@@ -21,6 +21,14 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/Utility/Markdown/markdown-components.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "components/Utility/Markdown/markdown-components.tsx",
+    "components/BusinessInsights/FanancialDashboard.jsx",
+    "app/api/business-insights-api/route.js"
+  ],
   "exclude": ["node_modules"]
 }
