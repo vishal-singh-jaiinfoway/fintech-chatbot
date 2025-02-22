@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useChat } from "@ai-sdk/react";
 import { useSelector } from "react-redux";
 import MarkdownRenderer from "../Utility/Markdown/MarkdownRenderer";
+import axios from "axios";
 
 const suggestedQuestions = {
   "Financial Performance & Guidance": {
@@ -77,8 +78,8 @@ const suggestedQuestions = {
   },
 };
 
-const years=[2024];
-const quarters=["1st","2nd","3rd","4rth"];
+const years = [2024];
+const quarters = ["1st", "2nd", "3rd", "4rth"];
 
 export default function Dashboard() {
   const foundationModel = useSelector((state) => state.sidebar.foundationModel);
@@ -94,66 +95,176 @@ export default function Dashboard() {
   const [selectedCategory, setSelectedCategory] = useState(
     Object.keys(suggestedQuestions)[0],
   );
-  const [selectedYear, setSelectedYear] = useState(
-    years[0]
-  );
-  const [selectedQuarter, setSelectedQuarter] = useState(
-    quarters[0]
-  );
+  const [selectedYear, setSelectedYear] = useState(years[0]);
+  const [selectedQuarter, setSelectedQuarter] = useState(quarters[0]);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [chats, setChats] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+
   const companies = [
-    "SoFi Technologies Inc.",
-    "Morgan Stanley",
-    "JPMorgan Chase & Co",
-    "Microsoft Corp",
+    { name: "SoFi Technologies Inc.", ticker: "SOFI" },
+    { name: "Morgan Stanley", ticker: "MS" },
+    { name: "JPMorgan Chase & Co", ticker: "JPM" },
+    { name: "Microsoft Corp", ticker: "MSFT" },
+    { name: "Ameris Bancorp", ticker: "ABCB" },
+    { name: "Associated Banc-Corp", ticker: "ASB" },
+    { name: "Atlantic Union Bankshares Corporation", ticker: "AUB" },
+    { name: "Banc of California, Inc.", ticker: "BANC" },
+    { name: "Bank of America Corporation", ticker: "BAC" },
+    { name: "Bank of Hawaii Corporation", ticker: "BOH" },
+    { name: "Bank OZK", ticker: "OZK" },
+    { name: "BankUnited, Inc.", ticker: "BKU" },
+    { name: "BOK Financial Corporation", ticker: "BOKF" },
+    { name: "Cadence Bank", ticker: "CADE" },
+    { name: "Cathay General Bancorp", ticker: "CATY" },
+    { name: "Citigroup Inc.", ticker: "C" },
+    { name: "Citizens Financial Group, Inc.", ticker: "CFG" },
+    { name: "Columbia Banking System, Inc.", ticker: "COLB" },
+    { name: "Comerica Incorporated", ticker: "CMA" },
+    { name: "Commerce Bancshares, Inc.", ticker: "CBSH" },
+    { name: "Cullen/Frost Bankers, Inc.", ticker: "CFR" },
+    { name: "Customers Bancorp, Inc.", ticker: "CUBI" },
+    { name: "East West Bancorp, Inc.", ticker: "EWBC" },
+    { name: "Eastern Bankshares, Inc.", ticker: "EBC" },
+    { name: "F.N.B. Corporation", ticker: "FNB" },
+    { name: "Fifth Third Bancorp", ticker: "FITB" },
+    { name: "First Citizens BancShares, Inc.", ticker: "FCNC.A" },
+    { name: "First Hawaiian, Inc.", ticker: "FHB" },
+    { name: "First Horizon Corporation", ticker: "FHN" },
+    { name: "First Interstate BancSystem, Inc.", ticker: "FIBK" },
+    { name: "Flagstar Financial, Inc.", ticker: "FLG" },
+    { name: "Fulton Financial Corporation", ticker: "FULT" },
+    { name: "Glacier Bancorp, Inc.", ticker: "GBCI" },
+    { name: "Hancock Whitney Corporation", ticker: "HWC" },
+    { name: "Home Bancshares, Inc.", ticker: "HOMB" },
+    { name: "Huntington Bancshares Incorporated", ticker: "HBAN" },
+    { name: "JPMorgan Chase & Co.", ticker: "JPM" },
+    { name: "KeyCorp", ticker: "KEY" },
+    { name: "M&T Bank Corporation", ticker: "MTB" },
+    { name: "Old National Bancorp", ticker: "ONB" },
+    { name: "Pinnacle Financial Partners, Inc.", ticker: "PNFP" },
+    { name: "Popular, Inc.", ticker: "BPOP" },
+    { name: "Prosperity Bancshares, Inc.", ticker: "PB" },
+    { name: "Provident Financial Services, Inc.", ticker: "PFS" },
+    { name: "Regions Financial Corporation", ticker: "RF" },
+    { name: "Simmons First National Corporation", ticker: "SFNC" },
+    { name: "SouthState Corporation", ticker: "SSB" },
+    { name: "Synovus Financial Corp.", ticker: "SNV" },
+    { name: "Texas Capital Bancshares, Inc.", ticker: "TCBI" },
+    { name: "The PNC Financial Services Group, Inc.", ticker: "PNC" },
+    { name: "Truist Financial Corporation", ticker: "TFC" },
+    { name: "U.S. Bancorp", ticker: "USB" },
+    { name: "UMB Financial Corporation", ticker: "UMBF" },
+    { name: "United Bankshares, Inc.", ticker: "UBSI" },
+    { name: "United Community Banks, Inc.", ticker: "UCB" },
+    { name: "Valley National Bancorp", ticker: "VLY" },
+    { name: "Webster Financial Corporation", ticker: "WBS" },
+    { name: "Wells Fargo & Company", ticker: "WFC" },
+    { name: "Western Alliance Bancorporation", ticker: "WAL" },
+    { name: "Wintrust Financial Corporation", ticker: "WTFC" },
+    { name: "WSFS Financial Corporation", ticker: "WSFS" },
+    { name: "Zions Bancorporation, National Association", ticker: "ZION" },
   ];
+
   const messagesEndRef = useRef(null);
   const [inputText, setInputText] = useState("");
-  const { messages, input, handleInputChange, handleSubmit, isLoading } =
-    useChat({
-      api: apiUrl,
-      body: {
-        modelId: foundationModel,
-        temperature: parseFloat(fmTemperature),
-        max_tokens: parseInt(fmMaxTokens, 10),
-        context: context,
-        inputText: inputValue,
-      },
-    });
+  // const { messages, input, handleInputChange, handleSubmit, isLoading } =
+  //   useChat({
+  //     api: apiUrl,
+  //     body: {
+  //       modelId: foundationModel,
+  //       temperature: parseFloat(fmTemperature),
+  //       max_tokens: parseInt(fmMaxTokens, 10),
+  //       context: context,
+  //       inputText: inputValue,
+  //     },
+  //   });
 
   useEffect(() => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [messages]);
+  }, [chats]);
+
+  const getAgentResponse = async () => {
+    try {
+      setLoading(true);
+      setInputText("");
+      setChats([
+        ...chats,
+        {
+          id: chats.length + 1,
+          text: inputText,
+          sender: "user",
+        },
+      ]);
+      setTimeout(() => {
+        if (messagesEndRef.current) {
+          messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 50);
+      const response = await axios.post(
+        `http://localhost:3000/api/bedrock-agent`,
+        { inputText: inputText },
+      );
+      console.log("response", response.data);
+
+      setChats([
+        ...chats,
+        {
+          id: chats.length + 1,
+          text: inputText,
+          sender: "user",
+        },
+        {
+          id: chats.length + 2,
+          text: response.data,
+          sender: "bot",
+        },
+      ]);
+
+      setInputText("");
+      setLoading(false);
+      setTimeout(() => {
+        if (messagesEndRef.current) {
+          messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    } catch (error) {
+      setChats((prev) => {
+        prev.pop();
+        return prev;
+      });
+    }
+  };
 
   const handleCompanyChange = (event) => setSelectedCompany(event.target.value);
   const handleCategoryChange = (event) =>
     setSelectedCategory(event.target.value);
 
-  const handleYearChange = (event) =>
-    setSelectedYear(event.target.value);
+  const handleYearChange = (event) => setSelectedYear(event.target.value);
 
-  const handleQuarterChange = (event) =>
-    setSelectedQuarter(event.target.value);
+  const handleQuarterChange = (event) => setSelectedQuarter(event.target.value);
 
   const handleInputChangeWithCompany = (event) => {
     setInputValue(event.target.value);
     setInputText(
       `${event.target.value} for ${selectedCompany} in ${selectedCategory} category  ${selectedQuarter} quarter of ${selectedYear}`,
     );
-    handleInputChange({
-      ...event,
-      target: {
-        ...event.target,
-        value: `${event.target.value} for ${selectedCompany} in ${selectedCategory} category  ${selectedQuarter} quarter of ${selectedYear}`,
-      },
-    });
+    // handleInputChange({
+    //   ...event,
+    //   target: {
+    //     ...event.target,
+    //     value: `${event.target.value} for ${selectedCompany} in ${selectedCategory} category  ${selectedQuarter} quarter of ${selectedYear}`,
+    //   },
+    // });
   };
 
   const handleButtonClick = (question) => {
     const formattedQuestion = `${question} for ${selectedCompany} in ${selectedCategory} category for ${selectedQuarter} quarter of ${selectedYear}`;
     setInputValue(formattedQuestion);
-    handleInputChange({ target: { value: formattedQuestion } });
+    setInputText(formattedQuestion);
+    // handleInputChange({ target: { value: formattedQuestion } });
   };
 
   return (
@@ -168,74 +279,74 @@ export default function Dashboard() {
       </header>
       <main className="container mx-auto flex-grow py-4 px-4">
         <div className="bg-white p-6 w-full h-full rounded-lg shadow-lg flex flex-col">
-         <div className="flex flex-row items-center gap-4">
-         <div className="mb-4">
-            <label className="block text-lg font-medium mb-2 text-gray-700">
-              Select Company:
-            </label>
-            <select
-              value={selectedCompany}
-              onChange={handleCompanyChange}
-              className="p-2 border border-gray-300 rounded"
-            >
-              {companies.map((company, index) => (
-                <option key={index} value={company}>
-                  {company}
-                </option>
-              ))}
-            </select>
+          <div className="flex flex-row items-center gap-4">
+            <div className="mb-4">
+              <label className="block text-lg font-medium mb-2 text-gray-700">
+                Select Company:
+              </label>
+              <select
+                value={selectedCompany}
+                onChange={handleCompanyChange}
+                className="p-2 border border-gray-300 rounded"
+              >
+                {companies.map((company, index) => (
+                  <option key={index} value={company.name}>
+                    {company.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="mb-4">
+              <label className="block text-lg font-medium mb-2 text-gray-700">
+                Select Category:
+              </label>
+              <select
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                className="p-2 border border-gray-300 rounded"
+              >
+                {Object.keys(suggestedQuestions).map((category, index) => (
+                  <option key={index} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
-          <div className="mb-4">
-            <label className="block text-lg font-medium mb-2 text-gray-700">
-              Select Category:
-            </label>
-            <select
-              value={selectedCategory}
-              onChange={handleCategoryChange}
-              className="p-2 border border-gray-300 rounded"
-            >
-              {Object.keys(suggestedQuestions).map((category, index) => (
-                <option key={index} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
+          <div className="flex flex-row items-center gap-4">
+            <div className="mb-4">
+              <label className="block text-lg font-medium mb-2 text-gray-700">
+                Select Year:
+              </label>
+              <select
+                value={selectedYear}
+                onChange={handleYearChange}
+                className="p-2 border border-gray-300 rounded"
+              >
+                {years.map((year, index) => (
+                  <option key={index} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="mb-4">
+              <label className="block text-lg font-medium mb-2 text-gray-700">
+                Select Quarter:
+              </label>
+              <select
+                value={selectedQuarter}
+                onChange={handleQuarterChange}
+                className="p-2 border border-gray-300 rounded"
+              >
+                {quarters.map((quarter, index) => (
+                  <option key={index} value={quarter}>
+                    {quarter}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
-         </div>
-         <div className="flex flex-row items-center gap-4">
-        <div className="mb-4">
-            <label className="block text-lg font-medium mb-2 text-gray-700">
-              Select Year:
-            </label>
-            <select
-              value={selectedYear}
-              onChange={handleYearChange}
-              className="p-2 border border-gray-300 rounded"
-            >
-              {years.map((year, index) => (
-                <option key={index} value={year}>
-                  {year}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="mb-4">
-            <label className="block text-lg font-medium mb-2 text-gray-700">
-              Select Quarter:
-            </label>
-            <select
-              value={selectedQuarter}
-              onChange={handleQuarterChange}
-              className="p-2 border border-gray-300 rounded"
-            >
-             {quarters.map((quarter, index) => (
-                <option key={index} value={quarter}>
-                  {quarter}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
           <div className="mb-4">
             <h3 className="font-bold mb-2 text-gray-700">
               Suggested Questions:
@@ -255,23 +366,23 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="flex-grow overflow-y-auto mb-4 bg-gray-100 rounded-lg p-4">
-            {messages.map((m, index) => (
+            {chats.map((m, index) => (
               <div
                 key={index}
                 className={`p-2 mb-2 rounded-lg ${
-                  m.role === "user"
+                  m.sender === "user"
                     ? "bg-blue-100 text-blue-900"
                     : "bg-gray-200 text-gray-900"
                 }`}
               >
                 <span
                   className={`${
-                    m.role === "user" ? "text-blue-600" : "text-green-600"
+                    m.sender === "user" ? "text-blue-600" : "text-green-600"
                   } font-semibold`}
                 >
-                  {m.role === "user" ? "User: " : "AI: "}
+                  {m.sender === "user" ? "User: " : "AI: "}
                 </span>
-                <MarkdownRenderer content={m.content} />
+                <MarkdownRenderer content={m.text} />
               </div>
             ))}
             {/* Loading Indicator */}
@@ -286,8 +397,10 @@ export default function Dashboard() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              handleSubmit(e);
-              setInputValue("");
+              // handleSubmit(e);
+              // setInputValue("");
+              console.log("hello");
+              getAgentResponse();
             }}
             className="flex"
           >

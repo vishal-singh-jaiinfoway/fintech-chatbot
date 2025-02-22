@@ -17,10 +17,81 @@ const urbanist = Urbanist({
   weight: ["500", "600", "700"],
 });
 Chart.register(...registerables);
+const suggestedQuestions = {
+  "Financial Performance & Guidance": {
+    "Common Questions": [
+      "What were the most common financial questions analysts asked?",
+      "What concerns did analysts raise about revenue, EPS, net income, margins, and loan growth?",
+      "Did analysts ask about guidance for the next quarter/year? What was the management’s response?",
+      "Were there any unexpected financial concerns analysts highlighted?",
+      "How did competitors justify misses or beats on financial expectations?",
+    ],
+  },
+  "Interest Rate & Macro Impact": {
+    "Common Questions": [
+      "What did analysts ask about the impact of Fed rate changes on net interest margin (NIM)?",
+      "How did competitors respond to concerns about loan demand and deposit pricing pressure?",
+      "Were there any discussions around inflation and economic outlook?",
+    ],
+  },
+  "Loan Portfolio & Credit Risk": {
+    "Common Questions": [
+      "What questions did analysts ask regarding loan portfolio quality, delinquency rates, and charge-offs?",
+      "How did competitors address concerns about credit risk and exposure to specific industries (e.g., CRE, C&I loans)?",
+      "Did analysts probe into loan loss provisions and reserve levels?",
+      "Were there any regulatory concerns about stress tests or liquidity management?",
+    ],
+  },
+  "Deposit Trends & Liquidity": {
+    "Common Questions": [
+      "What concerns did analysts raise about deposit outflows and cost of deposits?",
+      "How did competitors explain liquidity management strategies?",
+      "Were there any discussions around CDs, money market accounts, and client behavior shifts?",
+    ],
+  },
+  "Technology & Digital Banking": {
+    "Common Questions": [
+      "Did analysts question digital transformation, fintech partnerships, or investment in AI/automation?",
+      "What strategies did competitors highlight for digital banking growth?",
+      "Were there concerns about operational risks, cybersecurity, or compliance issues?",
+    ],
+  },
+  "Capital Allocation & Shareholder Returns": {
+    "Common Questions": [
+      "What did analysts ask about dividends, stock buybacks, and capital deployment?",
+      "How did competitors justify capital decisions in light of regulatory requirements and growth plans?",
+      "Were there discussions around M&A activity or expansion plans?",
+    ],
+  },
+  "Regulatory & Compliance Risks": {
+    "Common Questions": [
+      "Did analysts ask about compliance with Basel III, stress tests, or new banking regulations?",
+      "Were there any concerns raised about government scrutiny, lawsuits, or regulatory penalties?",
+    ],
+  },
+  "Competitive Landscape & Market Positioning": {
+    "Common Questions": [
+      "How did analysts probe into competitive threats (regional banks, fintech, big banks)?",
+      "What differentiation strategies did competitors highlight?",
+      "Were there any discussions on customer retention, product offerings, or geographic expansion?",
+    ],
+  },
+  "Cost Management & Operational Efficiency": {
+    "Common Questions": [
+      "What did analysts ask about cost-cutting measures, efficiency ratio, and expense control?",
+      "How did competitors address questions around branch optimization and workforce restructuring?",
+    ],
+  },
+  "Strategic Initiatives & Long-Term Vision": {
+    "Common Questions": [
+      "What future growth initiatives were analysts most interested in?",
+      "Were there any concerns about leadership changes, succession planning, or cultural shifts?",
+    ],
+  },
+};
 
 const Dashboard = ({chats,setChats}:any) => {
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const [fetchUploadChats, setFetchUploadChats] = useState([]);
   const [crmData, setCrmData] = useState<any>(null);
   const [financialData, setFinancialData] = useState<any>(null);
   const [recommendations, setRecommendations] = useState<any>(

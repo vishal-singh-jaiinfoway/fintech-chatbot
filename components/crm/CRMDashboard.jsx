@@ -4,10 +4,10 @@ import { useChat } from '@ai-sdk/react';
 import { useSelector } from "react-redux";
 
 const Chat = () => {
-  const foundationModel = useSelector((state: any) => state.sidebar.foundationModel);
-  const fmTemperature = useSelector((state: any) => state.sidebar.fmTemperature);
-  const fmMaxTokens = useSelector((state: any) => state.sidebar.fmMaxTokens);
-  const context  = useSelector((state: any) => state.sidebar.context);
+  const foundationModel = useSelector((state) => state.sidebar.foundationModel);
+  const fmTemperature = useSelector((state) => state.sidebar.fmTemperature);
+  const fmMaxTokens = useSelector((state) => state.sidebar.fmMaxTokens);
+  const context  = useSelector((state) => state.sidebar.context);
 
   const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/crm`;
   const { messages, input, handleInputChange, handleSubmit } = useChat({
@@ -27,7 +27,7 @@ const Chat = () => {
     "What follow-ups or reminders are set for JPMorgan Chase & Co.?",
   ];
 
-  const handleButtonClick = (question: string) => {
+  const handleButtonClick = (question) => {
     const mockInputEvent = {
       target: {
         value: question,
@@ -84,7 +84,7 @@ const Chat = () => {
       isTrusted: true,
       timeStamp: Date.now(),
       type: "input",
-    } as unknown as React.ChangeEvent<HTMLInputElement>;
+    } 
 
     const mockFormEvent = {
       preventDefault: () => {},
@@ -93,7 +93,7 @@ const Chat = () => {
         value: question,
         acceptCharset: "",
         action: "",
-        elements: [] as unknown as HTMLFormControlsCollection,
+        elements: [] ,
         encoding: "",
         enctype: "",
         length: 0,
@@ -103,7 +103,7 @@ const Chat = () => {
         reset: () => {},
         submit: () => {},
       },
-      currentTarget: {} as EventTarget & HTMLFormElement,
+      currentTarget: {} ,
       bubbles: true,
       cancelable: true,
       defaultPrevented: false,
@@ -112,7 +112,7 @@ const Chat = () => {
       timeStamp: Date.now(),
       type: "submit",
       nativeEvent: new Event("submit"),
-    } as unknown as React.FormEvent<HTMLFormElement>;
+    } ;
 
     handleInputChange(mockInputEvent);
     handleSubmit(mockFormEvent);
@@ -121,7 +121,7 @@ const Chat = () => {
   const scrollToBottom = () => {
     const element = messagesEndRef.current;
     if (element !== null) {
-      (element as HTMLElement).scrollIntoView({ behavior: "smooth" });
+      (element ).scrollIntoView({ behavior: "smooth" });
     }
   };
   
@@ -132,7 +132,7 @@ const Chat = () => {
   return (
     <div className="flex flex-col w-full h-full bg-white shadow-lg rounded-lg p-6">
       <div className="flex-grow overflow-y-auto">
-        {messages.map((m: any) => (
+        {messages.map((m) => (
           <div
             key={m.id}
             className={`whitespace-pre-wrap p-3 rounded-lg mb-2 ${
@@ -181,7 +181,7 @@ const Chat = () => {
 
 export default function Dashboard() {
   const [selectedTab, setSelectedTab] = useState("records");
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState(null);
   const [isChatOpen, setIsChatOpen] = useState(false);
 
   const toggleChat = () => {
@@ -237,7 +237,7 @@ export default function Dashboard() {
               </thead>
               <tbody>
                 {data?.records.length > 0 &&
-                  data?.records?.map((record: any) => (
+                  data?.records?.map((record) => (
                     <tr
                       key={record.Id}
                       className="odd:bg-white even:bg-gray-50"
@@ -260,7 +260,7 @@ export default function Dashboard() {
                       </td>
                       <td className="border px-6 py-3">{`${record.BillingAddress.street}, ${record.BillingAddress.city}, ${record.BillingAddress.state} ${record.BillingAddress.postalCode}, ${record.BillingAddress.country}`}</td>
                       <td className="border px-6 py-3">
-                        {record.Contacts.map((contact: any) => (
+                        {record.Contacts.map((contact) => (
                           <div key={contact.Email} className="mb-2">
                             <p>
                               Name: {contact.FirstName} {contact.LastName}
@@ -302,8 +302,8 @@ export default function Dashboard() {
               </thead>
               <tbody>
                 {data?.communicationHistory.length > 0 &&
-                  data?.communicationHistory?.map((entry: any) =>
-                    entry.Interactions.map((interaction: any) => (
+                  data?.communicationHistory?.map((entry) =>
+                    entry.Interactions.map((interaction) => (
                       <tr
                         key={interaction.InteractionId}
                         className="odd:bg-white even:bg-gray-50"
@@ -351,13 +351,13 @@ export default function Dashboard() {
               </thead>
               <tbody>
                 {data?.followUpsAndReminders.length > 0 &&
-                  data?.followUpsAndReminders?.map((entry: any) => (
+                  data?.followUpsAndReminders?.map((entry) => (
                     <tr
                       key={entry.CustomerId}
                       className="odd:bg-white even:bg-gray-50"
                     >
                       <td className="border px-6 py-3">{entry.CustomerId}</td>
-                      {entry.FollowUps.map((followUp: any) => (
+                      {entry.FollowUps.map((followUp) => (
                         <React.Fragment key={followUp.FollowUpId}>
                           <td className="border px-6 py-3">
                             {followUp.FollowUpId}
@@ -370,7 +370,7 @@ export default function Dashboard() {
                         </React.Fragment>
                       ))}
                       {entry.Reminders.length > 0 &&
-                        entry.Reminders.map((reminder: any) => (
+                        entry.Reminders.map((reminder) => (
                           <React.Fragment key={reminder.ReminderId}>
                             <td className="border px-6 py-3">
                               {reminder.ReminderId}
@@ -408,8 +408,8 @@ export default function Dashboard() {
                 </tr>
               </thead>
               <tbody>
-                {data?.taskManagement?.map((entry: any) =>
-                  entry.Tasks.map((task: any) => (
+                {data?.taskManagement?.map((entry) =>
+                  entry.Tasks.map((task) => (
                     <tr
                       key={task.TaskId}
                       className="odd:bg-white even:bg-gray-50"
@@ -443,8 +443,8 @@ export default function Dashboard() {
                 </tr>
               </thead>
               <tbody>
-                {data?.customerProfileAccessNotifications?.map((entry: any) =>
-                  entry.Notifications.map((notification: any) => (
+                {data?.customerProfileAccessNotifications?.map((entry) =>
+                  entry.Notifications.map((notification) => (
                     <tr
                       key={notification.NotificationId}
                       className="odd:bg-white even:bg-gray-50"

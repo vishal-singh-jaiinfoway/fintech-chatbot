@@ -3,20 +3,16 @@
 import React, { useState } from "react";
 import Dashboard from "@/components/Dashboard"; // Import other tab components as needed
 import { useSelector } from "react-redux";
-import CRMDashboard from "@/components/crm/CRMDashboard";
+import CRMDashboard from "@/components/crm/CRMDashboard.jsx";
 import FanancialDashboard from "@/components/fanancial-chat/FanancialDashboard";
 import BusinessInsights from "@/components/BusinessInsights/FanancialDashboard";
 import PersonalizedAdviceDashboard from "@/components/PersonalizedAdvice/PersonalizedAdviceDashboard";
-import KnowYourCustomer from "@/components/KnowYourCustomer/KnowYourCustomer";
-import GOPHER from "@/components/gopher/GOPHERDashboard";
-import CybersecuritySec from "@/components/stream-api/CybersecuritySec";
 import FetchUpload from "./FetchUpload/fetch_upload";
 
 // 
 
 const MainContent = () => {
   const selectedTab = useSelector((state: any) => state.sidebar.selectedTab);
-  //   const [selectedTab, setSelectedTab] = useState("Dashboard");
   const [chats, setChats] = useState([]);
   const [fetchUploadChats, setFetchUploadChats] = useState([]);
 
