@@ -1,0 +1,225 @@
+[
+    {
+        "category": "2+ Gophers",
+        "question": "What if 2+ Gophers are requested",
+        "answer": "When a request calls for 2 or more Gophers, the Gopher who accepts the request will receive the entire offer for the job once completed. It is the responsibility of the Gopher who accepts the request to ensure they have the additional help. The amount is not multiplied by the number of Gophers requested. If the amount of the offer is not enough to cover the crew needed in the opinion of the Gopher, it is recommended to not accept the request. It is very important to not accept a 2+ job if you cannot find the additional help. Accepting and then cancelling because the specified request criteria cannot be met may cause removal from the platform. "
+    },
+    {
+        "category": "Adding Pics",
+        "question": "Can't add my picture. ",
+        "answer": "This sounds like it may be a “permission” issue where you’ll want to make sure that the Gopher Go app has accept to photos. "
+    },
+    {
+        "category": "Age-Restricted Delivery",
+        "question": "Why was I charged for not providing my ID during an age-restricted delivery",
+        "answer": "When submitting an age-restricted request, you will receive multiple pop-up confirmations in order to move to the next step regarding the mandatory requirement to show a valid government issued ID during the delivery. We remind users that with every age-restricted delivery request, they must be present with their ID at the item(s) exchange OR the Gopher is entitled to the entire amount offered for the request. This is not negotiable nor refundable, so if you do not have your ID, please DO NOT make a request for age-restricted product delivery. "
+    },
+    {
+        "category": "App Fees",
+        "question": "How much does it cost to use the Gopher app",
+        "answer": ""
+    },
+    {
+        "category": "App Fees",
+        "question": "How much does it cost to use the Gopher app",
+        "answer": "Gopher Fees range from $0.99 to $4.99 depending on type of service requested, plus an Instant Transfer Fee of 8% of the total request offered. This fee covers the operating cost to ensure the Gopher is paid immediately upon completing your request. Age-Restrict Deliveries have an Extra $1.9 Fee. If you have your TrustShield ID verification, the Age-Restricted Fee is only $0.99. For example, if you made a request for a Delivery, wanting to pay a Gopher a total of $30, it would cost $33.47. (Cost of Goods = $20, Gopher Offer = $10, Gopher Fee = $0.99 and Instant Transfer Fee = $2.48) The Gopher would receive all $30 of your offer, costing you only $3.47 to use the app."
+    },
+    {
+        "category": "Bugs",
+        "question": "How do I report an app issue",
+        "answer": "In the “More” section of the app (bottom left icon on floorboard, you’ll see the Help Center link. From there you’ll see the “Report A Bug” link and from there complete the info. This is very helpful in resolving issues, so we sincerely thank you in advance if you’re ever able to help us identify a bug that snuck though an update. "
+    },
+    {
+        "category": "Cancellation - Requestor",
+        "question": "I can't cancel my request",
+        "answer": "Once a request has started, only your Gopher can cancel the request. You can contact them via SMS or call on through the app"
+    },
+    {
+        "category": "Cancellation Fee",
+        "question": "Why is there a Gopher Go Cancellation Fee",
+        "answer": "Please review our T&Cs for detailed information with cancellation fees. If a request is accepted with clear terms and then cancelled by the Gopher without the Requestors approval, there could be up to a $5 Fee"
+    },
+    {
+        "category": "Card Authorization",
+        "question": "My Gopher cancelled by request. I need a refund",
+        "answer": "We're sorry your Gopher cancelled the order. You were emailed the cancellations details. Regarding your charge, that is only a pre-authorization and released immediately after an order is canceled. You should see the “pending” charge disappear very shortly. How Gopher Request works regrading payments (for future reference): *Request made: No payment authorization.  *Request accepted: Payment is authorized (captured) *If request is canceled: Authorization released *Gopher logs request as completed: Requestor sent a confirmation in the app * Requester confirms deliver: Payment is processed. "
+    },
+    {
+        "category": "Contactless Delivery",
+        "question": "What if a request asks for an age-restricted items to be dropped off without contact",
+        "answer": "Albeit rare, sometimes a user will write in the special instructions to drop off an age-restricted items without contact. This CANNOT be honored, EVER. It is every Gopher’s responsibility to physically check for a valid ID before the delivery of age-restricted products is completed. Never feel bad for asking, there are no other legal options on any platform. You can always message the requestor prior to accepting a request to ensure they understand."
+    },
+    {
+        "category": "Cost Adjustments",
+        "question": "I submitted a cost adjustment and nothing happened",
+        "answer": "When a cost adjustment is submitted, the Requestor is immediately notified through the app and via text. They need to approved the cost adjustment in order for the amount to change. The app will continue to notify them until the cost adjustment is approved or declined. "
+    },
+    {
+        "category": "Cost Of Goods",
+        "question": "What if I don't know the Cost of Goods available for my order",
+        "answer": "Knowing the product cost (including applicable tax and/or fees), availability and store hours is important because once the Gopher accepts the request, they are doing it in good faith that everything requested is available and priced accordingly. This allows you to order the items you need without costly markups. In the event the cost of goods submitted is a little off, your Gopher can submit a COST ADJUSTMENT for the correct amount"
+    },
+    {
+        "category": "Counter Offers",
+        "question": "If I counter a request, am I obligated to take it",
+        "answer": "Yes, the counter offer feature is just like accepting a request. If you submit a counter offer, you are accepting the request, for the amount you think is fair and are willing to work for. If the Requestor accepts your counter offer, you’re obligated to complete it."
+    },
+    {
+        "category": "Disputes",
+        "question": "What if my Gopher delivered me wrong item(s)",
+        "answer": "If your Gopher brings you the wrong item(s), and your description (including pic) are clear, you can dispute your request in the app. Suggested options for the Gopher would be to return to the store where the purchase was made and exchange for the correct item(s) or cancel the order (which results in no charge to you). In this scenario, resolution is between the Requestor and the Gopher. The features in the app can perform to whatever your resolution is, even adjusting the price. If you ever need help in a situation like this, please don’t hesitate to contact at support@gophergo.io."
+    },
+    {
+        "category": "FAQs",
+        "question": "I don't know how to use this app is there a FAQ",
+        "answer": "On the same app screen where you contacted us, you’ll fine some helpful FAQs. If you don’t find what you’re looking for, please email support@gophergo.io"
+    },
+    {
+        "category": "Hours Open",
+        "question": "What are your hours?",
+        "answer": "Gopher Requests are available 24/7/365. If there is a Gopher requested and a Gopher available, we go to work!"
+    },
+    {
+        "category": "ID Verification",
+        "question": "What if the Requester cannot provide a valid ID at the delivery destination",
+        "answer": "When the Requester submits an age-restricted request, they will receive multiple pop-up confirmations in order to move to the next step regarding the mandatory requirement to show a valid government issued ID during the delivery. We remind users that with every age-restricted delivery request, they must be present with their ID at the item(s) exchange OR the Gopher is entitled to the entire amount offered for the request. This is not negotiable nor refundable, so if they do not have their ID present, you can select ID not present and complete the transaction, entering the applicable notes. Please keep all available correspondence with the customer. "
+    },
+    {
+        "category": "In-App Messaging",
+        "question": "How can I get a hold of a Gopher interested in my request",
+        "answer": "In the app, tap the bottom left request icon. That will show you any open requests you have. Tap on that particular request and you'll see an alert that your request has available information. From there, you can see Gophers interested or who has submitted a question. "
+    },
+    {
+        "category": "In-App Messaging",
+        "question": "My Gopher hasn't responded to my message",
+        "answer": "When a message is sent through the app, Gopher inc will continue to notify them of the message every 5 minutes. You can also try calling them through the app as well. "
+    },
+    {
+        "category": "In-App Messaging",
+        "question": "How can I get more information regarding a pending request",
+        "answer": "Gophers can communicate to Requestors through the in-app messaging link. When you open a request from the request queue, you will see “MESSAGE REQUESTER.” This link is to be used exclusively for getting more information about a request and not exchanging numbers/emails to circumvent the app."
+    },
+    {
+        "category": "Name Changes",
+        "question": "Why I can’t change my name for TrustShield?",
+        "answer":"If you set up your Gopher Request Account with an alias, you will not be able to apply for Gopher TrustShield. 1) If you have been using Gopher Request and want to keep your request history, you will need to email a clear picture of the Front and Back of your ID to support@gophergo.io 2) If you have no activity on your Gopher Request account, please delete your account and sign up again. Before saving your profile, you’ll have an opportunity to check to see if your information is entered correctly. "
+    },
+ 
+   
+    {
+        "category": "No Available Requests",
+        "question": "I'm not seeing any requests",
+        "answer": "We’re just now getting outside the Raleigh, NC area and it’s all word of mouth. We have had activity on the platform in recent weeks so we hope to start seeing more requests very soon. You’ll just want to make sure your notifications are on and your payout account is set up. Please be patient with us as we grow in your area, we’re just getting started and look forward to being your mobile BFF in no time! Please spread the word!"
+    },
+    {
+        "category": "Notifications",
+        "question": "I'm hearing requests but not seeing any available",
+        "answer": "This could mean that the request was taken already in most cases. You can always check to see in the MORE --> Work Radius & Settings to make sure all the available job types you're interested in are selected, as well as the work radius. "
+    },
+    {
+        "category": "Out Of Pocket Expense",
+        "question": "Why do I have to pay for the items requested",
+        "answer": "If you are looking to accept a request where a purchase is needed, these require an initial out of pocket expense. This amount, along with the offer, are paid out immediately after the request is completed. You are never required to accept a “purchase needed” request and can always just ignore them. Because the Gopher marketplace doesn’t have structures partnerships/contracts with venders, users avoid having to pay extreme mark-ups as a result. When it comes to certain items requested, there are not options to purchase in advance online or through an app, so the cost of goods option is how these are provided. All age restricted items requested cannot be delivered by a Gopher under 21 years old and cannot received by a user under 21 years old without providing legal government issued identification. "
+    },
+    {
+        "category": "Payment",
+        "question": "Not Accepting my Debit Card",
+        "answer": "We’re sorry Stripe isn’t accepting your Card. Per our agreement with them, we’re at their mercy when it comes to what cards are accepted and those that are not. They boast accepting most all cards, however for payout accounts (not payments) some are not available. You can see the list of available debit cards here. https://stripe.com/docs/payouts/instant-payouts-banks. "
+    },
+    {
+        "category": "Payment",
+        "question": "Why is there Cost Of Goods Amount",
+        "answer": "Anytime there is a “Cost of Goods” amount listed in a request, that means the Requestor is paying you that amount, to pay on their behalf. For example, if you want a meal delivered from a Food Truck, and that Food Truck has no way for the Requestor to pay for the food in advance, they will enter the amount in the Cost of Goods section for you to pay on their behalf. Therefore you will have to pay for the items yourself initially (the money will already be in escrow and GUARANTEED to you immediately upon completion.) We understand this is different than most fulfilment apps, however this keeps costs for everyone involved way down. The Merchants, Requesters and Gophers all benefit this way. If you aren’t interested in these transactions or do not have the funds to cover the Cost of Goods, please DO NOT accept the request."
+    },
+    {
+        "category": "Payment",
+        "question": "What does 'Make Me An Offer' mean",
+        "answer": "We’ve added a new feature for when a Requestor doesn’t know exactly what a fair offer would be for a service. A Gopher will see exactly what is needed and where the price offer is normally listed, it will say, “Make Me An Offer“. If interested, they can accept the request and enter their cost for materials (if applicable) and how much they want to charge for the service. The bid will then be sent to the Requestor, where they can accept or decline the offer."
+    },
+    {
+        "category": "Payout Account",
+        "question": "Why can't I enter my checking account number and routing",
+        "answer": "Per our instant payout agreement with Stripe, only a debit card can be used. They boast accepting most all cards, however for payout accounts (not payments) some are not available. You can see the list of available debit cards here. https://stripe.com/docs/payouts/instant-payouts-banks. "
+    },
+    {
+        "category": "Payout Account",
+        "question": "When do I get paid",
+        "answer": "When a Gopher selects “completed” in the app, the Requestor is immediately sent a notification as well as a text message to “confirm” the completion. Both users are sent an email receipt for the transaction once this is done. You can always send a friendly reminder if the Requestor missed the confirmation text) If the Requestor doesn’t select confirm, Gopher, Inc will automatically initiate the payout after 48 hours. "
+    },
+    {
+        "category": "Payout Account",
+        "question": "How can I set up my payout account if I don't have an ID",
+        "answer": "Unfortunately, there is no way around this. However, Stripe offers several options to use for verification (Passport, Passport Card, Driver’s License, State Issued ID Card, Resident Permit ID / US Green Card, Border Crossing Card, Child ID Card, NYC Card, US Visa Card and Birth Certificate)."
+    },
+    {
+        "category": "Payout Account",
+        "question": "My Payout Account is still pending",
+        "answer": "When adding your payout account, Stripe is looking to ensure your Name, SSN, Address and ID all match. If any combination of the info provided doesn't match, they will not allow you to enter you card. If you entered an alias as your Gopher profile. You'll need to delete your account and sign up again with the correct information. "
+    },
+    {
+        "category": "Ratings",
+        "question": "What criteria do I use to rate my Gopher/Requestor",
+        "answer": "Please rate your Gopher on accuracy, their communication (keeping you informed as to the status of your request), quality of work and timeliness of completing your request."
+    },
+    {
+        "category": "Receipts",
+        "question": "Do I need to keep a receipt of items purchased",
+        "answer": "Yes, it is always in your best interested to save receipts of items purchased for up to 60 days. Although disputes are very rare, you may need to provide a receipt if a dispute is filed regarding a request you performed."
+    },
+    {
+        "category": "Request Confirmation",
+        "question": "I completed the order so why hasn’t the Requestor confirmed yet",
+        "answer": "Although rare, sometimes the requestor might not have access to their device at the time of completion. Once you select complete, we send the Requester a text and app alert. We continue to text reminders until it is confirmed OR 48 hours passes. In the case of the latter, the payout is automatically initiated. As a best practice, when in the presence of the requestor for a completed job, we encourage you to let them know they will be receiving a confirmation alert and to please confirm it as that is what initiates your payout."
+    },
+    {
+        "category": "Request Description",
+        "question": "What info should I put in my request",
+        "answer": "Your request should be as descriptive as possible… the more info the better. Keep in mind, no-one knows what you want done better than you, so take your time in describing EXACTLY what it is you want so there is no confusion. Example of what not to do: “Need mulch spread in my backyard.” Example of what to do: “I need 12 yards of mulch laid in my backyard. Mush have own equipment (while also supplying any relevant picture available) *Also, we strongly recommend NOT putting your phone number in the request. We’ve provided the ability to communicate before and during your request through the app. "
+    },
+    {
+        "category": "Request Disappeared",
+        "question": "I can't see the request I just accepted",
+        "answer": "On your home screen (tap 'Request' at the bottom left of your screen. You will see 3 buttons at the top; Active, Scheduled and Available. If your request is active, it will show in the active tab. If the request you accepted is a scheduled request, it will be shown in the scheduled tab. "
+    },
+    {
+        "category": "Request Disappears",
+        "question": "I'm in the middle of a request and it disappeared",
+        "answer": "When you start a request, it is no longer housed in the 'Available' tab of your request queue. It moves to the Active tab. Please select the request icon on the bottom of the dashboard and tap on the active button. You'll see your request there. "
+    },
+    {
+        "category": "Request History - Go",
+        "question": "How can I see my previous requests",
+        "answer": "On the App’s dashboard at the bottom of the screen, select “Account” and then “Request History.” You will be able to see all previously completed and/or cancelled requests."
+    },
+    {
+        "category": "Request History - Request",
+        "question": "How can I see my previous orders",
+        "answer": "On the App’s dashboard at the bottom of the screen, select “Account” and then “Request History.” You will be able to see all previously completed, expired and/or cancelled requests. From there, you can select REQUEST AGAIN (making any changes you want as well)."
+    },
+    {
+        "category": "Request Not Accepted",
+        "question": "Why isn’t my request being accepted",
+        "answer": "There are usually only a couple reasons a request isn’t accepted: 1) We may not have enough Gophers in your area yet. Anytime a request is submitted in a new area, we get to work on recruiting available Gophers in that area (please be patient with us as we’re just venturing outside of Raleigh, NC). 2) The offer may have been deemed too low for the Gophers in your area. Remember the offer to your Gopher is 100% of what they make for the job. They work for you, not Gopher, Inc. We encourage you to look at it this way, “I'm hiring you to do X for $Y.” On our end, if your offer is below the average accepted offer, you’ll see a pop-up and we’ll share what the average offer for that request category is. That said, you can still offer whatever amount you want."
+    }
+    ,
+    {
+        "category": "Request Timing",
+        "question": "Hi it’s been over 2 hours since my order was excepted and I still have not received it yet.",
+        "answer": "We're sorry your Gopher is taking longer than expected. You can contact you Gopher via SMS or calling right through the app at any time to get an update. "
+    },
+    {
+        "category": "Service Area - GO",
+        "question": "Is Gopher available in my area",
+        "answer": "While Gopher is currently 'active' in North Carolina, it is 'available' in all 50 States. We recommend having your notifications set to on and your payout and profile info completed so you're ready once requests start popping up. "
+    },
+    {
+        "category": "Service Area - Requestor",
+        "question": "Is Gopher available in my area",
+        "answer": "While Gopher is currently 'active' in North Carolina, it is 'available' in all 50 States. If you make a request and a Gopher isn't available, your request will expire and you will not be charged."
+    },
+    {
+        "category": "Viewing Requests",
+        "question": "I can't see any available requests",
+        "answer": "We may be just getting to your area. As long as your notifications are on and your payout account is set up, you’re ready to go. When requests pop-up in your area, you’ll receive an app notification and see the details of the task requested.  In the short term, referring the app to others is a great way to get your community up and running sooner than later. You can follow us on any social media platform as well for real time info as to new activity in your area!"
+    }
+]

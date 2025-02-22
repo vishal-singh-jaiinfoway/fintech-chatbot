@@ -1,0 +1,609 @@
+{
+  "credit_card_transactions": [
+    {
+      "Date": "2023-05-01T00:00:00.000",
+      "Amount": 100.27,
+      "Transaction Type": "Fuel",
+      "Balance": 100.27,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2ErAAJ",
+      "Name": "Acme Corporation"
+    },
+    {
+      "Date": "2023-05-02T00:00:00.000",
+      "Amount": 76.54,
+      "Transaction Type": "Entertainment",
+      "Balance": 176.8,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EsAAJ",
+      "Name": "Globex Inc."
+    },
+    {
+      "Date": "2023-05-04T00:00:00.000",
+      "Amount": 2943.53,
+      "Transaction Type": "Travel",
+      "Balance": 3120.34,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EtAAJ",
+      "Name": "Initech"
+    },
+    {
+      "Date": "2023-05-04T00:00:00.000",
+      "Amount": 448.96,
+      "Transaction Type": "Travel",
+      "Balance": 3569.29,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EuAAJ",
+      "Name": "Umbrella Corporation"
+    },
+    {
+      "Date": "2023-05-27T00:00:00.000",
+      "Amount": 67.45,
+      "Transaction Type": "Fuel",
+      "Balance": 9516.0,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2ErAAJ",
+      "Name": "Acme Corporation"
+    },
+    {
+      "Date": "2023-05-27T00:00:00.000",
+      "Amount": 204.1,
+      "Transaction Type": "Restaurant",
+      "Balance": 9720.1,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EsAAJ",
+      "Name": "Globex Inc."
+    },
+    {
+      "Date": "2023-05-28T00:00:00.000",
+      "Amount": 50.04,
+      "Transaction Type": "Fuel",
+      "Balance": 9770.14,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EtAAJ",
+      "Name": "Initech"
+    },
+    {
+      "Date": "2023-05-28T00:00:00.000",
+      "Amount": 41.94,
+      "Transaction Type": "Entertainment",
+      "Balance": 9812.09,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EuAAJ",
+      "Name": "Umbrella Corporation"
+    },
+    {
+      "Date": "2023-07-18T00:00:00.000",
+      "Amount": 455.44,
+      "Transaction Type": "Entertainment",
+      "Balance": 26656.27,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2ErAAJ",
+      "Name": "Acme Corporation"
+    },
+    {
+      "Date": "2023-07-18T00:00:00.000",
+      "Amount": 157.1,
+      "Transaction Type": "Entertainment",
+      "Balance": 26813.37,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EsAAJ",
+      "Name": "Globex Inc."
+    },
+    {
+      "Date": "2023-07-20T00:00:00.000",
+      "Amount": 321.66,
+      "Transaction Type": "Travel",
+      "Balance": 27135.03,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EtAAJ",
+      "Name": "Initech"
+    },
+    {
+      "Date": "2023-07-21T00:00:00.000",
+      "Amount": 198.88,
+      "Transaction Type": "Entertainment",
+      "Balance": 27333.91,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EuAAJ",
+      "Name": "Umbrella Corporation"
+    },
+    {
+      "Date": "2023-06-01T00:00:00.000",
+      "Amount": 132.78,
+      "Transaction Type": "Fuel",
+      "Balance": 1045.87,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2ErAAJ",
+      "Name": "Acme Corporation"
+    },
+    {
+      "Date": "2023-06-02T00:00:00.000",
+      "Amount": 98.56,
+      "Transaction Type": "Groceries",
+      "Balance": 1144.43,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EsAAJ",
+      "Name": "Globex Inc."
+    },
+    {
+      "Date": "2023-06-04T00:00:00.000",
+      "Amount": 2450.67,
+      "Transaction Type": "Travel",
+      "Balance": 3595.1,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EtAAJ",
+      "Name": "Initech"
+    },
+    {
+      "Date": "2023-06-05T00:00:00.000",
+      "Amount": 380.24,
+      "Transaction Type": "Entertainment",
+      "Balance": 3975.34,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EuAAJ",
+      "Name": "Umbrella Corporation"
+    },
+    {
+      "Date": "2023-06-10T00:00:00.000",
+      "Amount": 67.45,
+      "Transaction Type": "Fuel",
+      "Balance": 4512.79,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2ErAAJ",
+      "Name": "Acme Corporation"
+    },
+    {
+      "Date": "2023-06-12T00:00:00.000",
+      "Amount": 124.30,
+      "Transaction Type": "Groceries",
+      "Balance": 4637.09,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EsAAJ",
+      "Name": "Globex Inc."
+    },
+    {
+      "Date": "2023-06-14T00:00:00.000",
+      "Amount": 341.23,
+      "Transaction Type": "Travel",
+      "Balance": 4978.32,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EtAAJ",
+      "Name": "Initech"
+    },
+    {
+      "Date": "2023-06-15T00:00:00.000",
+      "Amount": 195.67,
+      "Transaction Type": "Entertainment",
+      "Balance": 5173.99,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EuAAJ",
+      "Name": "Umbrella Corporation"
+    },
+    {
+      "Date": "2023-06-18T00:00:00.000",
+      "Amount": 89.76,
+      "Transaction Type": "Fuel",
+      "Balance": 5263.75,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2ErAAJ",
+      "Name": "Acme Corporation"
+    },
+    {
+      "Date": "2023-06-20T00:00:00.000",
+      "Amount": 162.54,
+      "Transaction Type": "Groceries",
+      "Balance": 5426.29,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EsAAJ",
+      "Name": "Globex Inc."
+    },
+    {
+      "Date": "2023-06-22T00:00:00.000",
+      "Amount": 445.78,
+      "Transaction Type": "Travel",
+      "Balance": 5872.07,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EtAAJ",
+      "Name": "Initech"
+    },
+    {
+      "Date": "2023-06-24T00:00:00.000",
+      "Amount": 218.90,
+      "Transaction Type": "Entertainment",
+      "Balance": 6090.97,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EuAAJ",
+      "Name": "Umbrella Corporation"
+    },
+    {
+      "Date": "2023-06-27T00:00:00.000",
+      "Amount": 103.45,
+      "Transaction Type": "Fuel",
+      "Balance": 6194.42,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2ErAAJ",
+      "Name": "Acme Corporation"
+    },
+    {
+      "Date": "2023-06-28T00:00:00.000",
+      "Amount": 137.67,
+      "Transaction Type": "Groceries",
+      "Balance": 6332.09,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EsAAJ",
+      "Name": "Globex Inc."
+    },
+    {
+      "Date": "2023-06-29T00:00:00.000",
+      "Amount": 504.89,
+      "Transaction Type": "Travel",
+      "Balance": 6836.98,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EtAAJ",
+      "Name": "Initech"
+    },
+    {
+      "Date": "2023-06-30T00:00:00.000",
+      "Amount": 321.78,
+      "Transaction Type": "Entertainment",
+      "Balance": 7158.76,
+      "Card Type": "Visa",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EuAAJ",
+      "Name": "Umbrella Corporation"
+    }
+  ],
+
+  "closing_house_transactions": [
+    {
+      "Date": "2023-05-01T00:00:00.000",
+      "Amount": 7765.06,
+      "Transaction Type": "Property Taxes",
+      "Balance": 112234.94,
+      "Account Name": "Commercial Closing House Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2ErAAJ",
+      "Name": "Acme Corporation"
+    },
+    {
+      "Date": "2023-05-01T00:00:00.000",
+      "Amount": 4700.96,
+      "Transaction Type": "Property Taxes",
+      "Balance": 107533.98,
+      "Account Name": "Commercial Closing House Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EsAAJ",
+      "Name": "Globex Inc."
+    },
+    {
+      "Date": "2023-05-02T00:00:00.000",
+      "Amount": 42135.63,
+      "Transaction Type": "Client Payment",
+      "Balance": 149669.61,
+      "Account Name": "Commercial Closing House Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EtAAJ",
+      "Name": "Initech"
+    },
+    {
+      "Date": "2023-05-02T00:00:00.000",
+      "Amount": 8655.03,
+      "Transaction Type": "Client Payment",
+      "Balance": 158324.64,
+      "Account Name": "Commercial Closing House Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EuAAJ",
+      "Name": "Umbrella Corporation"
+    },
+    {
+      "Date": "2023-06-01T00:00:00.000",
+      "Amount": 15432.78,
+      "Transaction Type": "Client Payment",
+      "Balance": 133456.34,
+      "Account Name": "Commercial Closing House Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2ErAAJ",
+      "Name": "Acme Corporation"
+    },
+    {
+      "Date": "2023-06-02T00:00:00.000",
+      "Amount": 8945.67,
+      "Transaction Type": "Property Taxes",
+      "Balance": 124510.67,
+      "Account Name": "Commercial Closing House Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EsAAJ",
+      "Name": "Globex Inc."
+    },
+    {
+      "Date": "2023-06-03T00:00:00.000",
+      "Amount": 23045.23,
+      "Transaction Type": "Client Payment",
+      "Balance": 147555.90,
+      "Account Name": "Commercial Closing House Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EtAAJ",
+      "Name": "Initech"
+    },
+    {
+      "Date": "2023-06-04T00:00:00.000",
+      "Amount": 10456.89,
+      "Transaction Type": "Legal Fees",
+      "Balance": 137099.01,
+      "Account Name": "Commercial Closing House Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EuAAJ",
+      "Name": "Umbrella Corporation"
+    },
+    {
+      "Date": "2023-06-06T00:00:00.000",
+      "Amount": 15678.54,
+      "Transaction Type": "Client Payment",
+      "Balance": 152777.55,
+      "Account Name": "Commercial Closing House Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2ErAAJ",
+      "Name": "Acme Corporation"
+    },
+    {
+      "Date": "2023-06-07T00:00:00.000",
+      "Amount": 12453.33,
+      "Transaction Type": "Property Taxes",
+      "Balance": 140324.22,
+      "Account Name": "Commercial Closing House Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EsAAJ",
+      "Name": "Globex Inc."
+    },
+    {
+      "Date": "2023-06-08T00:00:00.000",
+      "Amount": 20987.65,
+      "Transaction Type": "Client Payment",
+      "Balance": 161311.87,
+      "Account Name": "Commercial Closing House Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EtAAJ",
+      "Name": "Initech"
+    },
+    {
+      "Date": "2023-06-09T00:00:00.000",
+      "Amount": 11654.99,
+      "Transaction Type": "Legal Fees",
+      "Balance": 149656.88,
+      "Account Name": "Commercial Closing House Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EuAAJ",
+      "Name": "Umbrella Corporation"
+    },
+    {
+      "Date": "2023-06-11T00:00:00.000",
+      "Amount": 17234.50,
+      "Transaction Type": "Client Payment",
+      "Balance": 166891.38,
+      "Account Name": "Commercial Closing House Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2ErAAJ",
+      "Name": "Acme Corporation"
+    },
+    {
+      "Date": "2023-06-12T00:00:00.000",
+      "Amount": 10432.25,
+      "Transaction Type": "Property Taxes",
+      "Balance": 156459.13,
+      "Account Name": "Commercial Closing House Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EsAAJ",
+      "Name": "Globex Inc."
+    },
+    {
+      "Date": "2023-06-13T00:00:00.000",
+      "Amount": 19456.78,
+      "Transaction Type": "Client Payment",
+      "Balance": 175915.91,
+      "Account Name": "Commercial Closing House Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EtAAJ",
+      "Name": "Initech"
+    },
+    {
+      "Date": "2023-06-14T00:00:00.000",
+      "Amount": 8754.32,
+      "Transaction Type": "Legal Fees",
+      "Balance": 167161.59,
+      "Account Name": "Commercial Closing House Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EuAAJ",
+      "Name": "Umbrella Corporation"
+    }
+  ],
+
+  "business_transactions": [
+    {
+      "Date": "2023-05-01T00:00:00.000",
+      "Amount": 2541.82,
+      "Transaction Type": "Travel Expenses",
+      "Balance": 117458.18,
+      "Account Name": "Business Operating Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2ErAAJ",
+      "Name": "Acme Corporation"
+    },
+    {
+      "Date": "2023-05-02T00:00:00.000",
+      "Amount": 2984.89,
+      "Transaction Type": "Travel Expenses",
+      "Balance": 114473.28,
+      "Account Name": "Business Operating Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EsAAJ",
+      "Name": "Globex Inc."
+    },
+    {
+      "Date": "2023-05-05T00:00:00.000",
+      "Amount": 6134.8,
+      "Transaction Type": "Salary Payments",
+      "Balance": 108338.48,
+      "Account Name": "Business Operating Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EtAAJ",
+      "Name": "Initech"
+    },
+    {
+      "Date": "2023-05-05T00:00:00.000",
+      "Amount": 2276.88,
+      "Transaction Type": "Travel Expenses",
+      "Balance": 106061.6,
+      "Account Name": "Business Operating Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EuAAJ",
+      "Name": "Umbrella Corporation"
+    },{
+      "Date": "2023-06-01T00:00:00.000",
+      "Amount": 3647.25,
+      "Transaction Type": "Marketing Expenses",
+      "Balance": 102414.35,
+      "Account Name": "Business Operating Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2ErAAJ",
+      "Name": "Acme Corporation"
+    },
+    {
+      "Date": "2023-06-02T00:00:00.000",
+      "Amount": 4859.19,
+      "Transaction Type": "Office Rent",
+      "Balance": 97555.16,
+      "Account Name": "Business Operating Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EsAAJ",
+      "Name": "Globex Inc."
+    },
+    {
+      "Date": "2023-06-05T00:00:00.000",
+      "Amount": 5739.80,
+      "Transaction Type": "Vendor Payment",
+      "Balance": 91815.36,
+      "Account Name": "Business Operating Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EtAAJ",
+      "Name": "Initech"
+    },
+    {
+      "Date": "2023-06-06T00:00:00.000",
+      "Amount": 3164.45,
+      "Transaction Type": "Salary Payments",
+      "Balance": 88650.91,
+      "Account Name": "Business Operating Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EuAAJ",
+      "Name": "Umbrella Corporation"
+    },
+    {
+      "Date": "2023-06-10T00:00:00.000",
+      "Amount": 2481.77,
+      "Transaction Type": "Travel Expenses",
+      "Balance": 86169.14,
+      "Account Name": "Business Operating Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2ErAAJ",
+      "Name": "Acme Corporation"
+    },
+    {
+      "Date": "2023-06-12T00:00:00.000",
+      "Amount": 4189.22,
+      "Transaction Type": "Utilities",
+      "Balance": 81979.92,
+      "Account Name": "Business Operating Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EsAAJ",
+      "Name": "Globex Inc."
+    },
+    {
+      "Date": "2023-06-14T00:00:00.000",
+      "Amount": 3695.60,
+      "Transaction Type": "Office Supplies",
+      "Balance": 78284.32,
+      "Account Name": "Business Operating Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EtAAJ",
+      "Name": "Initech"
+    },
+    {
+      "Date": "2023-06-16T00:00:00.000",
+      "Amount": 2893.88,
+      "Transaction Type": "Marketing Expenses",
+      "Balance": 75390.44,
+      "Account Name": "Business Operating Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EuAAJ",
+      "Name": "Umbrella Corporation"
+    },
+    {
+      "Date": "2023-06-18T00:00:00.000",
+      "Amount": 1846.50,
+      "Transaction Type": "Office Rent",
+      "Balance": 73543.94,
+      "Account Name": "Business Operating Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2ErAAJ",
+      "Name": "Acme Corporation"
+    },
+    {
+      "Date": "2023-06-20T00:00:00.000",
+      "Amount": 3276.78,
+      "Transaction Type": "Vendor Payment",
+      "Balance": 70267.16,
+      "Account Name": "Business Operating Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EsAAJ",
+      "Name": "Globex Inc."
+    },
+    {
+      "Date": "2023-06-22T00:00:00.000",
+      "Amount": 5219.11,
+      "Transaction Type": "Salary Payments",
+      "Balance": 65048.05,
+      "Account Name": "Business Operating Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EtAAJ",
+      "Name": "Initech"
+    },
+    {
+      "Date": "2023-06-24T00:00:00.000",
+      "Amount": 4132.59,
+      "Transaction Type": "Utilities",
+      "Balance": 60915.46,
+      "Account Name": "Business Operating Account",
+      "Bank Name": "BankUnited",
+      "CustomerId": "0011i00000Zk2EuAAJ",
+      "Name": "Umbrella Corporation"
+    }
+  ]
+}

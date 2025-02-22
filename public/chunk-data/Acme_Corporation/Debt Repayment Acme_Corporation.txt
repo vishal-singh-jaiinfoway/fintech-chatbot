@@ -1,0 +1,12 @@
+{
+    "Acme_Corporation": {
+      "debt_repayment": [
+        { "year": 2019, "total_debt": 5000000, "debt_repaid": 800000, "remaining_debt": 4200000 },
+        { "year": 2020, "total_debt": 4700000, "debt_repaid": 900000, "remaining_debt": 3800000 },
+        { "year": 2021, "total_debt": 4400000, "debt_repaid": 1000000, "remaining_debt": 3400000 },
+        { "year": 2022, "total_debt": 4000000, "debt_repaid": 1100000, "remaining_debt": 2900000 },
+        { "year": 2023, "total_debt": 3500000, "debt_repaid": 1200000, "remaining_debt": 2300000 }
+      ]
+    }
+  }
+  

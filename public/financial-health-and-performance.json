@@ -1,0 +1,608 @@
+{
+    "companies": [
+      {
+        "CustomerId": "0011i00000Zk2ErAAJ",
+        "Name": "Acme Corporation",
+        "financial_health_and_performance": {
+            "cash_flow_analysis": {
+              "cash_flow_statement": [
+                {
+                  "year": 2019,
+                  "operating_activities": 1200000,
+                  "investing_activities": -800000,
+                  "financing_activities": 500000,
+                  "net_cash_flow": 900000
+                },
+                {
+                  "year": 2020,
+                  "operating_activities": 1300000,
+                  "investing_activities": -500000,
+                  "financing_activities": 400000,
+                  "net_cash_flow": 1200000
+                },
+                {
+                  "year": 2021,
+                  "operating_activities": 1100000,
+                  "investing_activities": -600000,
+                  "financing_activities": 300000,
+                  "net_cash_flow": 800000
+                },
+                {
+                  "year": 2022,
+                  "operating_activities": 1500000,
+                  "investing_activities": -900000,
+                  "financing_activities": 200000,
+                  "net_cash_flow": 800000
+                },
+                {
+                  "year": 2023,
+                  "operating_activities": 1700000,
+                  "investing_activities": -700000,
+                  "financing_activities": 100000,
+                  "net_cash_flow": 1100000
+                }
+              ],
+              "insights": {
+                "2019": "Positive net cash flow due to significant financing activities.",
+                "2020": "Increased net cash flow from strong operating activities and reduced investing outflows.",
+                "2021": "Slight decrease in net cash flow due to lower operating cash and stable investing activities.",
+                "2022": "Net cash flow remained stable despite higher investing outflows due to strong operating activities.",
+                "2023": "Increase in net cash flow driven by higher operating cash inflows and reduced investing activities."
+              }
+            },
+            "profitability_analysis": {
+              "income_statement": [
+                {
+                  "year": 2019,
+                  "revenue": 5000000,
+                  "cogs": 3000000,
+                  "gross_profit": 2000000,
+                  "operating_expenses": 800000,
+                  "operating_profit": 1200000,
+                  "net_profit": 900000
+                },
+                {
+                  "year": 2020,
+                  "revenue": 5500000,
+                  "cogs": 3200000,
+                  "gross_profit": 2300000,
+                  "operating_expenses": 900000,
+                  "operating_profit": 1400000,
+                  "net_profit": 1100000
+                },
+                {
+                  "year": 2021,
+                  "revenue": 5800000,
+                  "cogs": 3400000,
+                  "gross_profit": 2400000,
+                  "operating_expenses": 950000,
+                  "operating_profit": 1450000,
+                  "net_profit": 1150000
+                },
+                {
+                  "year": 2022,
+                  "revenue": 6200000,
+                  "cogs": 3600000,
+                  "gross_profit": 2600000,
+                  "operating_expenses": 1000000,
+                  "operating_profit": 1600000,
+                  "net_profit": 1250000
+                },
+                {
+                  "year": 2023,
+                  "revenue": 6800000,
+                  "cogs": 3800000,
+                  "gross_profit": 3000000,
+                  "operating_expenses": 1100000,
+                  "operating_profit": 1900000,
+                  "net_profit": 1500000
+                }
+              ],
+              "insights": {
+                "summary": "Steady increase in revenue and gross profit each year. Operating expenses increased gradually, but the growth in revenue and gross profit outpaced the rise in expenses. Net profit consistently increased, reflecting effective cost management and pricing strategies."
+              }
+            },
+            "balance_sheet_health": {
+              "balance_sheet": [
+                {
+                  "year": 2019,
+                  "assets": 7000000,
+                  "liabilities": 3500000,
+                  "equity": 3500000,
+                  "current_ratio": 1.5,
+                  "debt_to_equity_ratio": 1.0
+                },
+                {
+                  "year": 2020,
+                  "assets": 7800000,
+                  "liabilities": 3800000,
+                  "equity": 4000000,
+                  "current_ratio": 1.6,
+                  "debt_to_equity_ratio": 0.95
+                },
+                {
+                  "year": 2021,
+                  "assets": 8500000,
+                  "liabilities": 4000000,
+                  "equity": 4500000,
+                  "current_ratio": 1.7,
+                  "debt_to_equity_ratio": 0.89
+                },
+                {
+                  "year": 2022,
+                  "assets": 9200000,
+                  "liabilities": 4200000,
+                  "equity": 5000000,
+                  "current_ratio": 1.8,
+                  "debt_to_equity_ratio": 0.84
+                },
+                {
+                  "year": 2023,
+                  "assets": 10000000,
+                  "liabilities": 4500000,
+                  "equity": 5500000,
+                  "current_ratio": 1.9,
+                  "debt_to_equity_ratio": 0.82
+                }
+              ],
+              "insights": {
+                "summary": "Improved current ratio from 1.5 in 2019 to 1.9 in 2023, indicating better liquidity. Decreased debt-to-equity ratio from 1.0 in 2019 to 0.82 in 2023, showing improved leverage and solvency. Both assets and equity increased steadily, reflecting growth and capital structure optimization."
+              }
+            }
+          }
+      },
+      {
+        "Id": "0011i00000Zk2EsAAJ",
+        "Name": "Globex Inc.",
+        "financial_health_and_performance": {
+            "cash_flow_analysis": {
+              "cash_flow_statement": [
+                {
+                  "year": 2019,
+                  "operating_activities": 1500000,
+                  "investing_activities": -900000,
+                  "financing_activities": 400000,
+                  "net_cash_flow": 1000000
+                },
+                {
+                  "year": 2020,
+                  "operating_activities": 1600000,
+                  "investing_activities": -600000,
+                  "financing_activities": 300000,
+                  "net_cash_flow": 1300000
+                },
+                {
+                  "year": 2021,
+                  "operating_activities": 1400000,
+                  "investing_activities": -700000,
+                  "financing_activities": 200000,
+                  "net_cash_flow": 900000
+                },
+                {
+                  "year": 2022,
+                  "operating_activities": 1700000,
+                  "investing_activities": -800000,
+                  "financing_activities": 100000,
+                  "net_cash_flow": 1000000
+                },
+                {
+                  "year": 2023,
+                  "operating_activities": 1800000,
+                  "investing_activities": -500000,
+                  "financing_activities": 200000,
+                  "net_cash_flow": 1500000
+                }
+              ],
+              "insights": {
+                "2019": "Positive net cash flow due to strong operating activities and controlled investing outflows.",
+                "2020": "Increased net cash flow from strong operating activities and reduced investing outflows.",
+                "2021": "Net cash flow decreased due to higher investing outflows and lower financing activities.",
+                "2022": "Stable net cash flow due to balanced operating and investing activities.",
+                "2023": "Significant increase in net cash flow driven by higher operating cash inflows and reduced investing activities."
+              }
+            },
+            "profitability_analysis": {
+              "income_statement": [
+                {
+                  "year": 2019,
+                  "revenue": 6000000,
+                  "cogs": 3500000,
+                  "gross_profit": 2500000,
+                  "operating_expenses": 900000,
+                  "operating_profit": 1600000,
+                  "net_profit": 1200000
+                },
+                {
+                  "year": 2020,
+                  "revenue": 6500000,
+                  "cogs": 3700000,
+                  "gross_profit": 2800000,
+                  "operating_expenses": 1000000,
+                  "operating_profit": 1800000,
+                  "net_profit": 1400000
+                },
+                {
+                  "year": 2021,
+                  "revenue": 7000000,
+                  "cogs": 4000000,
+                  "gross_profit": 3000000,
+                  "operating_expenses": 1100000,
+                  "operating_profit": 1900000,
+                  "net_profit": 1500000
+                },
+                {
+                  "year": 2022,
+                  "revenue": 7500000,
+                  "cogs": 4200000,
+                  "gross_profit": 3300000,
+                  "operating_expenses": 1200000,
+                  "operating_profit": 2100000,
+                  "net_profit": 1700000
+                },
+                {
+                  "year": 2023,
+                  "revenue": 8000000,
+                  "cogs": 4500000,
+                  "gross_profit": 3500000,
+                  "operating_expenses": 1300000,
+                  "operating_profit": 2200000,
+                  "net_profit": 1800000
+                }
+              ],
+              "insights": {
+                "summary": "Consistent growth in revenue and gross profit each year. Operating expenses increased but were outpaced by revenue growth. Net profit increased steadily, indicating effective cost management and pricing strategies."
+              }
+            },
+            "balance_sheet_health": {
+              "balance_sheet": [
+                {
+                  "year": 2019,
+                  "assets": 8000000,
+                  "liabilities": 4000000,
+                  "equity": 4000000,
+                  "current_ratio": 1.6,
+                  "debt_to_equity_ratio": 1.0
+                },
+                {
+                  "year": 2020,
+                  "assets": 8800000,
+                  "liabilities": 4200000,
+                  "equity": 4600000,
+                  "current_ratio": 1.7,
+                  "debt_to_equity_ratio": 0.91
+                },
+                {
+                  "year": 2021,
+                  "assets": 9500000,
+                  "liabilities": 4500000,
+                  "equity": 5000000,
+                  "current_ratio": 1.8,
+                  "debt_to_equity_ratio": 0.9
+                },
+                {
+                  "year": 2022,
+                  "assets": 10200000,
+                  "liabilities": 4700000,
+                  "equity": 5500000,
+                  "current_ratio": 1.9,
+                  "debt_to_equity_ratio": 0.85
+                },
+                {
+                  "year": 2023,
+                  "assets": 11000000,
+                  "liabilities": 5000000,
+                  "equity": 6000000,
+                  "current_ratio": 2.0,
+                  "debt_to_equity_ratio": 0.83
+                }
+              ],
+              "insights": {
+                "summary": "Improved current ratio from 1.6 in 2019 to 2.0 in 2023, indicating better liquidity. Decreased debt-to-equity ratio from 1.0 in 2019 to 0.83 in 2023, showing improved leverage and solvency. Both assets and equity increased steadily, reflecting growth and capital structure optimization."
+              }
+            }
+          }
+      },
+      {
+        "Id": "0011i00000Zk2EtAAJ",
+        "Name": "Initech",
+        "financial_health_and_performance": {
+            "cash_flow_analysis": {
+            "cash_flow_statement": [
+                {
+                "year": 2019,
+                "operating_activities": 1400000,
+                "investing_activities": -850000,
+                "financing_activities": 450000,
+                "net_cash_flow": 1000000
+                },
+                {
+                "year": 2020,
+                "operating_activities": 1500000,
+                "investing_activities": -550000,
+                "financing_activities": 350000,
+                "net_cash_flow": 1300000
+                },
+                {
+                "year": 2021,
+                "operating_activities": 1300000,
+                "investing_activities": -650000,
+                "financing_activities": 250000,
+                "net_cash_flow": 900000
+                },
+                {
+                "year": 2022,
+                "operating_activities": 1600000,
+                "investing_activities": -750000,
+                "financing_activities": 150000,
+                "net_cash_flow": 1000000
+                },
+                {
+                "year": 2023,
+                "operating_activities": 1750000,
+                "investing_activities": -650000,
+                "financing_activities": 250000,
+                "net_cash_flow": 1350000
+                }
+            ],
+            "insights": {
+                "2019": "Positive net cash flow due to strong operating activities and controlled investing outflows.",
+                "2020": "Increased net cash flow from strong operating activities and reduced investing outflows.",
+                "2021": "Net cash flow decreased due to higher investing outflows and lower financing activities.",
+                "2022": "Stable net cash flow due to balanced operating and investing activities.",
+                "2023": "Significant increase in net cash flow driven by higher operating cash inflows and reduced investing activities."
+            }
+            },
+            "profitability_analysis": {
+            "income_statement": [
+                {
+                "year": 2019,
+                "revenue": 7000000,
+                "cogs": 4000000,
+                "gross_profit": 3000000,
+                "operating_expenses": 1000000,
+                "operating_profit": 2000000,
+                "net_profit": 1500000
+                },
+                {
+                "year": 2020,
+                "revenue": 7500000,
+                "cogs": 4200000,
+                "gross_profit": 3300000,
+                "operating_expenses": 1100000,
+                "operating_profit": 2200000,
+                "net_profit": 1700000
+                },
+                {
+                "year": 2021,
+                "revenue": 7800000,
+                "cogs": 4400000,
+                "gross_profit": 3400000,
+                "operating_expenses": 1200000,
+                "operating_profit": 2200000,
+                "net_profit": 1700000
+                },
+                {
+                "year": 2022,
+                "revenue": 8200000,
+                "cogs": 4600000,
+                "gross_profit": 3600000,
+                "operating_expenses": 1300000,
+                "operating_profit": 2300000,
+                "net_profit": 1800000
+                },
+                {
+                "year": 2023,
+                "revenue": 8700000,
+                "cogs": 4900000,
+                "gross_profit": 3800000,
+                "operating_expenses": 1400000,
+                "operating_profit": 2400000,
+                "net_profit": 1900000
+                }
+            ],
+            "insights": {
+                "summary": "Consistent growth in revenue and gross profit each year. Operating expenses increased but were outpaced by revenue growth. Net profit increased steadily, indicating effective cost management and pricing strategies."
+            }
+            },
+            "balance_sheet_health": {
+            "balance_sheet": [
+                {
+                "year": 2019,
+                "assets": 9000000,
+                "liabilities": 4500000,
+                "equity": 4500000,
+                "current_ratio": 1.6,
+                "debt_to_equity_ratio": 1.0
+                },
+                {
+                "year": 2020,
+                "assets": 9900000,
+                "liabilities": 4700000,
+                "equity": 5200000,
+                "current_ratio": 1.7,
+                "debt_to_equity_ratio": 0.9
+                },
+                {
+                "year": 2021,
+                "assets": 10700000,
+                "liabilities": 5000000,
+                "equity": 5700000,
+                "current_ratio": 1.8,
+                "debt_to_equity_ratio": 0.88
+                },
+                {
+                "year": 2022,
+                "assets": 11500000,
+                "liabilities": 5300000,
+                "equity": 6200000,
+                "current_ratio": 1.9,
+                "debt_to_equity_ratio": 0.85
+                },
+                {
+                "year": 2023,
+                "assets": 12400000,
+                "liabilities": 5600000,
+                "equity": 6800000,
+                "current_ratio": 2.0,
+                "debt_to_equity_ratio": 0.82
+                }
+            ],
+            "insights": {
+                "summary": "Improved current ratio from 1.6 in 2019 to 2.0 in 2023, indicating better liquidity. Decreased debt-to-equity ratio from 1.0 in 2019 to 0.82 in 2023, showing improved leverage and solvency. Both assets and equity increased steadily, reflecting growth and capital structure optimization."
+            }
+            }
+        }
+      },
+      {
+        "Id": "0011i00000Zk2EuAAJ",
+        "Name": "Umbrella Corporation",
+        "financial_health_and_performance": {
+            "cash_flow_analysis": {
+              "cash_flow_statement": [
+                {
+                  "year": 2019,
+                  "operating_activities": 1800000,
+                  "investing_activities": -1000000,
+                  "financing_activities": 600000,
+                  "net_cash_flow": 1400000
+                },
+                {
+                  "year": 2020,
+                  "operating_activities": 1900000,
+                  "investing_activities": -700000,
+                  "financing_activities": 500000,
+                  "net_cash_flow": 1700000
+                },
+                {
+                  "year": 2021,
+                  "operating_activities": 1700000,
+                  "investing_activities": -800000,
+                  "financing_activities": 400000,
+                  "net_cash_flow": 1300000
+                },
+                {
+                  "year": 2022,
+                  "operating_activities": 2000000,
+                  "investing_activities": -900000,
+                  "financing_activities": 300000,
+                  "net_cash_flow": 1400000
+                },
+                {
+                  "year": 2023,
+                  "operating_activities": 2200000,
+                  "investing_activities": -600000,
+                  "financing_activities": 400000,
+                  "net_cash_flow": 2000000
+                }
+              ],
+              "insights": {
+                "2019": "Positive net cash flow due to strong operating activities and significant financing activities.",
+                "2020": "Increased net cash flow from strong operating activities and reduced investing outflows.",
+                "2021": "Net cash flow decreased due to higher investing outflows and lower financing activities.",
+                "2022": "Stable net cash flow due to balanced operating and investing activities.",
+                "2023": "Significant increase in net cash flow driven by higher operating cash inflows and reduced investing activities."
+              }
+            },
+            "profitability_analysis": {
+              "income_statement": [
+                {
+                  "year": 2019,
+                  "revenue": 8000000,
+                  "cogs": 4500000,
+                  "gross_profit": 3500000,
+                  "operating_expenses": 1200000,
+                  "operating_profit": 2300000,
+                  "net_profit": 1800000
+                },
+                {
+                  "year": 2020,
+                  "revenue": 8500000,
+                  "cogs": 4700000,
+                  "gross_profit": 3800000,
+                  "operating_expenses": 1300000,
+                  "operating_profit": 2500000,
+                  "net_profit": 2000000
+                },
+                {
+                  "year": 2021,
+                  "revenue": 9000000,
+                  "cogs": 5000000,
+                  "gross_profit": 4000000,
+                  "operating_expenses": 1400000,
+                  "operating_profit": 2600000,
+                  "net_profit": 2100000
+                },
+                {
+                  "year": 2022,
+                  "revenue": 9500000,
+                  "cogs": 5200000,
+                  "gross_profit": 4300000,
+                  "operating_expenses": 1500000,
+                  "operating_profit": 2800000,
+                  "net_profit": 2200000
+                },
+                {
+                  "year": 2023,
+                  "revenue": 10000000,
+                  "cogs": 5500000,
+                  "gross_profit": 4500000,
+                  "operating_expenses": 1600000,
+                  "operating_profit": 2900000,
+                  "net_profit": 2300000
+                }
+              ],
+              "insights": {
+                "summary": "Consistent growth in revenue and gross profit each year. Operating expenses increased but were outpaced by revenue growth. Net profit increased steadily, indicating effective cost management and pricing strategies."
+              }
+            },
+            "balance_sheet_health": {
+              "balance_sheet": [
+                {
+                  "year": 2019,
+                  "assets": 10000000,
+                  "liabilities": 5000000,
+                  "equity": 5000000,
+                  "current_ratio": 1.7,
+                  "debt_to_equity_ratio": 1.0
+                },
+                {
+                  "year": 2020,
+                  "assets": 11000000,
+                  "liabilities": 5200000,
+                  "equity": 5800000,
+                  "current_ratio": 1.8,
+                  "debt_to_equity_ratio": 0.9
+                },
+                {
+                  "year": 2021,
+                  "assets": 12000000,
+                  "liabilities": 5500000,
+                  "equity": 6500000,
+                  "current_ratio": 1.9,
+                  "debt_to_equity_ratio": 0.85
+                },
+                {
+                  "year": 2022,
+                  "assets": 13000000,
+                  "liabilities": 5700000,
+                  "equity": 7300000,
+                  "current_ratio": 2.0,
+                  "debt_to_equity_ratio": 0.78
+                },
+                {
+                  "year": 2023,
+                  "assets": 14000000,
+                  "liabilities": 6000000,
+                  "equity": 8000000,
+                  "current_ratio": 2.1,
+                  "debt_to_equity_ratio": 0.75
+                }
+              ],
+              "insights": {
+                "summary": "Improved current ratio from 1.7 in 2019 to 2.1 in 2023, indicating better liquidity. Decreased debt-to-equity ratio from 1.0 in 2019 to 0.75 in 2023, showing improved leverage and solvency. Both assets and equity increased steadily, reflecting growth and capital structure optimization."
+              }
+            }
+          }
+      }
+    ]
+}

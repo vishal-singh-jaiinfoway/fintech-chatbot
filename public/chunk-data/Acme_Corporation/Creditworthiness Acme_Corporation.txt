@@ -1,0 +1,12 @@
+{
+    "Acme_Corporation": {
+      "creditworthiness": [
+        { "year": 2019, "credit_rating": "BBB", "actions_taken": "Timely debt payments, maintaining low credit utilization" },
+        { "year": 2020, "credit_rating": "BBB+", "actions_taken": "Reduced debt, improved cash flow management" },
+        { "year": 2021, "credit_rating": "A-", "actions_taken": "Continued debt repayment, increased revenue" },
+        { "year": 2022, "credit_rating": "A-", "actions_taken": "Maintained strong financial performance" },
+        { "year": 2023, "credit_rating": "A", "actions_taken": "Further debt reduction, strategic refinancing" }
+      ]
+    }
+  }
+  

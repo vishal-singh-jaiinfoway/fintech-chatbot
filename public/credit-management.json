@@ -1,0 +1,94 @@
+{
+    "Acme_Corporation": {
+      "credit_utilization": [
+        { "year": 2019, "credit_limit": 2000000, "credit_used": 1200000, "credit_utilization_ratio": 0.60 },
+        { "year": 2020, "credit_limit": 2200000, "credit_used": 1300000, "credit_utilization_ratio": 0.59 },
+        { "year": 2021, "credit_limit": 2400000, "credit_used": 1400000, "credit_utilization_ratio": 0.58 },
+        { "year": 2022, "credit_limit": 2600000, "credit_used": 1500000, "credit_utilization_ratio": 0.58 },
+        { "year": 2023, "credit_limit": 2800000, "credit_used": 1600000, "credit_utilization_ratio": 0.57 }
+      ],
+      "debt_repayment": [
+        { "year": 2019, "total_debt": 5000000, "debt_repaid": 800000, "remaining_debt": 4200000 },
+        { "year": 2020, "total_debt": 4700000, "debt_repaid": 900000, "remaining_debt": 3800000 },
+        { "year": 2021, "total_debt": 4400000, "debt_repaid": 1000000, "remaining_debt": 3400000 },
+        { "year": 2022, "total_debt": 4000000, "debt_repaid": 1100000, "remaining_debt": 2900000 },
+        { "year": 2023, "total_debt": 3500000, "debt_repaid": 1200000, "remaining_debt": 2300000 }
+      ],
+      "creditworthiness": [
+        { "year": 2019, "credit_rating": "BBB", "actions_taken": "Timely debt payments, maintaining low credit utilization" },
+        { "year": 2020, "credit_rating": "BBB+", "actions_taken": "Reduced debt, improved cash flow management" },
+        { "year": 2021, "credit_rating": "A-", "actions_taken": "Continued debt repayment, increased revenue" },
+        { "year": 2022, "credit_rating": "A-", "actions_taken": "Maintained strong financial performance" },
+        { "year": 2023, "credit_rating": "A", "actions_taken": "Further debt reduction, strategic refinancing" }
+      ]
+    },
+    "Globex_Inc": {
+      "credit_utilization": [
+        { "year": 2019, "credit_limit": 3000000, "credit_used": 1800000, "credit_utilization_ratio": 0.60 },
+        { "year": 2020, "credit_limit": 3300000, "credit_used": 1900000, "credit_utilization_ratio": 0.58 },
+        { "year": 2021, "credit_limit": 3600000, "credit_used": 2000000, "credit_utilization_ratio": 0.56 },
+        { "year": 2022, "credit_limit": 3900000, "credit_used": 2100000, "credit_utilization_ratio": 0.54 },
+        { "year": 2023, "credit_limit": 4200000, "credit_used": 2200000, "credit_utilization_ratio": 0.52 }
+      ],
+      "debt_repayment": [
+        { "year": 2019, "total_debt": 6000000, "debt_repaid": 1000000, "remaining_debt": 5000000 },
+        { "year": 2020, "total_debt": 5500000, "debt_repaid": 1100000, "remaining_debt": 4400000 },
+        { "year": 2021, "total_debt": 5000000, "debt_repaid": 1200000, "remaining_debt": 3800000 },
+        { "year": 2022, "total_debt": 4500000, "debt_repaid": 1300000, "remaining_debt": 3200000 },
+        { "year": 2023, "total_debt": 4000000, "debt_repaid": 1400000, "remaining_debt": 2600000 }
+      ],
+      "creditworthiness": [
+        { "year": 2019, "credit_rating": "BBB+", "actions_taken": "Maintained low credit utilization, timely debt payments" },
+        { "year": 2020, "credit_rating": "A-", "actions_taken": "Reduced debt, improved profitability" },
+        { "year": 2021, "credit_rating": "A", "actions_taken": "Strategic refinancing, continued debt reduction" },
+        { "year": 2022, "credit_rating": "A", "actions_taken": "Stable financial performance, maintained strong cash flow" },
+        { "year": 2023, "credit_rating": "A+", "actions_taken": "Further debt reduction, diversified revenue streams" }
+      ]
+    },
+    "Initech": {
+      "credit_utilization": [
+        { "year": 2019, "credit_limit": 2500000, "credit_used": 1500000, "credit_utilization_ratio": 0.60 },
+        { "year": 2020, "credit_limit": 2700000, "credit_used": 1600000, "credit_utilization_ratio": 0.59 },
+        { "year": 2021, "credit_limit": 2900000, "credit_used": 1700000, "credit_utilization_ratio": 0.59 },
+        { "year": 2022, "credit_limit": 3100000, "credit_used": 1800000, "credit_utilization_ratio": 0.58 },
+        { "year": 2023, "credit_limit": 3300000, "credit_used": 1900000, "credit_utilization_ratio": 0.58 }
+      ],
+      "debt_repayment": [
+        { "year": 2019, "total_debt": 5500000, "debt_repaid": 900000, "remaining_debt": 4600000 },
+        { "year": 2020, "total_debt": 5100000, "debt_repaid": 1000000, "remaining_debt": 4100000 },
+        { "year": 2021, "total_debt": 4700000, "debt_repaid": 1100000, "remaining_debt": 3600000 },
+        { "year": 2022, "total_debt": 4300000, "debt_repaid": 1200000, "remaining_debt": 3100000 },
+        { "year": 2023, "total_debt": 3900000, "debt_repaid": 1300000, "remaining_debt": 2600000 }
+      ],
+      "creditworthiness": [
+        { "year": 2019, "credit_rating": "BBB", "actions_taken": "Maintained low credit utilization, timely debt repayments" },
+        { "year": 2020, "credit_rating": "BBB+", "actions_taken": "Improved cash flow management, reduced debt" },
+        { "year": 2021, "credit_rating": "A-", "actions_taken": "Continued debt repayment, increased profitability" },
+        { "year": 2022, "credit_rating": "A-", "actions_taken": "Stable financial performance, strategic refinancing" },
+        { "year": 2023, "credit_rating": "A", "actions_taken": "Further debt reduction, diversified revenue streams" }
+      ]
+    },
+    "Umbrella_Corporation": {
+      "credit_utilization": [
+        { "year": 2019, "credit_limit": 3500000, "credit_used": 2100000, "credit_utilization_ratio": 0.60 },
+        { "year": 2020, "credit_limit": 3700000, "credit_used": 2200000, "credit_utilization_ratio": 0.59 },
+        { "year": 2021, "credit_limit": 3900000, "credit_used": 2300000, "credit_utilization_ratio": 0.59 },
+        { "year": 2022, "credit_limit": 4100000, "credit_used": 2400000, "credit_utilization_ratio": 0.58 },
+        { "year": 2023, "credit_limit": 4300000, "credit_used": 2500000, "credit_utilization_ratio": 0.58 }
+      ],
+      "debt_repayment": [
+        { "year": 2019, "total_debt": 6500000, "debt_repaid": 1100000, "remaining_debt": 5400000 },
+        { "year": 2020, "total_debt": 6000000, "debt_repaid": 1200000, "remaining_debt": 4800000 },
+        { "year": 2021, "total_debt": 5500000, "debt_repaid": 1300000, "remaining_debt": 4200000 },
+        { "year": 2022, "total_debt": 5000000, "debt_repaid": 1400000, "remaining_debt": 3600000 },
+        { "year": 2023, "total_debt": 4500000, "debt_repaid": 1500000, "remaining_debt": 3000000 }
+      ],
+      "creditworthiness": [
+        { "year": 2019, "credit_rating": "BBB", "actions_taken": "Maintained low credit utilization, timely debt payments" },
+        { "year": 2020, "credit_rating": "BBB+", "actions_taken": "Improved cash flow management, reduced debt" },
+        { "year": 2021, "credit_rating": "A-", "actions_taken": "Continued debt repayment, increased profitability" },
+        { "year": 2022, "credit_rating": "A-", "actions_taken": "Stable financial performance, strategic refinancing" },
+        { "year": 2023, "credit_rating": "A", "actions_taken": "Further debt reduction, diversified revenue streams" }
+      ]
+    }
+  }

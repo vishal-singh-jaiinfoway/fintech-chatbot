@@ -1,0 +1,26 @@
+{
+    "Acme_Corporation": {
+      "communication_history": [
+        {
+          "CustomerId": "0011i00000Zk2ErAAJ",
+          "Interactions": [
+            {
+              "InteractionId": "I001",
+              "Type": "Email",
+              "Date": "2024-05-01",
+              "Summary": "Sent email to discuss new product line.",
+              "Details": "Discussed the features and benefits of the new product line with John Doe. Scheduled a follow-up meeting."
+            },
+            {
+              "InteractionId": "I002",
+              "Type": "Phone Call",
+              "Date": "2024-05-05",
+              "Summary": "Phone call to review contract details.",
+              "Details": "Reviewed the contract details for the new order. John Doe had some questions which were addressed."
+            }
+          ]
+        }
+      ]
+    }
+  }
+  

@@ -1,0 +1,888 @@
+{
+  "records": [
+    {
+      "Id": "0011i00000Zk2ErAAJ",
+      "Name": "Acme Corporation",
+      "Industry": "Manufacturing",
+      "AnnualRevenue": 5000000,
+      "Phone": "(123) 456-7890",
+      "Website": "http://www.acmecorp.com",
+      "BillingAddress": {
+        "street": "123 Main St",
+        "city": "Metropolis",
+        "state": "NY",
+        "postalCode": "10001",
+        "country": "USA"
+      },
+      "Contacts": [
+        {
+          "FirstName": "John",
+          "LastName": "Doe",
+          "Email": "johndoe@acmecorp.com",
+          "Phone": "(123) 456-7891",
+          "Title": "CEO"
+        }
+      ],
+      "LastActivityDate": "2024-05-10",
+      "Notes": [
+        {
+          "CreatedDate": "2024-04-25",
+          "Content": "Met with John Doe to discuss new product line."
+        }
+      ]
+    },
+    {
+      "Id": "0011i00000Zk2EsAAJ",
+      "Name": "Globex Inc.",
+      "Industry": "Technology",
+      "AnnualRevenue": 10000000,
+      "Phone": "(123) 456-7892",
+      "Website": "http://www.globex.com",
+      "BillingAddress": {
+        "street": "456 Elm St",
+        "city": "Springfield",
+        "state": "IL",
+        "postalCode": "62701",
+        "country": "USA"
+      },
+      "Contacts": [
+        {
+          "FirstName": "Jane",
+          "LastName": "Smith",
+          "Email": "janesmith@globex.com",
+          "Phone": "(123) 456-7893",
+          "Title": "CFO"
+        }
+      ],
+      "LastActivityDate": "2024-05-12",
+      "Notes": [
+        {
+          "CreatedDate": "2024-05-05",
+          "Content": "Discussed financial planning for next quarter."
+        }
+      ]
+    },
+    {
+      "Id": "0011i00000Zk2EtAAJ",
+      "Name": "Initech",
+      "Industry": "Software",
+      "AnnualRevenue": 7500000,
+      "Phone": "(123) 456-7894",
+      "Website": "http://www.initech.com",
+      "BillingAddress": {
+        "street": "789 Oak St",
+        "city": "Silicon Valley",
+        "state": "CA",
+        "postalCode": "94043",
+        "country": "USA"
+      },
+      "Contacts": [
+        {
+          "FirstName": "Bill",
+          "LastName": "Lumbergh",
+          "Email": "billlumbergh@initech.com",
+          "Phone": "(123) 456-7895",
+          "Title": "CTO"
+        }
+      ],
+      "LastActivityDate": "2024-05-11",
+      "Notes": [
+        {
+          "CreatedDate": "2024-04-20",
+          "Content": "Presented new software upgrade features."
+        }
+      ]
+    },
+    {
+      "Id": "0011i00000Zk2EuAAJ",
+      "Name": "Umbrella Corporation",
+      "Industry": "Pharmaceuticals",
+      "AnnualRevenue": 15000000,
+      "Phone": "(123) 456-7896",
+      "Website": "http://www.umbrellacorp.com",
+      "BillingAddress": {
+        "street": "1234 Maple St",
+        "city": "Raccoon City",
+        "state": "MO",
+        "postalCode": "63021",
+        "country": "USA"
+      },
+      "Contacts": [
+        {
+          "FirstName": "Albert",
+          "LastName": "Wesker",
+          "Email": "albertwesker@umbrellacorp.com",
+          "Phone": "(123) 456-7897",
+          "Title": "Director"
+        }
+      ],
+      "LastActivityDate": "2024-05-09",
+      "Notes": [
+        {
+          "CreatedDate": "2024-03-30",
+          "Content": "Reviewed recent clinical trial results."
+        }
+      ]
+    }
+  ],
+  "communicationHistory": [
+    {
+      "CustomerId": "0011i00000Zk2ErAAJ",
+      "Interactions": [
+        {
+          "InteractionId": "I001",
+          "Type": "Email",
+          "Date": "2024-05-01",
+          "Summary": "Sent email to discuss new product line.",
+          "Details": "Discussed the features and benefits of the new product line with John Doe. Scheduled a follow-up meeting."
+        },
+        {
+          "InteractionId": "I002",
+          "Type": "Phone Call",
+          "Date": "2024-05-05",
+          "Summary": "Phone call to review contract details.",
+          "Details": "Reviewed the contract details for the new order. John Doe had some questions which were addressed."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EsAAJ",
+      "Interactions": [
+        {
+          "InteractionId": "I003",
+          "Type": "Meeting",
+          "Date": "2024-05-02",
+          "Summary": "Quarterly financial review meeting.",
+          "Details": "Met with Jane Smith to review the quarterly financial performance and discuss future plans."
+        },
+        {
+          "InteractionId": "I004",
+          "Type": "Email",
+          "Date": "2024-05-06",
+          "Summary": "Follow-up on financial planning.",
+          "Details": "Sent follow-up email regarding the financial planning discussed in the meeting. Included additional resources."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EtAAJ",
+      "Interactions": [
+        {
+          "InteractionId": "I005",
+          "Type": "Phone Call",
+          "Date": "2024-05-03",
+          "Summary": "Call to discuss software upgrades.",
+          "Details": "Discussed the upcoming software upgrades with Bill Lumbergh and their potential impact on operations."
+        },
+        {
+          "InteractionId": "I006",
+          "Type": "Meeting",
+          "Date": "2024-05-07",
+          "Summary": "In-person meeting to review project status.",
+          "Details": "Reviewed the current status of ongoing projects and outlined next steps."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EuAAJ",
+      "Interactions": [
+        {
+          "InteractionId": "I007",
+          "Type": "Email",
+          "Date": "2024-05-04",
+          "Summary": "Email discussing clinical trial results.",
+          "Details": "Sent detailed email to Albert Wesker discussing the latest clinical trial results and their implications."
+        },
+        {
+          "InteractionId": "I008",
+          "Type": "Phone Call",
+          "Date": "2024-05-09",
+          "Summary": "Follow-up call on trial results.",
+          "Details": "Followed up with a phone call to answer any questions and provide further details on the trial results."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EvAAJ",
+      "Interactions": [
+        {
+          "InteractionId": "I009",
+          "Type": "Meeting",
+          "Date": "2024-05-02",
+          "Summary": "Discussion on defense contracts.",
+          "Details": "Met with Bruce Wayne to discuss potential defense contracts and their strategic importance."
+        },
+        {
+          "InteractionId": "I010",
+          "Type": "Email",
+          "Date": "2024-05-08",
+          "Summary": "Follow-up on defense contract discussion.",
+          "Details": "Sent follow-up email with detailed action points from the meeting."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EwAAJ",
+      "Interactions": [
+        {
+          "InteractionId": "I011",
+          "Type": "Phone Call",
+          "Date": "2024-05-05",
+          "Summary": "Call to review engineering project.",
+          "Details": "Discussed the progress of the new engineering project with Tony Stark and identified key milestones."
+        },
+        {
+          "InteractionId": "I012",
+          "Type": "Email",
+          "Date": "2024-05-10",
+          "Summary": "Email summarizing project review.",
+          "Details": "Sent an email summarizing the key points discussed during the project review call."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2ExAAJ",
+      "Interactions": [
+        {
+          "InteractionId": "I013",
+          "Type": "Meeting",
+          "Date": "2024-05-01",
+          "Summary": "Biotechnology research discussion.",
+          "Details": "Met with Norman Osborn to discuss recent advancements in biotechnology and potential applications."
+        },
+        {
+          "InteractionId": "I014",
+          "Type": "Phone Call",
+          "Date": "2024-05-06",
+          "Summary": "Follow-up call on biotech research.",
+          "Details": "Followed up with a call to discuss the next steps for the biotechnology research project."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EyAAJ",
+      "Interactions": [
+        {
+          "InteractionId": "I015",
+          "Type": "Email",
+          "Date": "2024-05-03",
+          "Summary": "Email regarding tech conference plans.",
+          "Details": "Sent an email to Miles Dyson with details about the upcoming technology conference."
+        },
+        {
+          "InteractionId": "I016",
+          "Type": "Meeting",
+          "Date": "2024-05-07",
+          "Summary": "Conference planning meeting.",
+          "Details": "Met in person to finalize plans for the technology conference."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EzAAJ",
+      "Interactions": [
+        {
+          "InteractionId": "I017",
+          "Type": "Phone Call",
+          "Date": "2024-05-02",
+          "Summary": "Sales target review call.",
+          "Details": "Reviewed quarterly sales targets with Michael Scott over the phone."
+        },
+        {
+          "InteractionId": "I018",
+          "Type": "Email",
+          "Date": "2024-05-04",
+          "Summary": "Follow-up email on sales targets.",
+          "Details": "Sent a follow-up email summarizing the discussion and next steps for achieving sales targets."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2F0AAJ",
+      "Interactions": [
+        {
+          "InteractionId": "I019",
+          "Type": "Meeting",
+          "Date": "2024-05-01",
+          "Summary": "Import/export regulation meeting.",
+          "Details": "Met with Art Vandelay to discuss the impact of new import/export regulations on the business."
+        },
+        {
+          "InteractionId": "I020",
+          "Type": "Phone Call",
+          "Date": "2024-05-03",
+          "Summary": "Follow-up call on regulation impact.",
+          "Details": "Followed up with a call to discuss the steps needed to comply with new regulations."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2F1AAJ",
+      "Interactions": [
+        {
+          "InteractionId": "I021",
+          "Type": "Email",
+          "Date": "2024-05-02",
+          "Summary": "Email regarding new entertainment project.",
+          "Details": "Sent an email to Brennan Huff and Dale Doback outlining potential new entertainment projects."
+        },
+        {
+          "InteractionId": "I022",
+          "Type": "Phone Call",
+          "Date": "2024-05-06",
+          "Summary": "Call to brainstorm project ideas.",
+          "Details": "Discussed ideas for new entertainment projects during a phone call."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2F2AAJ",
+      "Interactions": [
+        {
+          "InteractionId": "I023",
+          "Type": "Meeting",
+          "Date": "2024-05-01",
+          "Summary": "Real estate development review.",
+          "Details": "Met with Michael Bluth to review plans for new real estate developments."
+        },
+        {
+          "InteractionId": "I024",
+          "Type": "Phone Call",
+          "Date": "2024-05-05",
+          "Summary": "Follow-up call on development plans.",
+          "Details": "Followed up with a call to discuss details and timelines for the development plans."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2F3AAJ",
+      "Interactions": [
+        {
+          "InteractionId": "I025",
+          "Type": "Email",
+          "Date": "2024-05-02",
+          "Summary": "Email on new product strategy.",
+          "Details": "Sent an email to Gavin Belson outlining the strategy for the upcoming product launch."
+        },
+        {
+          "InteractionId": "I026",
+          "Type": "Meeting",
+          "Date": "2024-05-04",
+          "Summary": "Product development strategy meeting.",
+          "Details": "Met in person to discuss and finalize the new product development strategy."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2F4AAJ",
+      "Interactions": [
+        {
+          "InteractionId": "I027",
+          "Type": "Phone Call",
+          "Date": "2024-05-03",
+          "Summary": "Call about upcoming campaign.",
+          "Details": "Discussed the details of the upcoming advertising campaign with Don Draper."
+        },
+        {
+          "InteractionId": "I028",
+          "Type": "Email",
+          "Date": "2024-05-06",
+          "Summary": "Follow-up on campaign discussion.",
+          "Details": "Sent a follow-up email with detailed action points and deadlines for the advertising campaign."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2F5AAJ",
+      "Interactions": [
+        {
+          "InteractionId": "I029",
+          "Type": "Meeting",
+          "Date": "2024-05-01",
+          "Summary": "Discussion on data compression.",
+          "Details": "Met with Richard Hendricks to discuss the new data compression algorithm and its potential impact."
+        },
+        {
+          "InteractionId": "I030",
+          "Type": "Phone Call",
+          "Date": "2024-05-04",
+          "Summary": "Follow-up on data compression discussion.",
+          "Details": "Followed up with a call to review the technical details and next steps for the data compression project."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2F6AAJ",
+      "Interactions": [
+        {
+          "InteractionId": "I031",
+          "Type": "Email",
+          "Date": "2024-05-02",
+          "Summary": "Email on quarterly sales performance.",
+          "Details": "Sent an email to David Brent summarizing the sales performance for the quarter and areas for improvement."
+        },
+        {
+          "InteractionId": "I032",
+          "Type": "Phone Call",
+          "Date": "2024-05-04",
+          "Summary": "Call to discuss sales strategies.",
+          "Details": "Discussed new sales strategies over the phone to boost performance in the next quarter."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2F7AAJ",
+      "Interactions": [
+        {
+          "InteractionId": "I033",
+          "Type": "Meeting",
+          "Date": "2024-05-01",
+          "Summary": "Candy product line review.",
+          "Details": "Met with Willy Wonka to review the new candy product line and discuss marketing strategies."
+        },
+        {
+          "InteractionId": "I034",
+          "Type": "Email",
+          "Date": "2024-05-05",
+          "Summary": "Follow-up on product line review.",
+          "Details": "Sent a follow-up email with key points and next steps from the product line review meeting."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2F8AAJ",
+      "Interactions": [
+        {
+          "InteractionId": "I035",
+          "Type": "Phone Call",
+          "Date": "2024-05-03",
+          "Summary": "Brainstorming session for show ideas.",
+          "Details": "Held a phone call with Liz Lemon to brainstorm ideas for new show concepts for the upcoming season."
+        },
+        {
+          "InteractionId": "I036",
+          "Type": "Email",
+          "Date": "2024-05-06",
+          "Summary": "Summary of brainstorming session.",
+          "Details": "Sent a summary email with the ideas discussed during the brainstorming session."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2F9AAJ",
+      "Interactions": [
+        {
+          "InteractionId": "I037",
+          "Type": "Meeting",
+          "Date": "2024-05-01",
+          "Summary": "Review of new entertainment ventures.",
+          "Details": "Met with Stan Edgar to review plans for new entertainment ventures and their potential impact."
+        },
+        {
+          "InteractionId": "I038",
+          "Type": "Phone Call",
+          "Date": "2024-05-05",
+          "Summary": "Follow-up on venture plans.",
+          "Details": "Discussed further details and timelines for the new entertainment ventures during a phone call."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2G0AAJ",
+      "Interactions": [
+        {
+          "InteractionId": "I039",
+          "Type": "Email",
+          "Date": "2024-05-02",
+          "Summary": "Email regarding technology projects.",
+          "Details": "Sent an email to William Bell with updates and plans for upcoming technology projects."
+        },
+        {
+          "InteractionId": "I040",
+          "Type": "Meeting",
+          "Date": "2024-05-07",
+          "Summary": "Technology project review meeting.",
+          "Details": "Met in person to review the status and next steps for various technology projects."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2G1AAJ",
+      "Interactions": [
+        {
+          "InteractionId": "I041",
+          "Type": "Phone Call",
+          "Date": "2024-05-03",
+          "Summary": "Discussion on delivery efficiency.",
+          "Details": "Discussed delivery route efficiency with Philip Fry and Turanga Leela and identified areas for improvement."
+        },
+        {
+          "InteractionId": "I042",
+          "Type": "Email",
+          "Date": "2024-05-06",
+          "Summary": "Follow-up on delivery efficiency.",
+          "Details": "Sent a follow-up email summarizing the points discussed during the call and suggested improvements."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2G2AAJ",
+      "Interactions": [
+        {
+          "InteractionId": "I043",
+          "Type": "Meeting",
+          "Date": "2024-05-01",
+          "Summary": "Biotechnology development review.",
+          "Details": "Met with Eldon Tyrell to review the latest developments in biotechnology and their commercial potential."
+        },
+        {
+          "InteractionId": "I044",
+          "Type": "Phone Call",
+          "Date": "2024-05-05",
+          "Summary": "Follow-up on biotech developments.",
+          "Details": "Followed up with a phone call to discuss next steps for bringing new biotech products to market."
+        }
+      ]
+    }
+  ],
+  "followUpsAndReminders": [
+    {
+      "CustomerId": "0011i00000Zk2ErAAJ",
+      "FollowUps": [
+        {
+          "FollowUpId": "F001",
+          "Date": "2024-05-15",
+          "Task": "Follow up on product line discussion",
+          "Details": "Send a follow-up email to John Doe about the new product line features."
+        }
+      ],
+      "Reminders": [
+        {
+          "ReminderId": "R001",
+          "Date": "2024-05-12",
+          "Task": "Prepare presentation for next meeting",
+          "Details": "Prepare slides for the upcoming meeting with Acme Corporation."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EsAAJ",
+      "FollowUps": [
+        {
+          "FollowUpId": "F002",
+          "Date": "2024-05-18",
+          "Task": "Check in on financial planning",
+          "Details": "Follow up with Jane Smith on the financial planning resources shared."
+        }
+      ],
+      "Reminders": [
+        {
+          "ReminderId": "R002",
+          "Date": "2024-05-14",
+          "Task": "Send financial report",
+          "Details": "Send the quarterly financial report to Globex Inc."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EtAAJ",
+      "FollowUps": [
+        {
+          "FollowUpId": "F003",
+          "Date": "2024-05-20",
+          "Task": "Discuss software upgrade details",
+          "Details": "Call Bill Lumbergh to discuss the details of the upcoming software upgrade."
+        }
+      ],
+      "Reminders": [
+        {
+          "ReminderId": "R003",
+          "Date": "2024-05-13",
+          "Task": "Review project milestones",
+          "Details": "Review the milestones for the ongoing projects at Initech."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EuAAJ",
+      "FollowUps": [
+        {
+          "FollowUpId": "F004",
+          "Date": "2024-05-22",
+          "Task": "Follow up on clinical trial results",
+          "Details": "Send a follow-up email to Albert Wesker with additional information on the clinical trial results."
+        }
+      ],
+      "Reminders": [
+        {
+          "ReminderId": "R004",
+          "Date": "2024-05-15",
+          "Task": "Prepare trial summary",
+          "Details": "Prepare a detailed summary of the recent clinical trial results."
+        }
+      ]
+    }
+  ],
+  "taskManagement": [
+    {
+      "CustomerId": "0011i00000Zk2ErAAJ",
+      "Tasks": [
+        {
+          "TaskId": "T001",
+          "Date": "2024-05-10",
+          "AssignedTo": "Emily Johnson",
+          "Task": "Research new product features",
+          "Details": "Research and compile a list of features for the new product line."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EsAAJ",
+      "Tasks": [
+        {
+          "TaskId": "T002",
+          "Date": "2024-05-11",
+          "AssignedTo": "Mark Smith",
+          "Task": "Compile financial data",
+          "Details": "Compile the financial data for the quarterly report."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EtAAJ",
+      "Tasks": [
+        {
+          "TaskId": "T003",
+          "Date": "2024-05-12",
+          "AssignedTo": "Sarah Lee",
+          "Task": "Prepare software upgrade documentation",
+          "Details": "Prepare detailed documentation for the upcoming software upgrade."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EuAAJ",
+      "Tasks": [
+        {
+          "TaskId": "T004",
+          "Date": "2024-05-13",
+          "AssignedTo": "David Brown",
+          "Task": "Analyze clinical trial data",
+          "Details": "Analyze the data from the recent clinical trial and prepare a report."
+        }
+      ]
+    }
+  ],
+  "customerProfileAccessNotifications": [
+    {
+      "CustomerId": "0011i00000Zk2ErAAJ",
+      "Notifications": [
+        {
+          "NotificationId": "N001",
+          "Date": "2024-05-09",
+          "Message": "You have accessed the profile of Acme Corporation. Review the recent interactions and update any new information as needed."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EsAAJ",
+      "Notifications": [
+        {
+          "NotificationId": "N002",
+          "Date": "2024-05-10",
+          "Message": "You have accessed the profile of Globex Inc. Ensure that all financial planning updates are reflected in the customer profile."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EtAAJ",
+      "Notifications": [
+        {
+          "NotificationId": "N003",
+          "Date": "2024-05-11",
+          "Message": "You have accessed the profile of Initech. Please check the latest project updates and customer feedback."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EuAAJ",
+      "Notifications": [
+        {
+          "NotificationId": "N004",
+          "Date": "2024-05-12",
+          "Message": "You have accessed the profile of Umbrella Corporation. Review the clinical trial results and follow up with the customer."
+        }
+      ]
+    }
+  ],
+  "followUpsAndReminders": [
+    {
+      "CustomerId": "0011i00000Zk2ErAAJ",
+      "FollowUps": [
+        {
+          "FollowUpId": "F001",
+          "Date": "2024-05-15",
+          "Task": "Follow up on product line discussion",
+          "Details": "Send a follow-up email to John Doe about the new product line features."
+        }
+      ],
+      "Reminders": [
+        {
+          "ReminderId": "R001",
+          "Date": "2024-05-12",
+          "Task": "Prepare presentation for next meeting",
+          "Details": "Prepare slides for the upcoming meeting with Acme Corporation."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EsAAJ",
+      "FollowUps": [
+        {
+          "FollowUpId": "F002",
+          "Date": "2024-05-18",
+          "Task": "Check in on financial planning",
+          "Details": "Follow up with Jane Smith on the financial planning resources shared."
+        }
+      ],
+      "Reminders": [
+        {
+          "ReminderId": "R002",
+          "Date": "2024-05-14",
+          "Task": "Send financial report",
+          "Details": "Send the quarterly financial report to Globex Inc."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EtAAJ",
+      "FollowUps": [
+        {
+          "FollowUpId": "F003",
+          "Date": "2024-05-20",
+          "Task": "Discuss software upgrade details",
+          "Details": "Call Bill Lumbergh to discuss the details of the upcoming software upgrade."
+        }
+      ],
+      "Reminders": [
+        {
+          "ReminderId": "R003",
+          "Date": "2024-05-13",
+          "Task": "Review project milestones",
+          "Details": "Review the milestones for the ongoing projects at Initech."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EuAAJ",
+      "FollowUps": [
+        {
+          "FollowUpId": "F004",
+          "Date": "2024-05-22",
+          "Task": "Follow up on clinical trial results",
+          "Details": "Send a follow-up email to Albert Wesker with additional information on the clinical trial results."
+        }
+      ],
+      "Reminders": [
+        {
+          "ReminderId": "R004",
+          "Date": "2024-05-15",
+          "Task": "Prepare trial summary",
+          "Details": "Prepare a detailed summary of the recent clinical trial results."
+        }
+      ]
+    }
+  ],
+  "taskManagement": [
+    {
+      "CustomerId": "0011i00000Zk2ErAAJ",
+      "Tasks": [
+        {
+          "TaskId": "T001",
+          "Date": "2024-05-10",
+          "AssignedTo": "Emily Johnson",
+          "Task": "Research new product features",
+          "Details": "Research and compile a list of features for the new product line."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EsAAJ",
+      "Tasks": [
+        {
+          "TaskId": "T002",
+          "Date": "2024-05-11",
+          "AssignedTo": "Mark Smith",
+          "Task": "Compile financial data",
+          "Details": "Compile the financial data for the quarterly report."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EtAAJ",
+      "Tasks": [
+        {
+          "TaskId": "T003",
+          "Date": "2024-05-12",
+          "AssignedTo": "Sarah Lee",
+          "Task": "Prepare software upgrade documentation",
+          "Details": "Prepare detailed documentation for the upcoming software upgrade."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EuAAJ",
+      "Tasks": [
+        {
+          "TaskId": "T004",
+          "Date": "2024-05-13",
+          "AssignedTo": "David Brown",
+          "Task": "Analyze clinical trial data",
+          "Details": "Analyze the data from the recent clinical trial and prepare a report."
+        }
+      ]
+    }
+  ],
+  "customerProfileAccessNotifications": [
+    {
+      "CustomerId": "0011i00000Zk2ErAAJ",
+      "Notifications": [
+        {
+          "NotificationId": "N001",
+          "Date": "2024-05-09",
+          "Message": "You have accessed the profile of Acme Corporation. Review the recent interactions and update any new information as needed."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EsAAJ",
+      "Notifications": [
+        {
+          "NotificationId": "N002",
+          "Date": "2024-05-10",
+          "Message": "You have accessed the profile of Globex Inc. Ensure that all financial planning updates are reflected in the customer profile."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EtAAJ",
+      "Notifications": [
+        {
+          "NotificationId": "N003",
+          "Date": "2024-05-11",
+          "Message": "You have accessed the profile of Initech. Please check the latest project updates and customer feedback."
+        }
+      ]
+    },
+    {
+      "CustomerId": "0011i00000Zk2EuAAJ",
+      "Notifications": [
+        {
+          "NotificationId": "N004",
+          "Date": "2024-05-12",
+          "Message": "You have accessed the profile of Umbrella Corporation. Review the clinical trial results and follow up with the customer."
+        }
+      ]
+    }
+  ]
+}

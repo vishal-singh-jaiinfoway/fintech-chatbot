@@ -1,0 +1,82 @@
+/* MarkdownRenderer.css */
+.markdown-container {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Headings */
+  .heading-1 { font-size: 2rem; font-weight: bold; }
+  .heading-2 { font-size: 1.75rem; font-weight: bold; }
+  .heading-3 { font-size: 1.5rem; font-weight: bold; }
+  .heading-4 { font-size: 1.25rem; font-weight: bold; }
+  .heading-5 { font-size: 1rem; font-weight: bold; }
+  .heading-6 { font-size: 0.875rem; font-weight: bold; }
+  
+  /* Paragraph */
+  .paragraph { margin-bottom: 1rem; font-size: 1rem; }
+  
+  /* Blockquote */
+  .blockquote {
+    border-left: 4px solid #007bff;
+    padding-left: 16px;
+    font-style: italic;
+    color: #555;
+    margin: 16px 0;
+  }
+  
+  /* Lists */
+  .list { margin-left: 20px; }
+  .list-item { margin-bottom: 5px; }
+  
+  /* Code blocks */
+  .code-block {
+    background: #282c34;
+    color: #ffffff;
+    padding: 12px;
+    border-radius: 5px;
+    overflow-x: auto;
+  }
+  
+  .inline-code {
+    background: #e6e6e6;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+  
+  /* Tables */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  .table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  .table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  /* Links */
+  .markdown-link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  .markdown-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Images */
+  .markdown-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
