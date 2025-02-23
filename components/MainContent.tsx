@@ -26,12 +26,12 @@ const MainContent = () => {
             <CRMDashboard />
           </>
         );
-        case "Fetch & Upload":
-          return (
-            <>
-              <FetchUpload fetchUploadChats={fetchUploadChats} setFetchUploadChats={setFetchUploadChats}/>
-            </>
-          );
+      // case "Fetch & Upload":
+      //   return (
+      //     <>
+      //       <FetchUpload fetchUploadChats={fetchUploadChats} setFetchUploadChats={setFetchUploadChats}/>
+      //     </>
+      //   );
       case "Financial Data":
         return <FanancialDashboard />;
       case "Business Insights":

@@ -271,14 +271,6 @@ export default function Dashboard() {
                           </div>
                         ))}
                       </td>
-                      {/* <td className="border px-6 py-3">
-                        {record.Notes.map((note: any) => (
-                          <div key={note.CreatedDate} className="mb-2">
-                            <p>Date: {note.CreatedDate}</p>
-                            <p>Content: {note.Content}</p>
-                          </div>
-                        ))}
-                      </td> */}
                     </tr>
                   ))}
               </tbody>

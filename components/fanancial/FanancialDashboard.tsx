@@ -363,7 +363,9 @@ export default function Dashboard() {
             <Chat />
           </div>
         )}
+
       </main>
     </div>
   );
 }
+

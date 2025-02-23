@@ -27,8 +27,10 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "components/Utility/Markdown/markdown-components.tsx",
-    "components/BusinessInsights/FanancialDashboard.jsx",
-    "app/api/business-insights-api/route.js"
+    "components/BusinessInsights/FanancialDashboard.tsx",
+    "app/api/business-insights-api/route.js",
+    "components/crm/CRMDashboard.tsx",
+    "app/api/crm/route.js"
   ],
   "exclude": ["node_modules"]
 }

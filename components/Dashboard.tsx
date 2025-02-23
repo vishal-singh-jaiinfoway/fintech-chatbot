@@ -2,92 +2,34 @@ import React, { useEffect, useRef, useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Bar } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
-import { MessageCircle, SendHorizonalIcon, SendIcon, X } from "lucide-react";
+import { MessageCircle, SendHorizonalIcon, X } from "lucide-react";
 import { Button } from "@mui/material";
 import axios from "axios";
-import { useChat } from "ai/react";
-import { Urbanist } from "next/font/google";
 import MarkdownRenderer from './Utility/Markdown/MarkdownRenderer'
-import { selectedTab } from "@/store/sidebarSlice";
-import { useSelector } from "react-redux";
+import {
+  // suggestedQuestions,
+  companies,
+  years,
+  quarters,
+} from "../public/data";
 
-const urbanist = Urbanist({
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["500", "600", "700"],
-});
+
 Chart.register(...registerables);
+
 const suggestedQuestions = {
   "Financial Performance & Guidance": {
     "Common Questions": [
-      "What were the most common financial questions analysts asked?",
-      "What concerns did analysts raise about revenue, EPS, net income, margins, and loan growth?",
-      "Did analysts ask about guidance for the next quarter/year? What was the management’s response?",
-      "Were there any unexpected financial concerns analysts highlighted?",
-      "How did competitors justify misses or beats on financial expectations?",
+      "What were the most common financial questions analysts asked in SoFi Technologies Inc. 3rd quarter,2024 earnings call?",
+      "What concerns did analysts raise about revenue, EPS, net income, margins, and loan growth in JPMorgan Chase & Co 1st quarter,2024 earnings call?",
+
+      "How did competitors respond to concerns about loan demand and deposit pricing pressure in Morgan Stanley 3rd quarter,2024 earnings call?",
+      "Were there any discussions around inflation and economic outlook in Wells Fargo & Company 4rth quarter,2024 earnings call?",
+
+      "What strategies did competitors highlight for digital banking growth in SoFi Technologies Inc. 4rth quarter,2024 earnings call?",
     ],
   },
-  "Interest Rate & Macro Impact": {
-    "Common Questions": [
-      "What did analysts ask about the impact of Fed rate changes on net interest margin (NIM)?",
-      "How did competitors respond to concerns about loan demand and deposit pricing pressure?",
-      "Were there any discussions around inflation and economic outlook?",
-    ],
-  },
-  "Loan Portfolio & Credit Risk": {
-    "Common Questions": [
-      "What questions did analysts ask regarding loan portfolio quality, delinquency rates, and charge-offs?",
-      "How did competitors address concerns about credit risk and exposure to specific industries (e.g., CRE, C&I loans)?",
-      "Did analysts probe into loan loss provisions and reserve levels?",
-      "Were there any regulatory concerns about stress tests or liquidity management?",
-    ],
-  },
-  "Deposit Trends & Liquidity": {
-    "Common Questions": [
-      "What concerns did analysts raise about deposit outflows and cost of deposits?",
-      "How did competitors explain liquidity management strategies?",
-      "Were there any discussions around CDs, money market accounts, and client behavior shifts?",
-    ],
-  },
-  "Technology & Digital Banking": {
-    "Common Questions": [
-      "Did analysts question digital transformation, fintech partnerships, or investment in AI/automation?",
-      "What strategies did competitors highlight for digital banking growth?",
-      "Were there concerns about operational risks, cybersecurity, or compliance issues?",
-    ],
-  },
-  "Capital Allocation & Shareholder Returns": {
-    "Common Questions": [
-      "What did analysts ask about dividends, stock buybacks, and capital deployment?",
-      "How did competitors justify capital decisions in light of regulatory requirements and growth plans?",
-      "Were there discussions around M&A activity or expansion plans?",
-    ],
-  },
-  "Regulatory & Compliance Risks": {
-    "Common Questions": [
-      "Did analysts ask about compliance with Basel III, stress tests, or new banking regulations?",
-      "Were there any concerns raised about government scrutiny, lawsuits, or regulatory penalties?",
-    ],
-  },
-  "Competitive Landscape & Market Positioning": {
-    "Common Questions": [
-      "How did analysts probe into competitive threats (regional banks, fintech, big banks)?",
-      "What differentiation strategies did competitors highlight?",
-      "Were there any discussions on customer retention, product offerings, or geographic expansion?",
-    ],
-  },
-  "Cost Management & Operational Efficiency": {
-    "Common Questions": [
-      "What did analysts ask about cost-cutting measures, efficiency ratio, and expense control?",
-      "How did competitors address questions around branch optimization and workforce restructuring?",
-    ],
-  },
-  "Strategic Initiatives & Long-Term Vision": {
-    "Common Questions": [
-      "What future growth initiatives were analysts most interested in?",
-      "Were there any concerns about leadership changes, succession planning, or cultural shifts?",
-    ],
-  },
+
+
 };
 
 const Dashboard = ({chats,setChats}:any) => {
@@ -146,10 +88,6 @@ const Dashboard = ({chats,setChats}:any) => {
     setRecommendations(items);
   };
 
-  if (!crmData || !financialData) {
-    return <div>Loading...</div>;
-  }
-
   const revenueData = {
     labels: crmData?.records?.map((record: any) => record.Name),
     datasets: [
@@ -166,17 +104,19 @@ const Dashboard = ({chats,setChats}:any) => {
     datasets: [
       {
         label: 'Transactions',
-        data: financialData.credit_card_transactions.map((tx: any) => tx.Amount),
+        data: financialData?.credit_card_transactions?.map((tx: any) => tx.Amount),
         backgroundColor: 'rgba(75, 192, 192, 0.6)',
       },
     ],
   };
 
-
+  if (!crmData || !financialData) {
+    return (<div>Loading...</div>);
+  }
   return (
     <div className="w-full h-screen overflow-auto p-4 bg-gray-100">
       <h1 className="text-3xl font-bold mb-6 text-center">Dashboard</h1>
-     <ChatPopup isOpen={isChatOpen} setIsOpen={setIsChatOpen} chats={chats} setChats={setChats}></ChatPopup>
+      <ChatPopup isOpen={isChatOpen} setIsOpen={setIsChatOpen} chats={chats} setChats={setChats}></ChatPopup>
 
       <div className="mb-8">
         <h2 className="text-2xl font-bold mb-4">Company Profiles</h2>
@@ -277,20 +217,17 @@ function ChatPopup({ isOpen, setIsOpen, chats, setChats }: any) {
   const scrollViewRef = useRef<any>(null)
   const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/bedrock-agent`;
 
-  const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: apiUrl,
+  const [selectedCategory, setSelectedCategory] = useState<string>(
+    Object.keys(suggestedQuestions)[0],
+  );
 
-  });
-  const selectedTab = useSelector((state: any) => state.sidebar.selectedTab);
+  const categoryKey = "Financial Performance & Guidance"; // or any dynamic string
+  const commonQuestions = suggestedQuestions[categoryKey as keyof typeof suggestedQuestions]["Common Questions"];
 
-  useEffect(() => {
-    console.log("selectedTab", selectedTab)
-  }, [selectedTab])
 
   useEffect(() => {
     if (scrollViewRef.current) {
       scrollViewRef.current.scrollIntoView({ behavior: 'smooth' });
-
     }
   }, [scrollViewRef.current])
 
@@ -345,11 +282,18 @@ function ChatPopup({ isOpen, setIsOpen, chats, setChats }: any) {
       getAgentResponse()
     }
   };
+  const handleCategoryChange = (event: { target: { value: React.SetStateAction<string>; }; }) =>
+    setSelectedCategory(event.target.value);
+  const handleButtonClick = (question: any) => {
+    const formattedQuestion = `${question} for in ${selectedCategory} category`;
+    setInput(formattedQuestion);
+    // handleInputChange({ target: { value: formattedQuestion } });
+  };
 
   return (
     <div className="fixed bottom-6 right-6 flex flex-col items-end">
       {isOpen && (
-        <div style={{ boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.5)" }} className="bg-white shadow-2xl rounded-2xl p-4 w-80 h-[500px] w-[800px] flex flex-col">
+        <div style={{ boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.5)" }} className="bg-white shadow-2xl rounded-2xl p-4 m-4 h-[500px] w-[800px] flex flex-col">
           <div className="flex justify-center items-center border-b pb-2" >
             {/* <h3 className="text-lg font-semibold">Chat</h3> */}
             <Button onClick={() => {
@@ -362,18 +306,42 @@ function ChatPopup({ isOpen, setIsOpen, chats, setChats }: any) {
           </div>
           <div className="flex-1 overflow-y-auto p-2">{/* Chat messages will go here */}
 
-            {isLoading && <div style={{ alignSelf: 'center', top: 250, left: 380 }} className="absolute z-[20] spinner"></div>}
+            <div className="mb-4">
+              <h3 className="font-bold mb-2 text-gray-700">
+                Suggested Questions:
+              </h3>
+              {/* <div className="flex flex-wrap mb-[50px]">
+                {commonQuestions.map(
+                  (question: string | number | bigint | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<React.AwaitedReactNode> | null | undefined, index: React.Key | null | undefined) => (
+                    <button
+                      key={index}
+                      className="bg-blue-500 text-white text-sm px-3 py-1 rounded mr-2 mb-2 hover:bg-blue-600"
+                      onClick={() => handleButtonClick(question)}
+                    >
+                      {question}
+                    </button>
+                  ),
+                )}
+              </div> */}
+              <CommonQuestionsList commonQuestions={commonQuestions} handleButtonClick={handleButtonClick}></CommonQuestionsList>
 
+            </div>
             {/* Messages Area */}
             <div className="flex-1 overflow-y-auto">
               {chats.map((msg: any, index: number) => (
-                <section style={{ marginBottom: msg.id % 2 === 0 ? '60px' : '30px' }} key={index} className={`flex-1 overflow-y-auto p-[20px] rounded text-sm-200 ${msg.sender === "user" ? "bg-blue-500 text-white self-end" : "bg-gray-200 text-black self-start"}`}>
+                <section style={{ marginBottom: msg.id % 2 === 0 ? '60px' : '30px' }} key={index} className={`flex-1 overflow-y-auto p-[10px] rounded text-sm-200 ${msg.sender === "user" ? "bg-gray-200 text-black text-sm self-end" : "bg-gray-400 text-black self-start"}`}>
                   <MarkdownRenderer content={msg.text} />
                 </section>
 
               ))}
             </div>
-
+            {/* Loading Indicator */}
+            {isLoading && (
+              <div className="loading-container">
+                <div className="spinner"></div>
+                <p className="loading-text">Generating Response...</p>
+              </div>
+            )}    
 
 
             <div ref={scrollViewRef}></div>
@@ -404,6 +372,39 @@ function ChatPopup({ isOpen, setIsOpen, chats, setChats }: any) {
     </div>
   );
 }
+
+
+const CommonQuestionsList = ({ commonQuestions, handleButtonClick }: { commonQuestions: (string | number)[], handleButtonClick: any }) => {
+  // const [visibleQuestions, setVisibleQuestions] = useState<(string | number)[]>([]);
+  // const [currentIndex, setCurrentIndex] = useState(0);
+
+  // useEffect(() => {
+  //   if (currentIndex < commonQuestions.length) {
+  //     const timeout = setTimeout(() => {
+  //       setVisibleQuestions((prev) => [...prev, commonQuestions[currentIndex]]);
+  //       setCurrentIndex((prevIndex) => prevIndex + 1);
+  //     }, 500); // Adjust delay time here (e.g., 500ms per question)
+
+  //     return () => clearTimeout(timeout);
+  //   }
+  // }, [currentIndex, commonQuestions]);
+
+  return (
+    <div className="flex flex-wrap mb-[50px]">
+      {commonQuestions.map((question, index) => (
+        <button
+          key={index}
+          className="bg-blue-500 text-white text-sm px-3 py-1 rounded mr-2 mb-2 hover:bg-blue-600"
+          onClick={() => handleButtonClick(question)}
+        >
+          {question}
+        </button>
+      ))}
+    </div>
+  );
+};
+
+
 
 
 export default Dashboard;

@@ -20,7 +20,6 @@ const Sidebar = () => {
   const context = useSelector((state: any) => state.sidebar.context);
 
   const handleTabClick = (tab: any) => {
-    console.log("hello world")
     dispatch(setSelectedTab(tab));
   };
 
@@ -51,7 +50,7 @@ const Sidebar = () => {
         <h2 className="text-xl font-bold mb-4">Tabs</h2>
         <ul className="space-y-2">
           {/* Personalized Advice */}
-          {["Dashboard","Earning Calls Summary", "Fetch & Upload", "Financial Data", "Business Insights"].map((tab) => (
+          {["Dashboard", "Earning Calls Summary", "Financial Data", "Business Insights"].map((tab) => (
             <li
               key={tab}
               className={`cursor-pointer rounded-md px-3 py-2 ${selectedTab === tab ? "bg-blue-500 text-white" : "bg-gray-200 hover:bg-gray-300"}`}
