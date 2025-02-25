@@ -222,12 +222,7 @@ export default function Dashboard() {
         <title>Business Insights</title>
       </Head>
 
-      {/* Header */}
-      <header className="bg-blue-600 text-white py-4 px-6 shadow flex-none">
-        <div className="container mx-auto">
-          <h1 className="text-3xl font-bold">Business Insights</h1>
-        </div>
-      </header>
+      
 
       {/* Top Controls */}
       <div className="bg-white p-4 shadow flex-none">

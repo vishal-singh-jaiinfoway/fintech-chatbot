@@ -46,20 +46,12 @@ const Sidebar = () => {
   return (
     <div className="flex-none w-1/5 h-screen bg-gray-100 p-6 rounded-lg shadow-lg overflow-y-auto mr-4">
       <div className="mb-6">
-        {/* Sidebar Tabs */}
-        {/* <h2 className="text-xl font-bold mb-4">Tabs</h2>
-        <ul className="space-y-2">
-
-          {["Business Insights"].map((tab) => (
-            <li
-              key={tab}
-              className={`cursor-pointer rounded-md px-3 py-2 ${selectedTab === tab ? "bg-blue-500 text-white" : "bg-gray-200 hover:bg-gray-300"}`}
-              onClick={() => handleTabClick(tab)}
-            >
-              {tab}
-            </li>
-          ))}
-        </ul> */}
+        {/* Header */}
+        <header className="bg-blue-600 text-white py-4 px-6 shadow flex-none">
+          <div className="container mx-auto">
+            <h1 className="text-3xl font-bold">Business Insights</h1>
+          </div>
+        </header>
       </div>
       <div>
         {/* Configuration */}
