@@ -195,7 +195,7 @@ function ChatPopup({ isOpen, setIsOpen, chats, setChats }: any) {
             <div className="flex-1 overflow-y-auto">
               {chats.map((msg: any, index: number) => (
                 <section style={{ marginBottom: msg.id % 2 === 0 ? '60px' : '30px' }} key={index} className={`flex-1 overflow-y-auto p-[10px] rounded text-sm-200 ${msg.sender === "user" ? "bg-gray-200 text-black text-sm self-end" : "bg-gray-400 text-black self-start"}`}>
-                  <MarkdownRenderer content={msg.text} />
+                  {/* <MarkdownRenderer content={msg.text} /> */}
                 </section>
 
               ))}

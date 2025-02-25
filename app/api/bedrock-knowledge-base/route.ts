@@ -39,8 +39,8 @@ export async function POST(req: Request) {
     region: "us-east-1",
     clientOptions: {
       credentials: {
-        accessKeyId: process.env.ACCESS_KEY,
-        secretAccessKey: process.env.SECRET_KEY,
+        accessKeyId: process.env.ACCESS_KEY!,
+        secretAccessKey: process.env.SECRET_KEY!,
       },
     },
   });
