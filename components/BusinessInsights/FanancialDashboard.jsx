@@ -54,77 +54,88 @@ export default function Dashboard() {
   }, [chats]);
 
   const getAgentResponse = async () => {
-    setLoading(true);
-    setInputText("");
-    setInputValue("");
-    const res = await fetch(apiUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        inputText: inputText,
-        checked,
-        selectedCompany,
-        selectedYear,
-        selectedQuarter,
-      }),
-    });
-
-    const reader = res.body?.getReader();
-    if (!reader) return;
-
-    const decoder = new TextDecoder();
-    let resultText = "";
-    let length = chats.length;
-
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) {
-        setLoading(false);
-        break;
-      }
-      resultText += decoder.decode(value, { stream: true });
-
-      setChats((prev) => {
-        let temp = [...prev];
-        (temp[length] = {
-          id: length + 1,
-          text: inputText,
-          sender: "user",
+    try {
+      setLoading(true);
+      setInputText("");
+      setInputValue("");
+      const res = await fetch(apiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          inputText: inputText,
+          checked,
+          selectedCompany,
+          selectedYear,
+          selectedQuarter,
         }),
-          (temp[length + 1] = { ...temp[length + 1], text: resultText });
-        return temp;
       });
+
+      const reader = res.body?.getReader();
+      if (!reader) return;
+
+      const decoder = new TextDecoder();
+      let resultText = "";
+      let length = chats.length;
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) {
+          setLoading(false);
+          break;
+        }
+        resultText += decoder.decode(value, { stream: true });
+
+        setChats((prev) => {
+          let temp = [...prev];
+          (temp[length] = {
+            id: length + 1,
+            text: inputText,
+            sender: "user",
+          }),
+            (temp[length + 1] = { ...temp[length + 1], text: resultText });
+          return temp;
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
   const getSentimentAnalysis = async () => {
     // setLoading(true);
-    const res = await fetch(apiUrlSentiments, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        checked,
-        selectedCompany,
-        selectedYear,
-        selectedQuarter,
-      }),
-    });
+    try {
+      const res = await fetch(apiUrlSentiments, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          checked,
+          selectedCompany,
+          selectedYear,
+          selectedQuarter,
+        }),
+      });
 
-    const reader = res.body?.getReader();
-    if (!reader) return;
+      const reader = res.body?.getReader();
+      if (!reader) return;
 
-    const decoder = new TextDecoder();
-    let resultText = "";
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) {
-        // setLoading(false);
-        break;
+      const decoder = new TextDecoder();
+      let resultText = "";
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) {
+          // setLoading(false);
+          break;
+        }
+        resultText += decoder.decode(value, { stream: true });
+
+        const sanitizedMarkdown = DOMPurify.sanitize(resultText);
+        setContent(sanitizedMarkdown);
       }
-      resultText += decoder.decode(value, { stream: true });
-
-      const sanitizedMarkdown = DOMPurify.sanitize(resultText);
-      setContent(sanitizedMarkdown);
+    } catch (error) {
+      console.log(error);
+      setContent(
+        `<p style="color:red;">Error: ${"Sorry,something went wrong"}</p>`,
+      );
     }
   };
 
@@ -133,7 +144,6 @@ export default function Dashboard() {
     const selectedCompanyObj = companies.find(
       (company) => company.ticker === selectedTicker,
     );
-    console.log("handleCompanyChange", selectedCompanyObj);
     setSelectedCompany(selectedCompanyObj); // Now setting the full object
   };
   const handleCategoryChange = (event) =>
