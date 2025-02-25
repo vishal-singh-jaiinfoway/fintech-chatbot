@@ -129,293 +129,301 @@ export default function Dashboard() {
 
   const [content, setContent] = useState("");
   const apiUrlSentiments = `${process.env.NEXT_PUBLIC_API_URL}/sentiment-analysis`;
+const [ticker, setTicker] = useState("");
+useEffect(() => {
+  console.log("selectedQuarter", selectedQuarter);
+  if (checked) {
+    getSentimentAnalysis();
+  }
+}, [checked, selectedCompany, selectedQuarter, selectedYear]);
 
-  useEffect(() => {
-    console.log("selectedQuarter", selectedQuarter);
-    if (checked) {
-      getSentimentAnalysis();
+useEffect(() => {
+  if (messagesEndRef.current) {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  }
+}, [chats]);
+
+const getAgentResponse = async () => {
+  setLoading(true);
+  setInputText("");
+  setInputValue("");
+  const res = await fetch(apiUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      inputText: inputText,
+      checked,
+      selectedCompany,
+      selectedYear,
+      selectedQuarter,
+    }),
+  });
+
+  const reader = res.body?.getReader();
+  if (!reader) return;
+
+  const decoder = new TextDecoder();
+  let resultText = "";
+  let length = chats.length;
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) {
+      setLoading(false);
+      break;
     }
-  }, [checked, selectedCompany, selectedQuarter, selectedYear]);
+    resultText += decoder.decode(value, { stream: true });
 
-  useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [chats]);
-
-  const getAgentResponse = async () => {
-    setLoading(true);
-    const res = await fetch(apiUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        inputText: inputText,
-        checked,
-        selectedCompany,
-        selectedYear,
-        selectedQuarter,
+    setChats((prev) => {
+      let temp = [...prev];
+      (temp[length] = {
+        id: length + 1,
+        text: inputText,
+        sender: "user",
       }),
+        (temp[length + 1] = { ...temp[length + 1], text: resultText });
+      return temp;
     });
+  }
+};
 
-    const reader = res.body?.getReader();
-    if (!reader) return;
+const getSentimentAnalysis = async () => {
+  // setLoading(true);
+  const res = await fetch(apiUrlSentiments, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      checked,
+      selectedCompany,
+      selectedYear,
+      selectedQuarter,
+    }),
+  });
 
-    const decoder = new TextDecoder();
-    let resultText = "";
-    let length = chats.length;
+  const reader = res.body?.getReader();
+  if (!reader) return;
 
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) {
-        setLoading(false);
-        break;
-      }
-      resultText += decoder.decode(value, { stream: true });
-
-      setChats((prev) => {
-        let temp = [...prev];
-        (temp[length] = {
-          id: length + 1,
-          text: inputText,
-          sender: "user",
-        }),
-          (temp[length + 1] = { ...temp[length + 1], text: resultText });
-        return temp;
-      });
+  const decoder = new TextDecoder();
+  let resultText = "";
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) {
+      // setLoading(false);
+      break;
     }
-  };
+    resultText += decoder.decode(value, { stream: true });
 
-  const getSentimentAnalysis = async () => {
-    // setLoading(true);
-    const res = await fetch(apiUrlSentiments, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        checked,
-        selectedCompany,
-        selectedYear,
-        selectedQuarter,
-      }),
-    });
+    const sanitizedMarkdown = DOMPurify.sanitize(resultText);
+    setContent(sanitizedMarkdown);
+  }
+};
 
-    const reader = res.body?.getReader();
-    if (!reader) return;
+const handleCompanyChange = (event) => {
+  const selectedTicker = event.target.value;
+  const selectedCompanyObj = companies.find(
+    (company) => company.ticker === selectedTicker,
+  );
+  console.log("handleCompanyChange", selectedCompanyObj);
+  setSelectedCompany(selectedCompanyObj); // Now setting the full object
+};
+const handleCategoryChange = (event) => setSelectedCategory(event.target.value);
 
-    const decoder = new TextDecoder();
-    let resultText = "";
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) {
-        // setLoading(false);
-        break;
-      }
-      resultText += decoder.decode(value, { stream: true });
+const handleYearChange = (event) => setSelectedYear(event.target.value);
 
-      const sanitizedMarkdown = DOMPurify.sanitize(resultText);
-      setContent(sanitizedMarkdown);
-    }
-  };
+const handleQuarterChange = (event) => setSelectedQuarter(event.target.value);
 
-  const handleCompanyChange = (event) => setSelectedCompany(event.target.value);
-  const handleCategoryChange = (event) =>
-    setSelectedCategory(event.target.value);
+const handleInputChangeWithCompany = (event) => {
+  setInputValue(event.target.value);
+  setInputText(
+    `${event.target.value} for ${selectedCompany.name} in ${selectedCategory} category  ${selectedQuarter} quarter of ${selectedYear}`,
+  );
+};
 
-  const handleYearChange = (event) => setSelectedYear(event.target.value);
+const handleButtonClick = (question) => {
+  const formattedQuestion = `${question} for ${selectedCompany.name} in ${selectedCategory} category for ${selectedQuarter} quarter of ${selectedYear}`;
+  setInputValue(formattedQuestion);
+  setInputText(formattedQuestion);
+};
 
-  const handleQuarterChange = (event) => setSelectedQuarter(event.target.value);
-
-  const handleInputChangeWithCompany = (event) => {
-    setInputValue(event.target.value);
-    setInputText(
-      `${event.target.value} for ${selectedCompany} in ${selectedCategory} category  ${selectedQuarter} quarter of ${selectedYear}`,
-    );
-  };
-
-  const handleButtonClick = (question) => {
-    const formattedQuestion = `${question} for ${selectedCompany} in ${selectedCategory} category for ${selectedQuarter} quarter of ${selectedYear}`;
-    setInputValue(formattedQuestion);
-    setInputText(formattedQuestion);
-  };
-
-  return (
-    <div className="h-screen flex flex-col bg-gray-50 overflow-y-auto mr-2">
-      <Head>
-        <title>Business Insights</title>
-      </Head>
-      <header className="bg-blue-600 text-white py-4 px-6 shadow-md">
-        <div className="container mx-auto">
-          <h1 className="text-3xl font-bold">Business Insights</h1>
-        </div>
-      </header>
-      <main className="container mx-auto flex-grow ">
-        <div className="bg-white p-6 w-full h-full rounded-lg shadow-lg flex flex-col">
-          <div className="flex flex-row items-center gap-4">
-            <div className="mb-4">
-              <label className="block text-lg font-medium mb-2 text-gray-700">
-                Select Company:
-              </label>
-              <select
-                style={{ outlineWidth: 0 }}
-                value={selectedCompany.name}
-                onChange={handleCompanyChange}
-                className="p-2 border border-gray-300 rounded"
-              >
-                {companies.map((company, index) => (
-                  <option key={index} value={company.name}>
-                    {company.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            {checked ? null : (
-              <div className="mb-4">
-                <label className="block text-lg font-medium mb-2 text-gray-700">
-                  Select Category:
-                </label>
-                <select
-                  style={{ outlineWidth: 0 }}
-                  value={selectedCategory}
-                  onChange={handleCategoryChange}
-                  className="p-2 border border-gray-300 rounded"
-                >
-                  {Object.keys(suggestedQuestions).map((category, index) => (
-                    <option key={index} value={category}>
-                      {category}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
-          </div>
-          <div className="flex flex-row items-center gap-4">
-            <div className="mb-4">
-              <label className="block text-lg font-medium mb-2 text-gray-700">
-                Select Year:
-              </label>
-              <select
-                style={{ outlineWidth: 0 }}
-                value={selectedYear}
-                onChange={handleYearChange}
-                className="p-2 border border-gray-300 rounded"
-              >
-                {years.map((year, index) => (
-                  <option key={index} value={year}>
-                    {year}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="mb-4">
-              <label className="block text-lg font-medium mb-2 text-gray-700">
-                Select Quarter:
-              </label>
-              <select
-                style={{ outlineWidth: 0 }}
-                value={selectedQuarter}
-                onChange={handleQuarterChange}
-                className="p-2 border border-gray-300 rounded"
-              >
-                {quarters.map((quarter, index) => (
-                  <option key={index} value={quarter}>
-                    {quarter}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
+return (
+  <div className="h-screen flex flex-col bg-gray-50 overflow-y-auto mr-2">
+    <Head>
+      <title>Business Insights</title>
+    </Head>
+    <header className="bg-blue-600 text-white py-4 px-6 shadow-md">
+      <div className="container mx-auto">
+        <h1 className="text-3xl font-bold">Business Insights</h1>
+      </div>
+    </header>
+    <main className="container mx-auto flex-grow ">
+      <div className="bg-white p-6 w-full h-full rounded-lg shadow-lg flex flex-col">
+        <div className="flex flex-row items-center gap-4">
           <div className="mb-4">
-            <CustomCheckbox
-              checked={checked}
-              setChecked={setChecked}
-            ></CustomCheckbox>
+            <label className="block text-lg font-medium mb-2 text-gray-700">
+              Select Company:
+            </label>
+            <select
+              style={{ outlineWidth: 0 }}
+              value={selectedCompany.ticker} // Use ticker instead of object
+              onChange={handleCompanyChange}
+              className="p-2 border border-gray-300 rounded"
+            >
+              {companies.map((company, index) => (
+                <option key={index} value={company.ticker}>
+                  {company.name}
+                </option>
+              ))}
+            </select>
           </div>
-          {checked ? (
-            <SentimentAnalysisComponent
-              content={content}
-            ></SentimentAnalysisComponent>
-          ) : (
-            <>
-              <div className="mb-4">
-                <h3 className="font-bold mb-2 text-gray-700">
-                  Suggested Questions:
-                </h3>
-                <div className="flex flex-wrap">
-                  {suggestedQuestions[selectedCategory]["Common Questions"].map(
-                    (question, index) => (
-                      <button
-                        key={index}
-                        className="bg-blue-500 text-white px-3 py-1 rounded mr-2 mb-2 hover:bg-blue-600"
-                        onClick={() => handleButtonClick(question)}
-                      >
-                        {question}
-                      </button>
-                    ),
-                  )}
-                </div>
-              </div>
-              <div className="flex-grow overflow-y-auto mb-4 bg-gray-100 rounded-lg p-4">
-                {chats.map((m, index) => (
-                  <div
-                    key={index}
-                    className={`p-2 mb-2 rounded-lg ${
-                      m.sender === "user"
-                        ? "bg-blue-100 text-blue-900"
-                        : "bg-gray-200 text-gray-900"
-                    }`}
-                  >
-                    <span
-                      className={`${
-                        m.sender === "user" ? "text-blue-600" : "text-green-600"
-                      } font-semibold`}
-                    >
-                      {m.sender === "user" ? "User: " : "AI: "}
-                    </span>
-
-                    <div className="prose ml-6 custom-markdown">
-                      <ReactMarkdown
-                        remarkPlugins={[remarkGfm]}
-                        rehypePlugins={[rehypeRaw]}
-                      >
-                        {m.text}
-                      </ReactMarkdown>
-                    </div>
-                  </div>
-                ))}
-                {/* Loading Indicator */}
-                {isLoading && (
-                  <div className="loading-container">
-                    <div className="spinner"></div>
-                    <p className="loading-text">Generating response...</p>
-                  </div>
-                )}
-                <div ref={messagesEndRef} />
-              </div>
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  getAgentResponse();
-                }}
-                className="flex"
+          {checked ? null : (
+            <div className="mb-4">
+              <label className="block text-lg font-medium mb-2 text-gray-700">
+                Select Category:
+              </label>
+              <select
+                style={{ outlineWidth: 0 }}
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                className="p-2 border border-gray-300 rounded"
               >
-                <input
-                  className="flex-grow p-2 border border-gray-300 rounded-l"
-                  value={inputValue}
-                  placeholder="Ask your question..."
-                  onChange={handleInputChangeWithCompany}
-                />
-                <button
-                  type="submit"
-                  className="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600"
-                >
-                  Send
-                </button>
-              </form>
-            </>
+                {Object.keys(suggestedQuestions).map((category, index) => (
+                  <option key={index} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </div>
           )}
         </div>
-      </main>
-    </div>
-  );
+        <div className="flex flex-row items-center gap-4">
+          <div className="mb-4">
+            <label className="block text-lg font-medium mb-2 text-gray-700">
+              Select Year:
+            </label>
+            <select
+              style={{ outlineWidth: 0 }}
+              value={selectedYear}
+              onChange={handleYearChange}
+              className="p-2 border border-gray-300 rounded"
+            >
+              {years.map((year, index) => (
+                <option key={index} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-4">
+            <label className="block text-lg font-medium mb-2 text-gray-700">
+              Select Quarter:
+            </label>
+            <select
+              style={{ outlineWidth: 0 }}
+              value={selectedQuarter}
+              onChange={handleQuarterChange}
+              className="p-2 border border-gray-300 rounded"
+            >
+              {quarters.map((quarter, index) => (
+                <option key={index} value={quarter}>
+                  {quarter}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <div className="mb-4">
+          <CustomCheckbox
+            checked={checked}
+            setChecked={setChecked}
+          ></CustomCheckbox>
+        </div>
+        {checked ? (
+          <SentimentAnalysisComponent
+            content={content}
+          ></SentimentAnalysisComponent>
+        ) : (
+          <>
+            <div className="mb-4">
+              <h3 className="font-bold mb-2 text-gray-700">
+                Suggested Questions:
+              </h3>
+              <div className="flex flex-wrap">
+                {suggestedQuestions[selectedCategory]["Common Questions"].map(
+                  (question, index) => (
+                    <button
+                      key={index}
+                      className="bg-blue-500 text-white px-3 py-1 rounded mr-2 mb-2 hover:bg-blue-600"
+                      onClick={() => handleButtonClick(question)}
+                    >
+                      {question}
+                    </button>
+                  ),
+                )}
+              </div>
+            </div>
+            <div className="flex-grow overflow-y-auto mb-4 bg-gray-100 rounded-lg p-4">
+              {chats.map((m, index) => (
+                <div
+                  key={index}
+                  className={`p-2 mb-2 rounded-lg ${
+                    m.sender === "user"
+                      ? "bg-blue-100 text-blue-900"
+                      : "bg-gray-200 text-gray-900"
+                  }`}
+                >
+                  <span
+                    className={`${
+                      m.sender === "user" ? "text-blue-600" : "text-green-600"
+                    } font-semibold`}
+                  >
+                    {m.sender === "user" ? "User: " : "AI: "}
+                  </span>
+
+                  <div className="prose ml-6 custom-markdown">
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      rehypePlugins={[rehypeRaw]}
+                    >
+                      {m.text}
+                    </ReactMarkdown>
+                  </div>
+                </div>
+              ))}
+              {/* Loading Indicator */}
+              {isLoading && (
+                <div className="loading-container">
+                  <div className="spinner"></div>
+                  <p className="loading-text">Generating response...</p>
+                </div>
+              )}
+              <div ref={messagesEndRef} />
+            </div>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                getAgentResponse();
+              }}
+              className="flex"
+            >
+              <input
+                className="flex-grow p-2 border border-gray-300 rounded-l"
+                value={inputValue}
+                placeholder="Ask your question..."
+                onChange={handleInputChangeWithCompany}
+              />
+              <button
+                type="submit"
+                className="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600"
+              >
+                Send
+              </button>
+            </form>
+          </>
+        )}
+      </div>
+    </main>
+  </div>
+);
 }
 
 const CustomCheckbox = ({ checked, setChecked }) => {
