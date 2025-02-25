@@ -60,6 +60,19 @@ export default function Dashboard() {
       setLoading(true);
       setInputText("");
       setInputValue("");
+      let length = chats.length;
+      setChats((prev) => {
+        let temp = [
+          ...prev,
+          {
+            id: length + 1,
+            text: inputValue,
+            sender: "user",
+          },
+        ];
+
+        return temp;
+      });
       const res = await fetch(apiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -77,7 +90,6 @@ export default function Dashboard() {
 
       const decoder = new TextDecoder();
       let resultText = "";
-      let length = chats.length;
 
       while (true) {
         const { done, value } = await reader.read();
@@ -89,12 +101,7 @@ export default function Dashboard() {
 
         setChats((prev) => {
           let temp = [...prev];
-          (temp[length] = {
-            id: length + 1,
-            text: inputValue,
-            sender: "user",
-          }),
-            (temp[length + 1] = { ...temp[length + 1], text: resultText });
+          temp[length + 1] = { ...temp[length + 1], text: resultText };
           return temp;
         });
       }
