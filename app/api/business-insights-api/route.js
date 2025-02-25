@@ -63,8 +63,8 @@ const invokeAgent = async (prompt) => {
 
 
     const agentId = "VV53ICXKOQ"; // Replace with your Agent IDJQT1NOKYF7
-    const aliasId = "GJPNVN5MOP"; // Replace with your Alias ID
-    const sessionId = "session-0042";
+    const aliasId = "U0EYU3LOOJ"; // Replace with your Alias ID
+    const sessionId = "session-008";
     try {
         const command = new InvokeAgentCommand({
             agentId,
