@@ -24,7 +24,7 @@ const bedrockClient = new BedrockRuntimeClient({
     },
 });
 
-const quarters = { "1st": 1, "2nd": 2, "3rd": 3, "4rth": 4 };
+const quarters = { "1st": 1, "2nd": 2, "3rd": 3, "4th": 4 };
 
 // Function to estimate Claude tokens (approximation)
 function estimateClaudeTokens(text) {

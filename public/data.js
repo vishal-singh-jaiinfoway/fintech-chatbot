@@ -83,7 +83,7 @@ const suggestedQuestions = {
 };
 
 const years = [2024];
-const quarters = ["1st", "2nd", "3rd", "4rth"];
+const quarters = ["1st", "2nd", "3rd", "4th"];
 
 
 const companies = [

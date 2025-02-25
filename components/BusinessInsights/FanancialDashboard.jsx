@@ -33,6 +33,7 @@ export default function Dashboard() {
   const [selectedQuarter, setSelectedQuarter] = useState(quarters[0]);
   const [chats, setChats] = useState([]);
   const [isLoading, setLoading] = useState(false);
+  const startRef = useRef(null);
 
   const messagesEndRef = useRef(null);
   const [inputText, setInputText] = useState("");
@@ -146,6 +147,7 @@ export default function Dashboard() {
     );
     setSelectedCompany(selectedCompanyObj); // Now setting the full object
   };
+
   const handleCategoryChange = (event) =>
     setSelectedCategory(event.target.value);
 
@@ -162,8 +164,18 @@ export default function Dashboard() {
 
   const handleButtonClick = (question) => {
     const formattedQuestion = `${question} for ${selectedCompany.name} in ${selectedCategory} category for ${selectedQuarter} quarter of ${selectedYear}`;
-    setInputValue(formattedQuestion);
+    setInputValue(question);
     setInputText(formattedQuestion);
+    scrollToBottom();
+  };
+
+  const scrollToTop = () => {
+    if (startRef.current) {
+      startRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const scrollToBottom = () => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
@@ -220,7 +232,7 @@ export default function Dashboard() {
             )}
           </div>
           <div className="flex flex-row items-center gap-4">
-            <div className="mb-4">
+            <div className="mb-4" ref={startRef}>
               <label className="block text-lg font-medium mb-2 text-gray-700">
                 Select Year:
               </label>
@@ -313,6 +325,7 @@ export default function Dashboard() {
                     </div>
                   </div>
                 ))}
+                {/* <ScrollToTop></ScrollToTop> */}
                 {/* Loading Indicator */}
                 {isLoading && (
                   <div className="loading-container">
@@ -386,3 +399,32 @@ const SentimentAnalysisComponent = ({ content }) => {
     </div>
   );
 };
+
+const ScrollToTop = () => {
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      setIsVisible(window.scrollY > 300);
+    };
+
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  return (
+    <button
+      onClick={scrollToTop}
+      className={`fixed bottom-6 right-6 p-3 bg-blue-600 text-white rounded-full shadow-lg transition-opacity duration-300 ${
+        isVisible ? "opacity-100" : "opacity-0"
+      }`}
+    >
+      ⬆️
+    </button>
+  );
+};
+
