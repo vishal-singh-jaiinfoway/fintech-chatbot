@@ -32,6 +32,8 @@ export default function Dashboard() {
   const [selectedQuarter, setSelectedQuarter] = useState(quarters[0]);
   const [chats, setChats] = useState([]);
   const [isLoading, setLoading] = useState(false);
+  const [isSentimentsLoading, setIsSentimentsLoading] = useState(false);
+
   const startRef = useRef(null);
 
   const messagesEndRef = useRef(null);
@@ -102,7 +104,7 @@ export default function Dashboard() {
   };
 
   const getSentimentAnalysis = async () => {
-    // setLoading(true);
+    setIsSentimentsLoading(true);
     try {
       const res = await fetch(apiUrlSentiments, {
         method: "POST",
@@ -123,7 +125,7 @@ export default function Dashboard() {
       while (true) {
         const { done, value } = await reader.read();
         if (done) {
-          // setLoading(false);
+          setIsSentimentsLoading(false);
           break;
         }
         resultText += decoder.decode(value, { stream: true });
@@ -274,6 +276,7 @@ export default function Dashboard() {
           </div>
           {checked ? (
             <SentimentAnalysisComponent
+              isSentimentsLoading={isSentimentsLoading}
               content={content}
             ></SentimentAnalysisComponent>
           ) : (
@@ -389,12 +392,19 @@ const CustomCheckbox = ({ checked, setChecked }) => {
   );
 };
 
-const SentimentAnalysisComponent = ({ content }) => {
+const SentimentAnalysisComponent = ({ content, isSentimentsLoading }) => {
   return (
     <div className="prose overflow-auto ml-20 mb-10 custom-markdown">
-      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
-        {content}
-      </ReactMarkdown>
+      {isSentimentsLoading ? (
+        <div className="loading-container">
+          <div className="spinner"></div>
+          <p className="loading-text">Loading...</p>
+        </div>
+      ) : (
+        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+          {content}
+        </ReactMarkdown>
+      )}
     </div>
   );
 };
