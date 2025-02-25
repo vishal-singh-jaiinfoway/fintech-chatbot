@@ -91,7 +91,7 @@ export default function Dashboard() {
           let temp = [...prev];
           (temp[length] = {
             id: length + 1,
-            text: inputText,
+            text: inputValue,
             sender: "user",
           }),
             (temp[length + 1] = { ...temp[length + 1], text: resultText });
