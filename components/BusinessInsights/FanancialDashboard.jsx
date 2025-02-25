@@ -14,7 +14,7 @@ import {
   years,
   quarters,
 } from "../../public/data";
-import { ArrowBigUpIcon, ArrowUp, ArrowUpCircle } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 
 export default function Dashboard() {
   const foundationModel = useSelector((state) => state.sidebar.foundationModel);
@@ -310,7 +310,9 @@ export default function Dashboard() {
                 {chats.map((m, index) => (
                   <div
                     key={index}
-                    className={`p-2 mb-2 rounded-lg ${
+                    className={`p-2 rounded-lg ${
+                      index % 2 != 0 ? "mb-[30px]" : "mb-[15px]"
+                    } ${
                       m.sender === "user"
                         ? "bg-blue-100 text-blue-900"
                         : "bg-gray-200 text-gray-900"
