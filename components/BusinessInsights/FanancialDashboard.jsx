@@ -14,8 +14,7 @@ import {
   years,
   quarters,
 } from "../../public/data";
-
-
+import { ArrowBigUpIcon, ArrowUp, ArrowUpCircle } from "lucide-react";
 
 export default function Dashboard() {
   const foundationModel = useSelector((state) => state.sidebar.foundationModel);
@@ -41,7 +40,7 @@ export default function Dashboard() {
 
   const [content, setContent] = useState("");
   const apiUrlSentiments = `${process.env.NEXT_PUBLIC_API_URL}/sentiment-analysis`;
-  const [ticker, setTicker] = useState("");
+
   useEffect(() => {
     if (checked) {
       getSentimentAnalysis();
@@ -325,7 +324,7 @@ export default function Dashboard() {
                     </div>
                   </div>
                 ))}
-                {/* <ScrollToTop></ScrollToTop> */}
+                <ScrollToTop scrollToTop={scrollToTop}></ScrollToTop>
                 {/* Loading Indicator */}
                 {isLoading && (
                   <div className="loading-container">
@@ -400,30 +399,31 @@ const SentimentAnalysisComponent = ({ content }) => {
   );
 };
 
-const ScrollToTop = () => {
+const ScrollToTop = ({ scrollToTop }) => {
   const [isVisible, setIsVisible] = useState(true);
 
-  useEffect(() => {
-    const toggleVisibility = () => {
-      setIsVisible(window.scrollY > 300);
-    };
+  // useEffect(() => {
+  //   const toggleVisibility = () => {
+  //     console.log("toggleVisibility", window.scrollY);
+  //     setIsVisible(window.scrollY > 300);
+  //   };
 
-    window.addEventListener("scroll", toggleVisibility);
-    return () => window.removeEventListener("scroll", toggleVisibility);
-  }, []);
+  //   window.addEventListener("scroll", toggleVisibility);
+  //   return () => window.removeEventListener("scroll", toggleVisibility);
+  // }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const comeIntoView = () => {
+    scrollToTop();
   };
 
   return (
     <button
-      onClick={scrollToTop}
+      onClick={comeIntoView}
       className={`fixed bottom-6 right-6 p-3 bg-blue-600 text-white rounded-full shadow-lg transition-opacity duration-300 ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
     >
-      ⬆️
+      <ArrowUp size={20}></ArrowUp>
     </button>
   );
 };
