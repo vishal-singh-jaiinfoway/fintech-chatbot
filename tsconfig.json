@@ -30,7 +30,8 @@
     "components/BusinessInsights/FanancialDashboard.tsx",
     "app/api/business-insights-api/route.js",
     "components/crm/CRMDashboard.tsx",
-    "app/api/crm/route.js"
+    "app/api/crm/route.js",
+    "app/api/sentiment-analysis/route.js"
   ],
   "exclude": ["node_modules"]
 }

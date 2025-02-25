@@ -330,3 +330,60 @@ body {
     }
   }
 
+  .hidden-checkbox {
+    display: none;
+}
+
+.custom-checkbox {
+    width: 24px;
+    height: 24px;
+    border: 2px solid gray;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.custom-checkbox.checked {
+    background-color: blue;
+    border-color: blue;
+    color: white;
+}
+
+.custom-checkbox.checked::after {
+    content: "✔";
+    font-size: 18px;
+    color: white;
+}
+.custom-markdown h1{
+  color:gray
+}
+.custom-markdown li::marker {
+  color: gray;
+}
+.custom-markdown td {
+  border:1px solid gray;
+}
+.custom-markdown th {
+  text-align:left;
+  border:1px solid gray;
+}
+
+/* Reduce scrollbar width */
+::-webkit-scrollbar {
+  width: 4px; /* Adjust scrollbar width */
+  height: 4px; /* For horizontal scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: lightgrey; /* Scrollbar track color */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* Scrollbar color */
+  border-radius: 10px;
+}
+
+

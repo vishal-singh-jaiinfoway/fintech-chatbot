@@ -1,13 +1,22 @@
+"use client";
+import DOMPurify from "dompurify";
+import dynamic from "next/dynamic";
+const ReactMarkdown = dynamic(() => import("react-markdown"), { ssr: false });
 import React, { useEffect, useRef, useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Bar } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
-import { MessageCircle, SendHorizonalIcon, X } from "lucide-react";
+import { MessageCircle, SendHorizonalIcon, StepBackIcon, X } from "lucide-react";
 import { Button } from "@mui/material";
 import axios from "axios";
-import MarkdownRenderer from './Utility/Markdown/MarkdownRenderer'
+// import MarkdownRenderer from './Utility/Markdown/MarkdownRenderer'
+import { motion } from "framer-motion";
+import Image from 'next/image';
+import { discussion } from '../public/example-data/discussion'
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 import {
-  // suggestedQuestions,
+  suggestedQuestions,
   companies,
   years,
   quarters,
@@ -16,195 +25,51 @@ import {
 
 Chart.register(...registerables);
 
-const suggestedQuestions = {
-  "Financial Performance & Guidance": {
-    "Common Questions": [
-      "What were the most common financial questions analysts asked in SoFi Technologies Inc. 3rd quarter,2024 earnings call?",
-      "What concerns did analysts raise about revenue, EPS, net income, margins, and loan growth in JPMorgan Chase & Co 1st quarter,2024 earnings call?",
+// const suggestedQuestions = {
+//   "Financial Performance & Guidance": {
+//     "Common Questions": [
+//       "What were the most common financial questions analysts asked in SoFi Technologies Inc. 3rd quarter,2024 earnings call?",
+//       "What concerns did analysts raise about revenue, EPS, net income, margins, and loan growth in JPMorgan Chase & Co 1st quarter,2024 earnings call?",
 
-      "How did competitors respond to concerns about loan demand and deposit pricing pressure in Morgan Stanley 3rd quarter,2024 earnings call?",
-      "Were there any discussions around inflation and economic outlook in Wells Fargo & Company 4rth quarter,2024 earnings call?",
+//       "How did competitors respond to concerns about loan demand and deposit pricing pressure in Morgan Stanley 3rd quarter,2024 earnings call?",
+//       "Were there any discussions around inflation and economic outlook in Wells Fargo & Company 4rth quarter,2024 earnings call?",
 
-      "What strategies did competitors highlight for digital banking growth in SoFi Technologies Inc. 4rth quarter,2024 earnings call?",
-    ],
-  },
+//       "What strategies did competitors highlight for digital banking growth in SoFi Technologies Inc. 4rth quarter,2024 earnings call?",
+//     ],
+//   },
 
 
-};
+// };
 
 const Dashboard = ({chats,setChats}:any) => {
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const [crmData, setCrmData] = useState<any>(null);
-  const [financialData, setFinancialData] = useState<any>(null);
-  const [recommendations, setRecommendations] = useState<any>(
-    [
-    {
-      "id": 1,
-      "title": "Revenue and Growth Forecasts",
-      "description": "Insights into expected revenue, sales growth, and key performance indicators (KPIs) for upcoming quarters or the fiscal year. Includes market demand, new product launches, and expansion plans.",
-      "priority": "High"
-    },
-    {
-      "id": 2,
-      "title": "Margins and Profitability Outlook",
-      "description": "Discussion on cost structures, expected operating margins, and profitability trends. Covers factors such as raw material costs, labor expenses, and efficiency improvements.",
-      "priority": "High"
-    },
-    {
-      "id": 3,
-      "title": "Macroeconomic and Industry Trends",
-      "description": "Analysis of external factors like interest rates, inflation, supply chain issues, and regulatory changes affecting business performance. Also includes competitive positioning within the industry.",
-      "priority": "Medium"
-    }
-  ]);
+  const [selectedCard, setSelectedCard] = useState<any>(1);
+  const [selectedCompany, setSelectedCompany] = useState(companies[0].name);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const crmResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/call-llms`);
-        const crmResult = await crmResponse.json();
-        setCrmData(crmResult.data);
-
-        const financialResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/fanancial-data`);
-        const financialResult = await financialResponse.json();
-        setFinancialData(financialResult.data);
-      } catch (error) {
-        console.error("Error fetching data", error);
-      }
-    };
-
-    fetchData();
-
-    //return () => setChats([])
-  }, []);
-
-  const onDragEnd = (result: any) => {
-    if (!result.destination) return;
-
-    const items = Array.from(recommendations);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-
-    setRecommendations(items);
-  };
-
-  const revenueData = {
-    labels: crmData?.records?.map((record: any) => record.Name),
-    datasets: [
-      {
-        label: 'Annual Revenue',
-        data: crmData?.records?.map((record: any) => record.AnnualRevenue),
-        backgroundColor: 'rgba(54, 162, 235, 0.6)',
-      },
-    ],
-  };
-
-  const transactionsData = {
-    labels: financialData?.credit_card_transactions?.map((tx: any) => new Date(tx.Date).toLocaleDateString()),
-    datasets: [
-      {
-        label: 'Transactions',
-        data: financialData?.credit_card_transactions?.map((tx: any) => tx.Amount),
-        backgroundColor: 'rgba(75, 192, 192, 0.6)',
-      },
-    ],
-  };
-
-  if (!crmData || !financialData) {
-    return (<div>Loading...</div>);
-  }
   return (
     <div className="w-full h-screen overflow-auto p-4 bg-gray-100">
-      <h1 className="text-3xl font-bold mb-6 text-center">Dashboard</h1>
+      {/* <h1 className="text-3xl font-bold mb-6 text-center">Dashboard</h1> */}
       <ChatPopup isOpen={isChatOpen} setIsOpen={setIsChatOpen} chats={chats} setChats={setChats}></ChatPopup>
+      {
+        selectedCard ? <CommonComponent selectedCard={selectedCard} setSelectedCard={setSelectedCard}></CommonComponent> : <div className="mb-8" >
+          {/* <h2 className="text-2xl font-bold mb-4">Company Profile</h2> */}
 
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold mb-4">Company Profiles</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {crmData.records.map((record: any) => (
-            <div key={record.Id} className="bg-white shadow-md rounded-lg p-4 overflow-hidden">
-              <h3 className="text-xl font-semibold mb-2">{record.Name}</h3>
-              <p className="text-gray-600">Industry: {record.Industry}</p>
-              <p className="text-gray-600">Annual Revenue: ${record.AnnualRevenue.toLocaleString()}</p>
-              <p className="text-gray-600">Phone: {record.Phone}</p>
-              <p className="text-gray-600">Website: {record.Website}</p>
-              <p className="text-gray-600">
-                Address: {record.BillingAddress.street}, {record.BillingAddress.city}, {record.BillingAddress.state} {record.BillingAddress.postalCode}, {record.BillingAddress.country}
-              </p>
-              {/* <p className="text-gray-600">Last Activity Date: {record.LastActivityDate}</p> */}
-              <h4 className="font-semibold mt-4">Contacts</h4>
-              {record.Contacts.map((contact: any) => (
-                <div key={contact.Email} className="ml-4">
-                  <p className="text-gray-600">{contact.FirstName} {contact.LastName} - {contact.Title}</p>
-                  <p className="text-gray-600">Email: {contact.Email}</p>
-                  <p className="text-gray-600">Phone: {contact.Phone}</p>
-                </div>
+          <div style={{ height: 100, width: 200 }}>
+            <h2>Select a Company</h2>
+            <select
+              value={selectedCompany}
+              onChange={(e) => setSelectedCompany(e.target.value)}
+              style={{ padding: "8px", marginBottom: "20px" }}
+            >
+              <option value="">-- Choose a company --</option>
+              {companies.map((company, index) => (
+                <option key={index} value={company.name}>{company.name}</option>
               ))}
-              {/* <h4 className="font-semibold mt-4">Notes</h4> */}
-              {/* {record.Notes.map((note: any, index: number) => (
-                <div key={index} className="ml-4">
-                  <p className="text-gray-600">{note.CreatedDate}: {note.Content}</p>
-                </div>
-              ))} */}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold mb-4">Financial Data Summary</h2>
-        <div className="flex flex-wrap justify-between">
-          <div className="w-full lg:w-1/2 p-2">
-            <div className="h-96 bg-white shadow-md rounded-lg p-4">
-              <Bar data={revenueData} options={{ responsive: true, maintainAspectRatio: false }} />
-            </div>
+            </select>
           </div>
-          <div className="w-full lg:w-1/2 p-2">
-            <div className="h-96 bg-white shadow-md rounded-lg p-4">
-              <Bar data={transactionsData} options={{ responsive: true, maintainAspectRatio: false }} />
-            </div>
-          </div>
+          <CardGrid setSelectedCard={setSelectedCard}></CardGrid>
         </div>
-      </div>
-
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold mb-4 text-center">Guidance & Outlook</h2>
-        <DragDropContext onDragEnd={onDragEnd}>
-          <Droppable droppableId="recommendations">
-            {(provided) => (
-              <div
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-              >
-                {recommendations.map((recommendation: any, index: number) => (
-                  <Draggable key={recommendation.id} draggableId={recommendation.id} index={index}>
-                    {(provided) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        className="bg-white shadow-md rounded-lg overflow-hidden"
-                      >
-                        <div className={`p-4 ${recommendation.priority === "High" ? "bg-red-100" : recommendation.priority === "Medium" ? "bg-yellow-100" : "bg-green-100"}`}>
-                          <h3 className="text-xl font-semibold mb-2">{recommendation.title}</h3>
-                          <p className="text-gray-600">{recommendation.description}</p>
-                        </div>
-                        <div className="p-4 bg-gray-50">
-                          <p className={`text-${recommendation.priority === "High" ? "red" : recommendation.priority === "Medium" ? "yellow" : "green"}-600 font-semibold`}>
-                            Priority: {recommendation.priority}
-                          </p>
-                        </div>
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
-      </div>
+      }
     </div>
   );
 };
@@ -291,7 +156,7 @@ function ChatPopup({ isOpen, setIsOpen, chats, setChats }: any) {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 flex flex-col items-end">
+    <div className="fixed bottom-6 right-6 flex flex-col items-end z-[100]">
       {isOpen && (
         <div style={{ boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.5)" }} className="bg-white shadow-2xl rounded-2xl p-4 m-4 h-[500px] w-[800px] flex flex-col">
           <div className="flex justify-center items-center border-b pb-2" >
@@ -403,6 +268,115 @@ const CommonQuestionsList = ({ commonQuestions, handleButtonClick }: { commonQue
     </div>
   );
 };
+
+
+const Card = ({ id, title, description, image, setSelectedCard }: any) => {
+
+  return (
+
+    <motion.div onClick={() => {
+      console.log("card", id + 1)
+      setSelectedCard(id + 1)
+    }}
+      className="bg-white p-4 rounded-2xl shadow-md border w-full cursor-pointer h-[300px]"
+      whileHover={{ scale: 1.05 }}
+    >
+
+
+      <Image src={`/images/${image}`} alt={title} width={300} height={200} className="rounded-lg mb-2 object-cover" />
+
+      <h3 className="rounded-lg text-md bg-blue-500 text-white text-center font-semibold mb-2">{title}</h3>
+
+      <p className="text-gray-600 text-sm text-center">{description}</p>
+    </motion.div>
+  );
+};
+
+const CardGrid = ({ setSelectedCard }: any) => {
+  const cards = [
+    { title: "Discussion", description: "Discussion of financial results, including revenue, earnings, and expenses.", image: "discussion.jpg" },
+    { title: "Insights", description: "Insights into factors influencing the company's performance", image: "insights_2.jpg" },
+    { title: "Outlook and Guidance", description: "Outlook and guidance for future performance", image: "outlook.jpg" },
+    { title: "Opportunity", description: "Opportunity for analysts and investors to ask questions", image: "investment.jpg" },
+    { title: "Common Questions", description: "What are the most common questions asked during the Q&A portion of earnings calls", image: "questions.webp" },
+    { title: "Sentiments", description: "Sentiments Analysis", image: "sentiments.jpg" },
+  ];
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
+      {cards.map((card, index) => (
+        <Card id={index + 1} setSelectedCard={setSelectedCard} key={index} title={card.title} description={card.description} image={card.image} />
+      ))}
+    </div>
+  );
+};
+
+const CommonComponent = ({ selectedCard, setSelectedCard }: any) => {
+  const [content, setContent] = useState("");
+  const discussion = `
+
+  # SoFi Technologies Q4 and Full Year 2024 Financial Results
+  
+  ## Revenue
+  
+  - Q4 2024 adjusted net revenue: **$739 million** (↑24% YoY)
+  - Full year 2024 adjusted net revenue: **$2.6 billion** (↑26% YoY)
+  - Financial Services and Technology Platform segments: **$1.2 billion** (↑54% YoY)
+  
+  ## Earnings
+  
+  - Q4 2024 adjusted EBITDA: **$198 million** (27% margin)
+  - Full year 2024 adjusted EBITDA: **>$665 million**
+  - Q4 2024 adjusted net income: **$61 million** (excluding tax benefits)
+  - Full year 2024 GAAP net income: **$499 million** ($227 million excluding tax benefits)
+  - Q4 2024 adjusted EPS: **$0.05**
+  - Full year 2024 EPS: **$0.39** ($0.15 excluding tax benefits)
+  
+  ## Expenses
+  
+  - Planning 30% incremental EBITDA margin in 2025 for reinvestment
+  - Seasonal payroll taxes: ~**$10 million** additional operating expenses in Q1 and Q2
+  
+  ## Segment Performance (Q4)
+  
+  | Segment | Revenue | YoY Growth |
+  |---------|---------|------------|
+  | Financial Services | $257 million | ↑84% |
+  | Technology Platform | $103 million | ↑6% |
+  | Lending | $423 million | ↑22% |
+  
+  ## 2025 Guidance
+  
+  - Adjusted net revenue: **$3.20-$3.275 billion** (23-26% growth)
+  - Adjusted EBITDA: **$845-$865 million**
+  - Adjusted GAAP net income: **$285-$305 million**
+  - Adjusted GAAP EPS: **$0.25-$0.27** per share
+  
+  *Note: The company emphasized strong growth across segments, improved profitability, and plans for continued investment to drive future growth.*`;
+
+
+
+  useEffect(() => {
+    const sanitizedMarkdown = DOMPurify.sanitize(discussion);
+
+    setContent(sanitizedMarkdown)
+  }, [selectedCard])
+
+  return (
+    <div className="flex flex-1">
+      <div className="bg-white">
+        <StepBackIcon className="fixed" size={40} color="blue" onClick={() => setSelectedCard(0)}></StepBackIcon>
+      </div>
+      <div className="prose overflow-auto ml-20 mb-10">
+        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+          {content}
+        </ReactMarkdown>
+      </div>
+    </div>
+  )
+
+}
+
 
 
 

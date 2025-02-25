@@ -44,13 +44,13 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="flex-none w-1/5 bg-gray-100 p-6 rounded-lg shadow-md">
+    <div className="flex-none w-1/5 h-screen bg-gray-100 p-6 rounded-lg shadow-lg overflow-y-auto mr-4">
       <div className="mb-6">
         {/* Sidebar Tabs */}
-        <h2 className="text-xl font-bold mb-4">Tabs</h2>
+        {/* <h2 className="text-xl font-bold mb-4">Tabs</h2>
         <ul className="space-y-2">
-          {/* Personalized Advice */}
-          {["Dashboard", "Earning Calls Summary", "Financial Data", "Business Insights"].map((tab) => (
+
+          {["Business Insights"].map((tab) => (
             <li
               key={tab}
               className={`cursor-pointer rounded-md px-3 py-2 ${selectedTab === tab ? "bg-blue-500 text-white" : "bg-gray-200 hover:bg-gray-300"}`}
@@ -59,7 +59,7 @@ const Sidebar = () => {
               {tab}
             </li>
           ))}
-        </ul>
+        </ul> */}
       </div>
       <div>
         {/* Configuration */}
@@ -82,7 +82,8 @@ const Sidebar = () => {
             value={foundationModel}
             onChange={handleFoundationModelChange}
           >
-            <option value="anthropic.claude-v2:1">Claude</option>
+            <option value="anthropic.claude-v2:1">Claude 3.5 Sonnet v2</option>
+            <option value="anthropic.claude-v2:1">Claude 3.5 Haiku</option>
             {/* <option value="anthropic.claude-3-sonnet-20240229-v1:0">Claude 3 Sonnet</option>
             <option value="meta.llama3-8b-instruct-v1:0">Llama 3 8b Instruct</option>
             <option value="ai21.j2-mid-v1">AI21 Labs</option> */}

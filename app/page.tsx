@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <Provider store={store}>
-      <div className="flex h-screen">
+      <div className="flex h-screen w-screen">
         <Head>
           <title>Financial Recommendation System</title>
           <link rel="icon" href="/favicon.ico" />

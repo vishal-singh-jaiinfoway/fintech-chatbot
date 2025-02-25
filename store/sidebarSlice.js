@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  selectedTab: "Dashboard",
+  selectedTab: "Business Insights",
   documentsToReturn: 3,
   persona: "relationship-manager",
   foundationModel: "anthropic.claude-v2:1",
