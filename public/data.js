@@ -1,4 +1,13 @@
 const suggestedQuestions = {
+  "Common": {
+    "Common Questions": [
+      "What are the most common questions asked during the Q&A portion of earnings calls?",
+      "How did management teams address those questions?",
+      "What topics/themes did management teams devote the most time to on earnings calls? (or what topics/themes were most common across banks)",
+      "Summarize comments management teams made on earnings calls about the external environment (the economy, the regulatory landscape, customer sentiment, expectations about interest rates, loan demand, deposit competition, customer sentiment are examples)",
+      "What forward looking expectations did management teams provide about net interest margin?",
+      "Summarize management’s comments about credit quality"]
+  },
   "Financial Performance & Guidance": {
     "Common Questions": [
       "What were the most common financial questions analysts asked?",
@@ -70,15 +79,7 @@ const suggestedQuestions = {
     ],
   },
 
-  "Common": {
-    "Common Questions": [
-      "What are the most common questions asked during the Q&A portion of earnings calls?",
-      "How did management teams address those questions?",
-      "What topics/themes did management teams devote the most time to on earnings calls? (or what topics/themes were most common across banks)",
-      "Summarize comments management teams made on earnings calls about the external environment (the economy, the regulatory landscape, customer sentiment, expectations about interest rates, loan demand, deposit competition, customer sentiment are examples)",
-      "What forward looking expectations did management teams provide about net interest margin?",
-      "Summarize management’s comments about credit quality"]
-  }
+
 
 };
 
