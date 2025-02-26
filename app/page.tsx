@@ -13,6 +13,7 @@ import gopherChat from './../public/gopher.json'
 const Home = () => {
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   const handleLogin = () => {
     if (password === "genai@123") {
@@ -31,8 +32,8 @@ const Home = () => {
         </Head>
         {isLoggedIn ? (
           <>
-            <Sidebar />
-            <MainContent />
+            <Sidebar isChatOpen={isChatOpen} setIsChatOpen={setIsChatOpen} />
+            <MainContent isChatOpen={isChatOpen} setIsChatOpen={setIsChatOpen} />
           </>
         ) : (
           <div className="flex items-center justify-center w-full">

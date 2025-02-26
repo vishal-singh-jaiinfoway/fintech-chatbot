@@ -6,7 +6,7 @@ import BusinessInsights from "@/components/BusinessInsights/FanancialDashboard";
 
 
 
-const MainContent = () => {
+const MainContent = ({ isChatOpen, setIsChatOpen }: any) => {
   const selectedTab = useSelector((state: any) => state.sidebar.selectedTab);
   const [chats, setChats] = useState([]);
   const [fetchUploadChats, setFetchUploadChats] = useState([]);
@@ -15,10 +15,10 @@ const MainContent = () => {
     switch (selectedTab) {
 
       case "Business Insights":
-        return <BusinessInsights />;
+        return <BusinessInsights isChatOpen={isChatOpen} setIsChatOpen={setIsChatOpen} />;
 
       default:
-        return <BusinessInsights />;
+        return <BusinessInsights isChatOpen={isChatOpen} setIsChatOpen={setIsChatOpen} />;
     }
   };
 

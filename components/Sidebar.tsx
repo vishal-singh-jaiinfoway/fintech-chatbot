@@ -10,7 +10,7 @@ import {
 } from "@/store/sidebarSlice";
 import { tabClasses } from "@mui/material";
 
-const Sidebar = () => {
+const Sidebar = ({ isChatOpen, setIsChatOpen }: any) => {
   const dispatch = useDispatch();
   const selectedTab = useSelector((state: any) => state.sidebar.selectedTab);
   const persona = useSelector((state: any) => state.sidebar.persona);
@@ -43,6 +43,10 @@ const Sidebar = () => {
     dispatch(setContext(e.target.value));
   };
 
+  const toggleChat = () => {
+    setIsChatOpen(!isChatOpen);
+  };
+
   return (
     <div className="flex-none w-1/5 h-screen bg-gray-100 p-6 rounded-lg shadow-lg overflow-y-auto mr-4">
       <div className="mb-6">
@@ -63,6 +67,14 @@ const Sidebar = () => {
       </div>
       <div>
         {/* Configuration */}
+        <div className="mb-4 flex justify-start">
+          <button
+            className="bg-blue-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            onClick={toggleChat}
+          >
+            Fetch & Upload
+          </button>
+        </div>
         <h2 className="text-xl font-bold mb-4">Configuration</h2>
         <div className="mb-4">
           <label className="block mb-1 font-semibold">Persona</label>
@@ -126,6 +138,7 @@ const Sidebar = () => {
             <span>0</span>
             <span>4000</span>
           </div>
+
           <div className="mb-4">
             <label className="block mb-1 font-semibold">Context</label>
             <textarea 
