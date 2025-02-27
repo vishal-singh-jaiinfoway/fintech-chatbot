@@ -174,15 +174,19 @@ ${source || "No reference data available."}`
 const generateResponse = async (prompt) => {
     try {
         const queryParamsArray = await getQueryParams(prompt);
-        console.log("prompt", prompt)
-        console.log("queryParamsArray", queryParamsArray);
         if (!queryParamsArray || queryParamsArray.length === 0 || queryParamsArray[0].ticker === "ALL") {
             return "⚠️ **Error:** The request could not be processed. Please refine your query and try again.";
         }
         const s3urls = queryParamsArray.map(generateS3Uri);
         const jsonFiles = await Promise.all(s3urls.map(fetchJsonFromS3));
-
-        return getAnswerForPrompt(JSON.stringify(jsonFiles), prompt);
+        const transformedData = jsonFiles.map(item => ({
+            id: item.id,
+            company_name: item.company_name,
+            event: item.event,
+            year: item.year,
+            transcript: item.transcript.map(t => t.text).join(" ") // Join all transcript texts
+        }));
+        return getAnswerForPrompt(JSON.stringify(transformedData), prompt);
     } catch (error) {
         console.error("Error:", error);
     }
