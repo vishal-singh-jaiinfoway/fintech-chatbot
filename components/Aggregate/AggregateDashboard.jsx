@@ -18,7 +18,7 @@ import { ArrowUp, SendHorizonalIcon, X } from "lucide-react";
 import { Button } from "@mui/material";
 
 export default function AggregateDashboard({ isChatOpen, setIsChatOpen }) {
-  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/business-insights-api`;
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/aggregate-insights-api`;
   const [selectedCompanies, setSelectedCompanies] = useState([]);
 
   const [inputValue, setInputValue] = useState("");
