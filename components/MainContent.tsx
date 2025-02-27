@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import BusinessInsights from "@/components/BusinessInsights/FanancialDashboard";
+import AggregateBusinessInsights from "@/components/Aggregate/AggregateDashboard";
 
 
 
@@ -16,6 +17,8 @@ const MainContent = ({ isChatOpen, setIsChatOpen }: any) => {
 
       case "Business Insights":
         return <BusinessInsights isChatOpen={isChatOpen} setIsChatOpen={setIsChatOpen} />;
+      case "Aggregate":
+        return <AggregateBusinessInsights isChatOpen={isChatOpen} setIsChatOpen={setIsChatOpen} />;
 
       default:
         return <BusinessInsights isChatOpen={isChatOpen} setIsChatOpen={setIsChatOpen} />;

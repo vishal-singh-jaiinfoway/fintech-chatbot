@@ -51,10 +51,10 @@ const Sidebar = ({ isChatOpen, setIsChatOpen }: any) => {
     <div className="flex-none w-1/5 h-screen bg-gray-100 p-6 rounded-lg shadow-lg overflow-y-auto mr-4">
       <div className="mb-6">
         {/* Sidebar Tabs */}
-        {/* <h2 className="text-xl font-bold mb-4">Tabs</h2>
+        <h2 className="text-xl font-bold mb-4">Tabs</h2>
         <ul className="space-y-2">
 
-          {["Business Insights"].map((tab) => (
+          {["Business Insights", "Aggregate"].map((tab) => (
             <li
               key={tab}
               className={`cursor-pointer rounded-md px-3 py-2 ${selectedTab === tab ? "bg-blue-500 text-white" : "bg-gray-200 hover:bg-gray-300"}`}
@@ -63,7 +63,7 @@ const Sidebar = ({ isChatOpen, setIsChatOpen }: any) => {
               {tab}
             </li>
           ))}
-        </ul> */}
+        </ul>
       </div>
       <div>
         {/* Configuration */}
