@@ -105,6 +105,7 @@ export default function Dashboard({ isChatOpen, setIsChatOpen }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           inputText: inputText,
+          chats: chats,
           checked,
           selectedCompany,
           selectedYear,
@@ -125,6 +126,7 @@ export default function Dashboard({ isChatOpen, setIsChatOpen }) {
           break;
         }
         resultText += decoder.decode(value, { stream: true });
+        console.log("resultText", resultText);
         const sanitizedMarkdown = DOMPurify.sanitize(resultText);
         setChats((prev) => {
           let temp = [...prev];

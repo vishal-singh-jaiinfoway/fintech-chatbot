@@ -66,6 +66,24 @@ export default function AggregateDashboard({ isChatOpen, setIsChatOpen }) {
     );
   }, [filters]);
 
+  useEffect(() => {
+    setInputText(
+      `${inputValue} ${
+        selectedCompanies.length ? "for " + selectedCompanies.join(",") : ""
+      } ${
+        filters.includes(selectedQuarter)
+          ? "for the " + selectedQuarter + " quarter"
+          : ""
+      } ${filters.includes(selectedYear) ? "of " + selectedYear : ""}`,
+    );
+  }, [
+    inputValue,
+    selectedCompanies,
+    selectedCategory,
+    selectedQuarter,
+    selectedYear,
+  ]);
+
   const getAgentResponse = async () => {
     try {
       setLoading(true);
@@ -89,6 +107,8 @@ export default function AggregateDashboard({ isChatOpen, setIsChatOpen }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           inputText: inputText,
+          inputValue,
+          chats: chats,
         }),
       });
 
@@ -105,10 +125,11 @@ export default function AggregateDashboard({ isChatOpen, setIsChatOpen }) {
           break;
         }
         resultText += decoder.decode(value, { stream: true });
-
+        console.log("resultText", resultText);
+        const sanitizedMarkdown = DOMPurify.sanitize(resultText);
         setChats((prev) => {
           let temp = [...prev];
-          temp[length + 1] = { ...temp[length + 1], text: resultText };
+          temp[length + 1] = { ...temp[length + 1], text: sanitizedMarkdown };
           return temp;
         });
       }
@@ -136,17 +157,15 @@ export default function AggregateDashboard({ isChatOpen, setIsChatOpen }) {
       } ${filters.includes(selectedYear) ? "of " + selectedYear : ""}`,
     );
   };
-  //prompt What are the most common questions asked during the Q&A portion of earnings calls? for SoFi Technologies Inc.  1stquarter of of 2024
   const handleButtonClick = (question) => {
-    const formattedQuestion = `${question} ${
-      selectedCompanies.length ? "for " + selectedCompanies.join(",") : ""
-    } ${
-      filters.includes(selectedQuarter)
-        ? "for the " + selectedQuarter + " quarter"
-        : ""
-    } ${filters.includes(selectedYear) ? "of " + selectedYear : ""}`;
+    // const formattedQuestion = `${question} ${
+    //   selectedCompanies.length ? "for " + selectedCompanies.join(",") : ""
+    // } ${
+    //   filters.includes(selectedQuarter)
+    //     ? "for the " + selectedQuarter + " quarter"
+    //     : ""
+    // } ${filters.includes(selectedYear) ? "of " + selectedYear : ""}`;
     setInputValue(question);
-    setInputText(formattedQuestion);
     scrollToBottom();
     setSelectedQuestion(question);
   };
@@ -210,16 +229,16 @@ export default function AggregateDashboard({ isChatOpen, setIsChatOpen }) {
             </div>
 
             <div className="mb-4 p-2 border border-gray-300 rounded">
-             {
-                selectedCompanies && selectedCompanies.length?<>
-                 <label className="block text-lg font-medium mb-2 text-gray-700">
-                Selected
-              </label>
-              <div className="w-[300px] overflow-x-auto">
-                <b>{selectedCompanies.join(",")}</b>
-              </div>
-                </>:null
-             }
+              {selectedCompanies && selectedCompanies.length ? (
+                <>
+                  <label className="block text-lg font-medium mb-2 text-gray-700">
+                    Selected
+                  </label>
+                  <div className="w-[300px] overflow-x-auto">
+                    <b>{selectedCompanies.join(",")}</b>
+                  </div>
+                </>
+              ) : null}
             </div>
           </div>
           <div className="flex flex-row items-center gap-4">
@@ -337,6 +356,9 @@ export default function AggregateDashboard({ isChatOpen, setIsChatOpen }) {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                if (!selectedCompanies.length) {
+                  return alert("Please select atleast one company");
+                }
                 getAgentResponse();
               }}
               className="flex"

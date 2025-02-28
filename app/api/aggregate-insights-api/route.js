@@ -134,22 +134,14 @@ const getAnswerForPrompt = async function* (source, prompt) {
                 messages: [
                     {
                         role: "user",
-                        content: `Answer the following question concisely and informatively.
-
-### **Instructions:**
-- Format your response in **proper Markdown**.
-- If the question is unclear, politely ask for clarification.
-- Do **not** mention that you are using a transcript as a source.
-- Do **not** state that you are providing a Markdown-formatted response.
-
-### **Question:**
-${prompt}
-
-### **Reference Data:**
-${source || "No reference data available."}`
+                        content: `You are provided transcript(s) of earnings-calls.Answer the prompt based on the provided context.\n\n\nContext:${source}\n\n\nPrompt:${prompt}\n\n\n.Generate your response with proper markdown formatting.Never ever disclose or mention your source of information based on which you are answering the prompt,and that you are providing your response with markdown formatting.If question is unrelated to the provided context,then do not answer the prompt.`
                     }
                 ],
-                max_tokens: 2000
+                max_tokens: 2000,
+                temperature: 1,
+                top_p: 0.999,
+                top_k: 250,
+                stop_sequences: ["Human:", "Assistant:"]
             })
         });
 
@@ -171,7 +163,7 @@ ${source || "No reference data available."}`
 };
 
 // Function to generate response from Claude
-const generateResponse = async (prompt) => {
+const generateResponse = async (prompt, rawPrompt) => {
     try {
         const queryParamsArray = await getQueryParams(prompt);
         if (!queryParamsArray || queryParamsArray.length === 0 || queryParamsArray[0].ticker === "ALL") {
@@ -186,7 +178,7 @@ const generateResponse = async (prompt) => {
             year: item.year,
             transcript: item.transcript.map(t => t.text).join(" ") // Join all transcript texts
         }));
-        return getAnswerForPrompt(JSON.stringify(transformedData), prompt);
+        return getAnswerForPrompt(JSON.stringify(transformedData), rawPrompt);
     } catch (error) {
         console.error("Error:", error);
     }
@@ -196,8 +188,9 @@ const generateResponse = async (prompt) => {
 export async function POST(req) {
     try {
         const body = await req.json();
-        const { inputText } = body;
-        const stream = await generateResponse(inputText);
+        const { inputText, inputValue, chats } = body;
+
+        const stream = await generateResponse(inputText, inputValue);
 
         return new Response(new ReadableStream({
             async start(controller) {
@@ -217,3 +210,4 @@ export async function POST(req) {
         return new Response("Error occurred", { status: 500 });
     }
 }
+

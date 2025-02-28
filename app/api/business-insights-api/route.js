@@ -114,6 +114,7 @@
 
 // const getAnswerForPrompt = async function* (source, prompt) {
 //     try {
+//         console.log("source", source)
 //         // Check if the prompt is missing or unclear
 //         if (!prompt || prompt.trim().length === 0) {
 //             yield "⚠️ **Error:** The question is unclear. Please provide more details.";
@@ -149,7 +150,11 @@
 // ${source || "No reference data available."}`
 //                     }
 //                 ],
-//                 max_tokens: 2000
+//                 max_tokens: 2000,
+//                 temperature: 1,
+//                 top_p: 0.999,
+//                 top_k: 250,
+//                 stop_sequences: ["Human:", "Assistant:"]
 //             })
 //         });
 
@@ -174,15 +179,21 @@
 // const generateResponse = async (prompt) => {
 //     try {
 //         const queryParamsArray = await getQueryParams(prompt);
-//         console.log("prompt", prompt)
-//         console.log("queryParamsArray", queryParamsArray);
 //         if (!queryParamsArray || queryParamsArray.length === 0 || queryParamsArray[0].ticker === "ALL") {
 //             return "⚠️ **Error:** The request could not be processed. Please refine your query and try again.";
 //         }
 //         const s3urls = queryParamsArray.map(generateS3Uri);
 //         const jsonFiles = await Promise.all(s3urls.map(fetchJsonFromS3));
 
-//         return getAnswerForPrompt(JSON.stringify(jsonFiles), prompt);
+//         const transformedData = jsonFiles.map(item => ({
+//             id: item.id,
+//             company_name: item.company_name,
+//             event: item.event,
+//             year: item.year,
+//             transcript: item.transcript.map(t => t.text).join(" ") // Join all transcript texts
+//         }));
+
+//         return getAnswerForPrompt(JSON.stringify(transformedData), prompt);
 //     } catch (error) {
 //         console.error("Error:", error);
 //     }
@@ -225,16 +236,16 @@ import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
 const s3Client = new S3Client({
     region: process.env.AWS_REGION ?? "us-east-1",
     credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID ?? "",
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY ?? "",
+        accessKeyId: process.env.AWS_ACCESS_KEY,
+        secretAccessKey: process.env.AWS_SECRET_KEY,
     },
 });
 
 const bedrockAgentClient = new BedrockAgentRuntimeClient({
     region: process.env.AWS_REGION ?? "us-east-1",
     credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID ?? "",
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY ?? "",
+        accessKeyId: process.env.AWS_ACCESS_KEY,
+        secretAccessKey: process.env.AWS_SECRET_KEY,
     },
 });
 
@@ -243,11 +254,7 @@ export async function POST(req) {
     let body = await req.json();
     let { messages = [], inputText, checked, selectedCompany, selectedQuarter, selectedYear } = body;
 
-    console.log("inputText==========", inputText);
-    console.log("checked==========", checked);
-    console.log("selectedCompany", selectedCompany);
-    console.log("selectedQuarter", selectedQuarter);
-    console.log("selectedYear", selectedYear);
+
 
     // Construct S3 URI for the transcript with corrected quarter format
     const formattedQuarter = selectedQuarter.replace(/st|nd|rd|th/g, ""); // Remove suffix like 'st', 'nd', 'rd', 'th'
@@ -303,22 +310,21 @@ const parseS3Uri = (s3Uri) => {
 };
 
 const invokeAgent = async (prompt, transcript, checked, selectedCompany) => {
-    const agentId = "VV53ICXKOQ"; // Replace with your Agent ID
-    const aliasId = "V40L6XYC9A"; // Replace with your Alias ID
-    const sessionId = "session-001";
+    const agentId = "50SABV0OZD"; // Replace with your Agent ID
+    const aliasId = "SQTYNYI0DL"; // Replace with your Alias ID
+    const sessionId = "session-002";
 
     const combinedPrompt = `
         Here is the context from the earnings call transcript of ${selectedCompany?.name}:
-        
+
         Transcript:
         ${transcript}
 
         User Input: ${prompt}
 
-        Please generate an analysis or response based on the provided context and user input.
+        Please generate an analysis or response based on the provided context and user input.Please provide your response in markdown format only.Do not mention or disclose your source of information and that using your markdown to format your response.
     `;
 
-    console.log("combinedPrompt", combinedPrompt);
 
     try {
         const command = new InvokeAgentCommand({
@@ -332,7 +338,6 @@ const invokeAgent = async (prompt, transcript, checked, selectedCompany) => {
         });
 
         const response = await bedrockAgentClient.send(command);
-        console.log("response", response);
 
         const eventStream = response.completion;
 
@@ -343,7 +348,6 @@ const invokeAgent = async (prompt, transcript, checked, selectedCompany) => {
                     for await (const event of eventStream) {
                         if (event.chunk?.bytes) {
                             const chunkData = new TextDecoder("utf-8").decode(event.chunk.bytes);
-                            console.log("chunkData", chunkData);
                             controller.enqueue(chunkData);
                         }
                     }
