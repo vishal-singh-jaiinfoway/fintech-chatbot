@@ -134,6 +134,7 @@ const getAnswerForPrompt = async function* (source, prompt, chats, context, pers
             body: JSON.stringify({
                 anthropic_version: "bedrock-2023-05-31",
                 messages: [
+                    ...chats.slice(-5),
                     {
                         role: "user",
                         content: `You are provided transcript(s) of earnings-calls.Answer the prompt based on the provided context.\n\n\nContext:${source}\n\n\nPrompt:${prompt}\n\n\n.Generate your response for someone who is a ${persona},
@@ -199,6 +200,7 @@ export async function POST(req) {
         const { inputText, inputValue, chats, context, persona, foundationModel,
             fmTemperature,
             fmMaxTokens, } = body;
+
 
         const stream = await generateResponse(inputText, inputValue, chats, context, persona, foundationModel,
             fmTemperature,

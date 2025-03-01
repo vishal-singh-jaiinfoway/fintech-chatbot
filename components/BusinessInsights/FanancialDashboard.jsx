@@ -17,7 +17,12 @@ import {
 import { ArrowUp, SendHorizonalIcon, X } from "lucide-react";
 import { Button } from "@mui/material";
 
-export default function Dashboard({ isChatOpen, setIsChatOpen }) {
+export default function Dashboard({
+  isChatOpen,
+  setIsChatOpen,
+  chats,
+  setChats,
+}) {
   const foundationModel = useSelector((state) => state.sidebar.foundationModel);
   const fmTemperature = useSelector((state) => state.sidebar.fmTemperature);
   const fmMaxTokens = useSelector((state) => state.sidebar.fmMaxTokens);
@@ -33,7 +38,6 @@ export default function Dashboard({ isChatOpen, setIsChatOpen }) {
 
   const [selectedYear, setSelectedYear] = useState(years[0]);
   const [selectedQuarter, setSelectedQuarter] = useState(quarters[0]);
-  const [chats, setChats] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [isSentimentsLoading, setIsSentimentsLoading] = useState(false);
 

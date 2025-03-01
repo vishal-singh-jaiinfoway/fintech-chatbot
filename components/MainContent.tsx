@@ -11,17 +11,18 @@ const MainContent = ({ isChatOpen, setIsChatOpen }: any) => {
   const selectedTab = useSelector((state: any) => state.sidebar.selectedTab);
   const [chats, setChats] = useState([]);
   const [fetchUploadChats, setFetchUploadChats] = useState([]);
+  const [aggregateInsightsChats, setAggregateInsightsChats] = useState([]);
 
   const renderTabContent = () => {
     switch (selectedTab) {
 
       case "Business Insights":
-        return <BusinessInsights isChatOpen={isChatOpen} setIsChatOpen={setIsChatOpen} />;
+        return <BusinessInsights isChatOpen={isChatOpen} setIsChatOpen={setIsChatOpen} chats={chats} setChats={setChats} />;
       case "Aggregate":
-        return <AggregateBusinessInsights isChatOpen={isChatOpen} setIsChatOpen={setIsChatOpen} />;
+        return <AggregateBusinessInsights isChatOpen={isChatOpen} setIsChatOpen={setIsChatOpen} chats={aggregateInsightsChats} setChats={setAggregateInsightsChats} />;
 
       default:
-        return <BusinessInsights isChatOpen={isChatOpen} setIsChatOpen={setIsChatOpen} />;
+        return <BusinessInsights isChatOpen={isChatOpen} setIsChatOpen={setIsChatOpen} chats={chats} setChats={setChats} />;
     }
   };
 

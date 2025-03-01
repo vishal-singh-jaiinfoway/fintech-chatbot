@@ -17,7 +17,12 @@ import {
 import { ArrowUp, SendHorizonalIcon, X } from "lucide-react";
 import { Button } from "@mui/material";
 
-export default function AggregateDashboard({ isChatOpen, setIsChatOpen }) {
+export default function AggregateDashboard({
+  isChatOpen,
+  setIsChatOpen,
+  chats,
+  setChats,
+}) {
   const foundationModel = useSelector((state) => state.sidebar.foundationModel);
   const fmTemperature = useSelector((state) => state.sidebar.fmTemperature);
   const fmMaxTokens = useSelector((state) => state.sidebar.fmMaxTokens);
@@ -32,7 +37,6 @@ export default function AggregateDashboard({ isChatOpen, setIsChatOpen }) {
   const [selectedQuestion, setSelectedQuestion] = useState(null);
   const [selectedYear, setSelectedYear] = useState(years[0]);
   const [selectedQuarter, setSelectedQuarter] = useState(quarters[0]);
-  const [chats, setChats] = useState([]);
   const [isLoading, setLoading] = useState(false);
 
   const startRef = useRef(null);
@@ -95,9 +99,8 @@ export default function AggregateDashboard({ isChatOpen, setIsChatOpen }) {
         let temp = [
           ...prev,
           {
-            id: length + 1,
-            text: inputValue,
-            sender: "user",
+            role: "user",
+            content: inputValue,
           },
         ];
 
@@ -131,11 +134,13 @@ export default function AggregateDashboard({ isChatOpen, setIsChatOpen }) {
           break;
         }
         resultText += decoder.decode(value, { stream: true });
-        console.log("resultText", resultText);
         const sanitizedMarkdown = DOMPurify.sanitize(resultText);
         setChats((prev) => {
           let temp = [...prev];
-          temp[length + 1] = { ...temp[length + 1], text: sanitizedMarkdown };
+          temp[length + 1] = {
+            role: "assistant",
+            content: sanitizedMarkdown,
+          };
           return temp;
         });
       }
@@ -150,7 +155,6 @@ export default function AggregateDashboard({ isChatOpen, setIsChatOpen }) {
   const handleYearChange = (event) => setSelectedYear(event.target.value);
 
   const handleQuarterChange = (event) => {
-    console.log("setSelectedQuarter", event.target.value);
     setSelectedQuarter(event.target.value);
   };
 
@@ -176,10 +180,6 @@ export default function AggregateDashboard({ isChatOpen, setIsChatOpen }) {
     scrollToBottom();
     setSelectedQuestion(question);
   };
-
-  useEffect(() => {
-    console.log("startRef", startRef.current);
-  }, [startRef.current]);
 
   const scrollToTop = () => {
     if (startRef.current) {
@@ -295,7 +295,7 @@ export default function AggregateDashboard({ isChatOpen, setIsChatOpen }) {
                   (question, index) => (
                     <button
                       key={index}
-                      className="bg-blue-500 text-white px-3 py-1 rounded mr-2 mb-2 hover:bg-blue-600"
+                      className="bg-blue-500 text-sm text-white px-3 py-1 rounded mr-2 mb-2 hover:bg-blue-600"
                       onClick={() => handleButtonClick(question)}
                     >
                       {question}
@@ -311,17 +311,17 @@ export default function AggregateDashboard({ isChatOpen, setIsChatOpen }) {
                   className={`p-2 rounded-lg ${
                     index % 2 != 0 ? "mb-[30px]" : "mb-[15px]"
                   } ${
-                    m.sender === "user"
+                    m.role === "user"
                       ? "bg-blue-100 text-blue-900"
                       : "bg-gray-200 text-gray-900"
                   }`}
                 >
                   <span
                     className={`${
-                      m.sender === "user" ? "text-blue-600" : "text-green-600"
+                      m.role === "user" ? "text-blue-600" : "text-green-600"
                     } font-semibold`}
                   >
-                    {m.sender === "user" ? "User: " : "AI: "}
+                    {m.role === "user" ? "User: " : "AI: "}
                   </span>
 
                   <div className="prose ml-6 custom-markdown">
@@ -329,7 +329,7 @@ export default function AggregateDashboard({ isChatOpen, setIsChatOpen }) {
                       remarkPlugins={[remarkGfm]}
                       rehypePlugins={[rehypeRaw]}
                     >
-                      {m.text}
+                      {m.content}
                     </ReactMarkdown>
                   </div>
                 </div>
@@ -450,8 +450,8 @@ function FetchUploadPopUp({ isOpen, setIsOpen, chats, setChats }) {
           ...prev,
           {
             id: length + 1,
-            text: inputText,
-            sender: "user",
+            content: inputText,
+            role: "user",
           },
         ];
 
@@ -482,7 +482,11 @@ function FetchUploadPopUp({ isOpen, setIsOpen, chats, setChats }) {
 
         setChats((prev) => {
           let temp = [...prev];
-          temp[length + 1] = { ...temp[length + 1], text: sanitizedMarkdown };
+          temp[length + 1] = {
+            id: length + 2,
+            role: "assistant",
+            content: sanitizedMarkdown,
+          };
           return temp;
         });
       }
@@ -548,7 +552,7 @@ function FetchUploadPopUp({ isOpen, setIsOpen, chats, setChats }) {
                 style={{ marginBottom: msg.id % 2 === 0 ? "60px" : "30px" }}
                 key={index}
                 className={`flex-1 overflow-y-auto p-[20px] rounded text-sm-200 ${
-                  msg.sender === "user"
+                  msg.role === "user"
                     ? "bg-blue-100 text-white self-end"
                     : "bg-gray-200 text-black self-start"
                 }`}
@@ -558,7 +562,7 @@ function FetchUploadPopUp({ isOpen, setIsOpen, chats, setChats }) {
                     remarkPlugins={[remarkGfm]}
                     rehypePlugins={[rehypeRaw]}
                   >
-                    {msg.text}
+                    {msg.content}
                   </ReactMarkdown>
                 </div>
               </section>
@@ -642,7 +646,7 @@ function MultiSelect({ selectedCompanies, setSelectedCompanies }) {
           {companies.map((company) => (
             <label
               key={company.ticker}
-              className="flex items-center p-2 cursor-pointer hover:bg-gray-100"
+              className="border-b border-gray-300 flex items-center p-2 cursor-pointer hover:bg-gray-100"
             >
               <input
                 type="checkbox"

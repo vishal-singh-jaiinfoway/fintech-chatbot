@@ -327,6 +327,10 @@ const invokeAgent = async (prompt, transcript, checked, selectedCompany, persona
     const aliasId = "SQTYNYI0DL"; // Replace with your Alias ID
     const sessionId = "session-002";
 
+    // const agentId = "VV53ICXKOQ"; // Replace with your Agent ID
+    // const aliasId = "V40L6XYC9A"; // Replace with your Alias ID
+    // const sessionId = "session-001";
+
     const combinedPrompt = `
        Here is the context from the earnings call transcript of ${selectedCompany?.name}:
 
@@ -369,6 +373,7 @@ Ensure the response is well-structured and insightful.
                     for await (const event of eventStream) {
                         if (event.chunk?.bytes) {
                             const chunkData = new TextDecoder("utf-8").decode(event.chunk.bytes);
+                            console.log("chunkData", chunkData);
                             controller.enqueue(chunkData);
                         }
                     }
