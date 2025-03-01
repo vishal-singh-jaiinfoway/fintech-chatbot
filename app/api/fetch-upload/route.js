@@ -256,7 +256,7 @@ const handler = async ({ ticker, year, quarter }) => {
         console.log("step 3")
         const mergedData = { ...JSON.parse(structuredTranscript), transcript: parsedTranscript.transcript };
         console.log("step 4");
-        const s3Uri = await uploadToS3(ticker, year, quarter, mergedData, "transcripts", "json");
+        const s3Uri = await uploadToS3(ticker, year, quarter, mergedData, "transcripts/json", "json");
         return s3Uri;
     } catch (error) {
         console.error("Error in handler:", error);
