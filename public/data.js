@@ -151,4 +151,26 @@ const companies = [
   { name: "Zions Bancorporation, National Association", ticker: "ZION" },
 ];
 
-module.exports = { suggestedQuestions, companies, years, quarters };
+const personas = [
+  "Retail Investors",
+  "Institutional Investors",
+  "Equity Analysts",
+  "Portfolio Managers",
+  "Financial Advisors",
+  "Company Executives & Management",
+  "Corporate Development Teams",
+  "Strategic Planners",
+  "Financial Journalists",
+  "Industry Analysts",
+  "Regulators (SEC, FTC, etc.)",
+  "Government & Policy Makers",
+  "Competitive Intelligence Analysts",
+  "Market Researchers",
+  "Economists",
+  "Professors & Students",
+  "Securities Lawyers",
+  "Compliance Officers"
+]
+
+
+module.exports = { suggestedQuestions, companies, years, quarters, personas };

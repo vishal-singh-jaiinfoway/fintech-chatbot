@@ -252,7 +252,13 @@ const bedrockAgentClient = new BedrockAgentRuntimeClient({
 export async function POST(req) {
     // Extract the prompt from the body of the request
     let body = await req.json();
-    let { messages = [], inputText, checked, selectedCompany, selectedQuarter, selectedYear } = body;
+    let { inputText, checked, selectedCompany, selectedQuarter, selectedYear,
+        persona,
+        foundationModel,
+        fmTemperature,
+        fmMaxTokens,
+        context,
+    } = body;
 
 
 
@@ -267,8 +273,11 @@ export async function POST(req) {
         return new Response("Error fetching transcript", { status: 500 });
     }
 
-    const result = await invokeAgent(inputText, transcript, checked, selectedCompany);
-    console.log("invokeAgent", result);
+    const result = await invokeAgent(inputText, transcript, checked, selectedCompany, persona,
+        foundationModel,
+        fmTemperature,
+        fmMaxTokens,
+        context);
 
     return new Response(result, {
         headers: {
@@ -309,20 +318,32 @@ const parseS3Uri = (s3Uri) => {
     };
 };
 
-const invokeAgent = async (prompt, transcript, checked, selectedCompany) => {
+const invokeAgent = async (prompt, transcript, checked, selectedCompany, persona,
+    foundationModel,
+    fmTemperature,
+    fmMaxTokens,
+    context,) => {
     const agentId = "50SABV0OZD"; // Replace with your Agent ID
     const aliasId = "SQTYNYI0DL"; // Replace with your Alias ID
     const sessionId = "session-002";
 
     const combinedPrompt = `
-        Here is the context from the earnings call transcript of ${selectedCompany?.name}:
+       Here is the context from the earnings call transcript of ${selectedCompany?.name}:
 
-        Transcript:
-        ${transcript}
+Transcript:
+${transcript}
 
-        User Input: ${prompt}
+User Input: ${prompt}
 
-        Please generate an analysis or response based on the provided context and user input.Please provide your response in markdown format only.Do not mention or disclose your source of information and that using your markdown to format your response.
+Please generate an analysis or response based on the provided context and user input, considering someone who is ${persona}. If relevant, incorporate the following additional context: ${context}.
+
+Formatting Instructions:
+
+Provide your response in Markdown format only.
+Limit the response to ${fmMaxTokens} tokens.
+Use a foundation model temperature of ${fmTemperature}.
+Do not mention or disclose your source of information and that using your markdown to format your response.
+Ensure the response is well-structured and insightful.
     `;
 
 

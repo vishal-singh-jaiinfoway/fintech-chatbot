@@ -112,7 +112,9 @@ const getQueryParams = async (prompt) => {
     }
 };
 
-const getAnswerForPrompt = async function* (source, prompt) {
+const getAnswerForPrompt = async function* (source, prompt, chats, context, persona, foundationModel,
+    fmTemperature,
+    fmMaxTokens,) {
     try {
         // Check if the prompt is missing or unclear
         if (!prompt || prompt.trim().length === 0) {
@@ -134,11 +136,13 @@ const getAnswerForPrompt = async function* (source, prompt) {
                 messages: [
                     {
                         role: "user",
-                        content: `You are provided transcript(s) of earnings-calls.Answer the prompt based on the provided context.\n\n\nContext:${source}\n\n\nPrompt:${prompt}\n\n\n.Generate your response with proper markdown formatting.Never ever disclose or mention your source of information based on which you are answering the prompt,and that you are providing your response with markdown formatting.If question is unrelated to the provided context,then do not answer the prompt.`
+                        content: `You are provided transcript(s) of earnings-calls.Answer the prompt based on the provided context.\n\n\nContext:${source}\n\n\nPrompt:${prompt}\n\n\n.Generate your response for someone who is a ${persona},
+                        and with proper markdown formatting.Consider this additional context as well when generating response.\n
+                        Additional Context:${context}.Do not consider the additional context if it's not meaningful to the current prompt and Context.\n\nNever ever disclose or mention your source of information based on which you are answering the prompt,and that you are providing your response with markdown formatting.If question is unrelated to the provided context,then do not answer the prompt.`
                     }
                 ],
-                max_tokens: 2000,
-                temperature: 1,
+                max_tokens: fmMaxTokens,
+                temperature: fmTemperature,
                 top_p: 0.999,
                 top_k: 250,
                 stop_sequences: ["Human:", "Assistant:"]
@@ -163,7 +167,9 @@ const getAnswerForPrompt = async function* (source, prompt) {
 };
 
 // Function to generate response from Claude
-const generateResponse = async (prompt, rawPrompt) => {
+const generateResponse = async (prompt, rawPrompt, chats, context, persona, foundationModel,
+    fmTemperature,
+    fmMaxTokens,) => {
     try {
         const queryParamsArray = await getQueryParams(prompt);
         if (!queryParamsArray || queryParamsArray.length === 0 || queryParamsArray[0].ticker === "ALL") {
@@ -178,7 +184,9 @@ const generateResponse = async (prompt, rawPrompt) => {
             year: item.year,
             transcript: item.transcript.map(t => t.text).join(" ") // Join all transcript texts
         }));
-        return getAnswerForPrompt(JSON.stringify(transformedData), rawPrompt);
+        return getAnswerForPrompt(JSON.stringify(transformedData), rawPrompt, chats, context, persona, foundationModel,
+            fmTemperature,
+            fmMaxTokens,);
     } catch (error) {
         console.error("Error:", error);
     }
@@ -188,9 +196,13 @@ const generateResponse = async (prompt, rawPrompt) => {
 export async function POST(req) {
     try {
         const body = await req.json();
-        const { inputText, inputValue, chats } = body;
+        const { inputText, inputValue, chats, context, persona, foundationModel,
+            fmTemperature,
+            fmMaxTokens, } = body;
 
-        const stream = await generateResponse(inputText, inputValue);
+        const stream = await generateResponse(inputText, inputValue, chats, context, persona, foundationModel,
+            fmTemperature,
+            fmMaxTokens,);
 
         return new Response(new ReadableStream({
             async start(controller) {

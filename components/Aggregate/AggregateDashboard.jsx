@@ -18,15 +18,18 @@ import { ArrowUp, SendHorizonalIcon, X } from "lucide-react";
 import { Button } from "@mui/material";
 
 export default function AggregateDashboard({ isChatOpen, setIsChatOpen }) {
+  const foundationModel = useSelector((state) => state.sidebar.foundationModel);
+  const fmTemperature = useSelector((state) => state.sidebar.fmTemperature);
+  const fmMaxTokens = useSelector((state) => state.sidebar.fmMaxTokens);
+  const context = useSelector((state) => state.sidebar.context);
+  const persona = useSelector((state) => state.sidebar.persona);
   const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/aggregate-insights-api`;
   const [selectedCompanies, setSelectedCompanies] = useState([]);
-
   const [inputValue, setInputValue] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(
     Object.keys(suggestedQuestions)[0],
   );
   const [selectedQuestion, setSelectedQuestion] = useState(null);
-
   const [selectedYear, setSelectedYear] = useState(years[0]);
   const [selectedQuarter, setSelectedQuarter] = useState(quarters[0]);
   const [chats, setChats] = useState([]);
@@ -54,27 +57,25 @@ export default function AggregateDashboard({ isChatOpen, setIsChatOpen }) {
     }
   }, [chats]);
 
-  useEffect(() => {
-    setInputText(
-      `${selectedQuestion} ${
-        selectedCompanies.length ? "for " + selectedCompanies.join(",") : ""
-      } ${
-        filters.includes(selectedQuarter)
-          ? "for the " + selectedQuarter + " quarter"
-          : ""
-      } ${filters.includes(selectedYear) ? "of " + selectedYear : ""}`,
-    );
-  }, [filters]);
+  //   useEffect(() => {
+  //     setInputText(
+  //       `${selectedQuestion} ${
+  //         selectedCompanies.length ? "for " + selectedCompanies.join(",") : ""
+  //       } ${
+  //         filters.includes(selectedQuarter)
+  //           ? "for the " + selectedQuarter + " quarter"
+  //           : ""
+  //       } ${filters.includes(selectedYear) ? "of " + selectedYear : ""}`,
+  //     );
+  //   }, [filters]);
 
   useEffect(() => {
     setInputText(
       `${inputValue} ${
         selectedCompanies.length ? "for " + selectedCompanies.join(",") : ""
-      } ${
-        filters.includes(selectedQuarter)
-          ? "for the " + selectedQuarter + " quarter"
-          : ""
-      } ${filters.includes(selectedYear) ? "of " + selectedYear : ""}`,
+      } ${selectedQuarter ? "for the " + selectedQuarter + " quarter" : ""} ${
+        selectedYear ? "of " + selectedYear : ""
+      }`,
     );
   }, [
     inputValue,
@@ -109,6 +110,11 @@ export default function AggregateDashboard({ isChatOpen, setIsChatOpen }) {
           inputText: inputText,
           inputValue,
           chats: chats,
+          context,
+          persona,
+          foundationModel,
+          fmTemperature,
+          fmMaxTokens,
         }),
       });
 
@@ -143,18 +149,19 @@ export default function AggregateDashboard({ isChatOpen, setIsChatOpen }) {
 
   const handleYearChange = (event) => setSelectedYear(event.target.value);
 
-  const handleQuarterChange = (event) => setSelectedQuarter(event.target.value);
+  const handleQuarterChange = (event) => {
+    console.log("setSelectedQuarter", event.target.value);
+    setSelectedQuarter(event.target.value);
+  };
 
   const handleInputChangeWithCompany = (event) => {
     setInputValue(event.target.value);
     setInputText(
       `${event.target.value} ${
         selectedCompanies.length ? "for " + selectedCompanies.join(",") : ""
-      } ${
-        filters.includes(selectedQuarter)
-          ? "for the " + selectedQuarter + " quarter"
-          : ""
-      } ${filters.includes(selectedYear) ? "of " + selectedYear : ""}`,
+      } ${selectedQuarter ? "for the " + selectedQuarter + " quarter" : ""} ${
+        selectedYear ? "of " + selectedYear : ""
+      }`,
     );
   };
   const handleButtonClick = (question) => {
@@ -593,13 +600,23 @@ function MultiSelect({ selectedCompanies, setSelectedCompanies }) {
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   const handleSelect = (ticker) => {
-    setSelectedCompanies(
-      (prev) =>
-        prev.includes(ticker)
-          ? prev.filter((item) => item !== ticker) // Remove if already selected
-          : [...prev, ticker], // Add if not selected
-    );
+    setSelectedCompanies((prev) => {
+      if (prev.includes(ticker)) {
+        // Remove if already selected
+        return prev.filter((item) => item !== ticker);
+      }
+
+      if (prev.length >= 5) {
+        // Prevent adding more than 5
+        alert("You can select up to 5 companies");
+        return prev; // Keep the previous state
+      }
+
+      // Add new selection
+      return [...prev, ticker];
+    });
   };
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -621,7 +638,7 @@ function MultiSelect({ selectedCompanies, setSelectedCompanies }) {
       </button>
 
       {isOpen && (
-        <div className="absolute border bg-white mt-1 shadow-md w-full max-h-[150px] overflow-y-auto rounded">
+        <div className="absolute border border-gray-300 bg-white mt-1 shadow-md w-full max-h-[300px] overflow-y-auto rounded">
           {companies.map((company) => (
             <label
               key={company.ticker}

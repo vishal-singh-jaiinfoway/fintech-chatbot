@@ -9,6 +9,7 @@ import {
   setContext
 } from "@/store/sidebarSlice";
 import { tabClasses } from "@mui/material";
+import { personas } from "@/public/data";
 
 const Sidebar = ({ isChatOpen, setIsChatOpen }: any) => {
   const dispatch = useDispatch();
@@ -83,8 +84,12 @@ const Sidebar = ({ isChatOpen, setIsChatOpen }: any) => {
             value={persona}
             onChange={handlePersonaChange}
           >
-            <option value="relationship-manager">CFO</option>
-            <option value="banker">Banker</option>
+            {
+              personas.map((persona: any, index: number) => (
+                <option key={index} value={persona}>{persona}</option>
+              ))
+            }
+
           </select>
         </div>
         <div className="mb-4">
@@ -94,11 +99,9 @@ const Sidebar = ({ isChatOpen, setIsChatOpen }: any) => {
             value={foundationModel}
             onChange={handleFoundationModelChange}
           >
-            <option value="anthropic.claude-v2:1">Claude 3.5 Sonnet v2</option>
-            <option value="anthropic.claude-v2:1">Claude 3.5 Haiku</option>
-            {/* <option value="anthropic.claude-3-sonnet-20240229-v1:0">Claude 3 Sonnet</option>
-            <option value="meta.llama3-8b-instruct-v1:0">Llama 3 8b Instruct</option>
-            <option value="ai21.j2-mid-v1">AI21 Labs</option> */}
+            <option value="anthropic.claude-3-5-sonnet-20240620-v1:0">Claude 3.5 Sonnet v1</option>
+            <option value="anthropic.claude-3-5-sonnet-v2">Claude 3.5 Sonnet v2</option>
+            <option value="anthropic.claude-3-haiku-20240307-v1:0">Claude 3.5 Haiku</option>
           </select>
         </div>
         <div className="mb-4">

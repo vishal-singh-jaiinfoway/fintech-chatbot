@@ -68,19 +68,15 @@ export default function Dashboard({ isChatOpen, setIsChatOpen }) {
     }
   }, [chats]);
 
-  useEffect(() => {
-    setInputText(
-      `${selectedQuestion} ${
-        filters.includes(selectedCompany.name)
-          ? "for " + selectedCompany.name
-          : ""
-      } ${
-        filters.includes(selectedQuarter)
-          ? "for the " + selectedQuarter + " quarter"
-          : ""
-      } ${filters.includes(selectedYear) ? "of " + selectedYear : ""}`,
-    );
-  }, [filters]);
+  // useEffect(() => {
+  //   setInputText(
+  //     `${selectedQuestion} ${
+  //       selectedCompany.name ? "for " + selectedCompany.name : ""
+  //     } ${selectedQuarter ? "for the " + selectedQuarter + " quarter" : ""} ${
+  //       selectedYear ? "of " + selectedYear : ""
+  //     }`,
+  //   );
+  // }, [filters]);
 
   const getAgentResponse = async () => {
     try {
@@ -110,6 +106,11 @@ export default function Dashboard({ isChatOpen, setIsChatOpen }) {
           selectedCompany,
           selectedYear,
           selectedQuarter,
+          persona,
+          foundationModel,
+          fmTemperature,
+          fmMaxTokens,
+          context,
         }),
       });
 
@@ -126,7 +127,6 @@ export default function Dashboard({ isChatOpen, setIsChatOpen }) {
           break;
         }
         resultText += decoder.decode(value, { stream: true });
-        console.log("resultText", resultText);
         const sanitizedMarkdown = DOMPurify.sanitize(resultText);
         setChats((prev) => {
           let temp = [...prev];
@@ -183,11 +183,11 @@ export default function Dashboard({ isChatOpen, setIsChatOpen }) {
       (company) => company.ticker === selectedTicker,
     );
     setSelectedCompany(selectedCompanyObj); // Now setting the full object
-    setFilters((prevFilters) => {
-      const updatedFilters = [...prevFilters];
-      updatedFilters[0] = selectedCompanyObj.name;
-      return [...updatedFilters];
-    });
+    // setFilters((prevFilters) => {
+    //   const updatedFilters = [...prevFilters];
+    //   updatedFilters[0] = selectedCompanyObj.name;
+    //   return [...updatedFilters];
+    // });
   };
 
   const handleCategoryChange = (event) => {
@@ -196,56 +196,44 @@ export default function Dashboard({ isChatOpen, setIsChatOpen }) {
 
   const handleYearChange = (event) => {
     setSelectedYear(event.target.value);
-    setFilters((prevFilters) => {
-      const updatedFilters = [...prevFilters];
-      updatedFilters[1] = event.target.value;
-      return [...updatedFilters];
-    });
+    // setFilters((prevFilters) => {
+    //   const updatedFilters = [...prevFilters];
+    //   updatedFilters[1] = event.target.value;
+    //   return [...updatedFilters];
+    // });
   };
 
   const handleQuarterChange = (event) => {
     setSelectedQuarter(event.target.value);
-    setFilters((prevFilters) => {
-      const updatedFilters = [...prevFilters];
-      updatedFilters[2] = event.target.value;
-      return [...updatedFilters];
-    });
+    // setFilters((prevFilters) => {
+    //   const updatedFilters = [...prevFilters];
+    //   updatedFilters[2] = event.target.value;
+    //   return [...updatedFilters];
+    // });
   };
 
   const handleInputChangeWithCompany = (event) => {
     setInputValue(event.target.value);
     setInputText(
       `${event.target.value} ${
-        filters.includes(selectedCompany.name)
-          ? "for " + selectedCompany.name
-          : ""
-      } ${
-        filters.includes(selectedQuarter)
-          ? "for the " + selectedQuarter + " quarter"
-          : ""
-      } ${filters.includes(selectedYear) ? "of " + selectedYear : ""}`,
+        selectedCompany.name ? "for " + selectedCompany.name : ""
+      } ${selectedQuarter ? "for the " + selectedQuarter + " quarter" : ""} ${
+        selectedYear ? "of " + selectedYear : ""
+      }`,
     );
   };
-  //prompt What are the most common questions asked during the Q&A portion of earnings calls? for SoFi Technologies Inc.  1stquarter of of 2024
+
   const handleButtonClick = (question) => {
     const formattedQuestion = `${question} ${
-      filters.includes(selectedCompany.name)
-        ? "for " + selectedCompany.name
-        : ""
-    } ${
-      filters.includes(selectedQuarter)
-        ? "for the " + selectedQuarter + " quarter"
-        : ""
-    } ${filters.includes(selectedYear) ? "of " + selectedYear : ""}`;
+      selectedCompany.name ? "for " + selectedCompany.name : ""
+    } ${selectedQuarter ? "for the " + selectedQuarter + " quarter" : ""} ${
+      selectedYear ? "of " + selectedYear : ""
+    }`;
     setInputValue(question);
     setInputText(formattedQuestion);
     scrollToBottom();
     setSelectedQuestion(question);
   };
-
-  useEffect(() => {
-    console.log("startRef", startRef.current);
-  }, [startRef.current]);
 
   const scrollToTop = () => {
     if (startRef.current) {
