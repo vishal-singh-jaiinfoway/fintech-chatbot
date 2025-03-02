@@ -252,7 +252,7 @@ const bedrockAgentClient = new BedrockAgentRuntimeClient({
 export async function POST(req) {
     // Extract the prompt from the body of the request
     let body = await req.json();
-    let { inputText, checked, selectedCompany, selectedQuarter, selectedYear,
+    let { inputText, selectedCompany, selectedQuarter, selectedYear,
         persona,
         foundationModel,
         fmTemperature,
@@ -273,7 +273,7 @@ export async function POST(req) {
         return new Response("Error fetching transcript", { status: 500 });
     }
 
-    const result = await invokeAgent(inputText, transcript, checked, selectedCompany, persona,
+    const result = await invokeAgent(inputText, transcript, selectedCompany, persona,
         foundationModel,
         fmTemperature,
         fmMaxTokens,
@@ -318,19 +318,18 @@ const parseS3Uri = (s3Uri) => {
     };
 };
 
-const invokeAgent = async (prompt, transcript, checked, selectedCompany, persona,
+const invokeAgent = async (prompt, transcript, selectedCompany, persona,
     foundationModel,
     fmTemperature,
     fmMaxTokens,
     context,) => {
-    const agentId = "50SABV0OZD"; // Replace with your Agent ID
-    const aliasId = "SQTYNYI0DL"; // Replace with your Alias ID
-    const sessionId = "session-002";
-
     // const agentId = "VV53ICXKOQ"; // Replace with your Agent ID
     // const aliasId = "V40L6XYC9A"; // Replace with your Alias ID
     // const sessionId = "session-001";
-
+    const agentId = "50SABV0OZD"; // Replace with your Agent ID
+    const aliasId = "8GMJ6EEOXH"; // Replace with your Alias ID
+    const sessionId = "session-001";
+    console.log("Prompt", prompt)
     const combinedPrompt = `
        Here is the context from the earnings call transcript of ${selectedCompany?.name}:
 
@@ -341,8 +340,8 @@ User Input: ${prompt}
 
 Please generate an analysis or response based on the provided context and user input, considering someone who is ${persona}. If relevant, incorporate the following additional context: ${context}.
 
-Formatting Instructions:
-
+Instructions:
+Provide streaming response only.
 Provide your response in Markdown format only.
 Limit the response to ${fmMaxTokens} tokens.
 Use a foundation model temperature of ${fmTemperature}.
@@ -373,7 +372,6 @@ Ensure the response is well-structured and insightful.
                     for await (const event of eventStream) {
                         if (event.chunk?.bytes) {
                             const chunkData = new TextDecoder("utf-8").decode(event.chunk.bytes);
-                            console.log("chunkData", chunkData);
                             controller.enqueue(chunkData);
                         }
                     }

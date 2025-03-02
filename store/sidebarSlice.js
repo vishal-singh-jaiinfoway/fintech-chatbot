@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   selectedTab: "Business Insights",
   documentsToReturn: 3,
-  persona: "Retail Investors",
+  persona: "Controller (Chief Accounting Officer)",
   foundationModel: "anthropic.claude-3-5-sonnet-20240620-v1:0",
   fmTemperature: 1,
   fmMaxTokens: 2000,  

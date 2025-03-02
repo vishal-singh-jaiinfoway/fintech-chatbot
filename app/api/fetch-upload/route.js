@@ -224,9 +224,7 @@ const invokeModel = async (transcript) => {
 
 const fetchAndUploadTranscript = async function* (prompt) {
     try {
-        console.log("prompt", prompt);
         const queryParamsArray = await getQueryParams(prompt);
-        console.log("queryParamsArray", queryParamsArray);
 
         for (const company of queryParamsArray) {
             for (let quarter = 1; quarter <= parseInt(company.quarters); quarter++) {
@@ -249,13 +247,9 @@ const fetchAndUploadTranscript = async function* (prompt) {
 const handler = async ({ ticker, year, quarter }) => {
     try {
         const transcript = await fetchEarningsCallsTranscript(ticker, year, quarter);
-        console.log("step 1")
         const parsedTranscript = parseTranscript(transcript);
-        console.log("step 2")
         const structuredTranscript = await invokeModel(parsedTranscript);
-        console.log("step 3")
         const mergedData = { ...JSON.parse(structuredTranscript), transcript: parsedTranscript.transcript };
-        console.log("step 4");
         const s3Uri = await uploadToS3(ticker, year, quarter, mergedData, "transcripts/json", "json");
         return s3Uri;
     } catch (error) {

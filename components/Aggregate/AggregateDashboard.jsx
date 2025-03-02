@@ -45,33 +45,19 @@ export default function AggregateDashboard({
   const [inputText, setInputText] = useState("");
   const [fetchUploadChats, setFetchUploadChats] = useState([]);
 
+  const [previousPrompts, setPreviousPrompts] = useState([]);
+
   const [filters, setFilters] = useState([
     ...selectedCompanies,
     selectedYear,
     selectedQuarter,
   ]);
 
-  const removeFilter = (filterToRemove) => {
-    setFilters(filters.filter((filter) => filter !== filterToRemove));
-  };
-
   useEffect(() => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [chats]);
-
-  //   useEffect(() => {
-  //     setInputText(
-  //       `${selectedQuestion} ${
-  //         selectedCompanies.length ? "for " + selectedCompanies.join(",") : ""
-  //       } ${
-  //         filters.includes(selectedQuarter)
-  //           ? "for the " + selectedQuarter + " quarter"
-  //           : ""
-  //       } ${filters.includes(selectedYear) ? "of " + selectedYear : ""}`,
-  //     );
-  //   }, [filters]);
 
   useEffect(() => {
     setInputText(
@@ -118,6 +104,10 @@ export default function AggregateDashboard({
           foundationModel,
           fmTemperature,
           fmMaxTokens,
+          previousPrompts,
+          selectedCompanies,
+          selectedQuarter,
+          selectedYear,
         }),
       });
 
@@ -131,6 +121,11 @@ export default function AggregateDashboard({
         const { done, value } = await reader.read();
         if (done) {
           setLoading(false);
+          setPreviousPrompts((prev) => {
+            let temp = [...prev];
+            temp.push(inputText);
+            return temp;
+          });
           break;
         }
         resultText += decoder.decode(value, { stream: true });
@@ -169,13 +164,6 @@ export default function AggregateDashboard({
     );
   };
   const handleButtonClick = (question) => {
-    // const formattedQuestion = `${question} ${
-    //   selectedCompanies.length ? "for " + selectedCompanies.join(",") : ""
-    // } ${
-    //   filters.includes(selectedQuarter)
-    //     ? "for the " + selectedQuarter + " quarter"
-    //     : ""
-    // } ${filters.includes(selectedYear) ? "of " + selectedYear : ""}`;
     setInputValue(question);
     scrollToBottom();
     setSelectedQuestion(question);
@@ -214,7 +202,6 @@ export default function AggregateDashboard({
                 selectedCompanies={selectedCompanies}
                 setSelectedCompanies={setSelectedCompanies}
               ></MultiSelect>
-              {/* <CustomMultiSelect></CustomMultiSelect> */}
             </div>
 
             <div className="mb-4">
@@ -344,27 +331,15 @@ export default function AggregateDashboard({
               )}
               <div ref={messagesEndRef} />
             </div>
-            {/* <div className="flex flex-wrap gap-2 mb-3">
-              {filters.map((filter, index) => (
-                <span
-                  key={index}
-                  className="bg-blue-500 text-white px-3 py-1 rounded-full flex items-center"
-                >
-                  {filter?.name ? filter.name : filter}
-
-                  <X
-                    className="ml-2 text-white hover:text-red-500"
-                    onClick={() => removeFilter(filter)}
-                  ></X>
-                </span>
-              ))}
-            </div> */}
 
             <form
               onSubmit={(e) => {
                 e.preventDefault();
                 if (!selectedCompanies.length) {
                   return alert("Please select atleast one company");
+                }
+                if (!inputValue.trim().length) {
+                  return alert("Please provide some input");
                 }
                 getAgentResponse();
               }}
@@ -402,15 +377,16 @@ export default function AggregateDashboard({
 const ScrollToTop = ({ scrollToTop }) => {
   const [isVisible, setIsVisible] = useState(true);
 
-  // useEffect(() => {
-  //   const toggleVisibility = () => {
-  //     console.log("toggleVisibility", window.scrollY);
-  //     setIsVisible(window.scrollY > 300);
-  //   };
+  //   useEffect(() => {
+  //     const toggleVisibility = () => {
+  //       const scrollY = Math.floor(window.scrollY); // Ensures we get whole numbers
+  //       console.log("toggleVisibility", scrollY);
+  //       setIsVisible(scrollY >= 3.75);
+  //     };
 
-  //   window.addEventListener("scroll", toggleVisibility);
-  //   return () => window.removeEventListener("scroll", toggleVisibility);
-  // }, []);
+  //     window.addEventListener("scroll", toggleVisibility);
+  //     return () => window.removeEventListener("scroll", toggleVisibility);
+  //   }, []);
 
   const comeIntoView = () => {
     scrollToTop();
@@ -663,41 +639,4 @@ function MultiSelect({ selectedCompanies, setSelectedCompanies }) {
   );
 }
 
-// function CustomMultiSelect() {
 
-//     const [selectedOptions, setSelectedOptions] = useState([]);
-//     const [isOpen, setIsOpen] = useState(false);
-
-//     const toggleOption = (value) => {
-//         setSelectedOptions((prev) =>
-//             prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value]
-//         );
-//     };
-
-//     return (
-//         <div className="relative inline-block w-[250px] z-[50]">
-//             <button
-//                 onClick={() => setIsOpen(!isOpen)}
-//                 className="border px-4 py-2 bg-white w-full text-left"
-//             >
-//                 {selectedOptions.length > 0 ? selectedOptions.join(", ") : "Select Options"}
-//             </button>
-
-//             {isOpen && (
-//                 <div className="absolute border bg-white mt-1 shadow-md w-full max-h-[150px] overflow-y-auto rounded">
-//                     {companies.map((option) => (
-//                         <label key={option.ticker} className="flex items-center p-2 cursor-pointer hover:bg-gray-100">
-//                             <input
-//                                 type="checkbox"
-//                                 checked={selectedOptions.includes(option.ticker)}
-//                                 onChange={() => toggleOption(option.ticker)}
-//                                 className="mr-2 h-[20px] w-[20px] overflow-auto-x"
-//                             />
-//                             {option.name}
-//                         </label>
-//                     ))}
-//                 </div>
-//             )}
-//         </div>
-//     );
-// }

@@ -152,25 +152,15 @@ const companies = [
 ];
 
 const personas = [
-  "Retail Investors",
-  "Institutional Investors",
-  "Equity Analysts",
-  "Portfolio Managers",
-  "Financial Advisors",
-  "Company Executives & Management",
-  "Corporate Development Teams",
-  "Strategic Planners",
-  "Financial Journalists",
-  "Industry Analysts",
-  "Regulators (SEC, FTC, etc.)",
-  "Government & Policy Makers",
-  "Competitive Intelligence Analysts",
-  "Market Researchers",
-  "Economists",
-  "Professors & Students",
-  "Securities Lawyers",
-  "Compliance Officers"
-]
+  "Controller (Chief Accounting Officer)",
+  "Treasurer",
+  "Head of Financial Planning & Analysis (FP&A)",
+  "Head of Risk & Compliance",
+  "Head of Taxation",
+  "Investor Relations Director",
+  "Head of Procurement & Vendor Management"
+];
+
 
 
 module.exports = { suggestedQuestions, companies, years, quarters, personas };

@@ -73,44 +73,45 @@ const extractJSON = (text) => {
 };
 
 // Function to get query parameters from Claude model
-const getQueryParams = async (prompt) => {
-    try {
-        const modelCommand = new InvokeModelCommand({
-            modelId: "anthropic.claude-3-5-sonnet-20240620-v1:0",
-            contentType: "application/json",
-            accept: "application/json",
-            body: JSON.stringify({
-                anthropic_version: "bedrock-2023-05-31",
-                messages: [
-                    {
-                        role: "user",
-                        content: `From the following prompt, infer the required company ticker(s), quarter(s), and year(s) for which transcripts are needed.If you infer that you need for all the quarters,then insert four values.Transcripts are only available for the year 2024.
-        
-        Return your response in JSON format:
-        \`\`\`json
-        [
-            { "ticker": "<company_ticker>", "quarter": "<quarter>", "year": "<year>" }
-        ]
-        \`\`\`
+// const getQueryParams = async (prompt) => {
+//     try {
+//         const modelCommand = new InvokeModelCommand({
+//             modelId: "anthropic.claude-3-5-sonnet-20240620-v1:0",
+//             contentType: "application/json",
+//             accept: "application/json",
+//             body: JSON.stringify({
+//                 anthropic_version: "bedrock-2023-05-31",
+//                 messages: [
+//                     {
+//                         role: "user",
+//                         content: `From the following prompt, infer the required company ticker(s), quarter(s), and year(s) for which transcripts are needed.If you infer that you need for all the quarters,then insert four values.Transcripts are only available for the year 2024.
 
-        ### Prompt:
-        ${prompt}`
-                    }
-                ],
-                max_tokens: 500
-            })
-        });
+//         Return your response in JSON format:
+//         \`\`\`json
+//         [
+//             { "ticker": "<company_ticker>", "quarter": "<quarter>", "year": "<year>" }
+//         ]
+//         \`\`\`
 
-        const response = await bedrockClient.send(modelCommand);
-        const responseData = JSON.parse(Buffer.from(response.body).toString("utf-8"));
-        const responseText = responseData?.content?.map(item => item.text).join("\n") || "No response received";
+//         ### Prompt:
+//         ${prompt}`
+//                     }
+//                 ],
+//                 max_tokens: 500
+//             })
+//         });
 
-        const extractedJSON = extractJSON(responseText);
-        return JSON.parse(extractedJSON);
-    } catch (error) {
-        console.error("Unexpected error:", error);
-    }
-};
+//         const response = await bedrockClient.send(modelCommand);
+//         const responseData = JSON.parse(Buffer.from(response.body).toString("utf-8"));
+//         const responseText = responseData?.content?.map(item => item.text).join("\n") || "No response received";
+
+//         const extractedJSON = extractJSON(responseText);
+//         return JSON.parse(extractedJSON);
+//     } catch (error) {
+//         console.error("Unexpected error:", error);
+//         throw error;
+//     }
+// };
 
 const getAnswerForPrompt = async function* (source, prompt, chats, context, persona, foundationModel,
     fmTemperature,
@@ -134,7 +135,7 @@ const getAnswerForPrompt = async function* (source, prompt, chats, context, pers
             body: JSON.stringify({
                 anthropic_version: "bedrock-2023-05-31",
                 messages: [
-                    ...chats.slice(-5),
+
                     {
                         role: "user",
                         content: `You are provided transcript(s) of earnings-calls.Answer the prompt based on the provided context.\n\n\nContext:${source}\n\n\nPrompt:${prompt}\n\n\n.Generate your response for someone who is a ${persona},
@@ -170,13 +171,18 @@ const getAnswerForPrompt = async function* (source, prompt, chats, context, pers
 // Function to generate response from Claude
 const generateResponse = async (prompt, rawPrompt, chats, context, persona, foundationModel,
     fmTemperature,
-    fmMaxTokens,) => {
+    fmMaxTokens, previousPrompts, selectedCompanies, selectedQuarter, selectedYear) => {
     try {
-        const queryParamsArray = await getQueryParams(prompt);
+
+        const optimizedPrompt = await optimizePrompt(previousPrompts, previousPrompts.length ? rawPrompt : prompt, selectedCompanies, selectedQuarter, selectedYear, chats);
+
+        const queryParamsArray = optimizedPrompt?.queryParamsArray;
+        // console.log("queryParamsArray", queryParamsArray)
         if (!queryParamsArray || queryParamsArray.length === 0 || queryParamsArray[0].ticker === "ALL") {
             return "⚠️ **Error:** The request could not be processed. Please refine your query and try again.";
         }
-        const s3urls = queryParamsArray.map(generateS3Uri);
+        if (optimizedPrompt.fetch_transcripts) {
+            const s3urls = queryParamsArray.map(generateS3Uri);
         const jsonFiles = await Promise.all(s3urls.map(fetchJsonFromS3));
         const transformedData = jsonFiles.map(item => ({
             id: item.id,
@@ -185,13 +191,70 @@ const generateResponse = async (prompt, rawPrompt, chats, context, persona, foun
             year: item.year,
             transcript: item.transcript.map(t => t.text).join(" ") // Join all transcript texts
         }));
-        return getAnswerForPrompt(JSON.stringify(transformedData), rawPrompt, chats, context, persona, foundationModel,
+            return getAnswerForPrompt(JSON.stringify(transformedData), optimizedPrompt.prompt, chats, context, persona, foundationModel,
             fmTemperature,
             fmMaxTokens,);
+        } else {
+            return getAnswerForPrompt(JSON.stringify(chats), optimizedPrompt.prompt, chats, context, persona, foundationModel,
+                fmTemperature,
+                fmMaxTokens,);
+
+        }
+
+
     } catch (error) {
         console.error("Error:", error);
     }
 };
+
+const optimizePrompt = async (previousPrompts, rawPrompt, selectedCompanies, selectedQuarter, selectedYear, chats) => {
+    try {
+
+        const previousPromptsString = previousPrompts.join("\n\n");
+
+        const modelCommand = new InvokeModelCommand({
+            modelId: "anthropic.claude-3-5-sonnet-20240620-v1:0",
+            contentType: "application/json",
+            accept: "application/json",
+            body: JSON.stringify({
+                anthropic_version: "bedrock-2023-05-31",
+                messages: [
+                    ...chats.slice(-5),
+                    {
+                        role: "user",
+                        content: `Based on previous prompts,you need to make current prompt more clear only if it is not and it is stemming from previous prompt(s) else just return the prompt as it is without modifying it.\n\nPrevious prompts:${previousPromptsString}\n\n\nCurrent prompt:${rawPrompt}.\n\n\nFor example if current prompt is "just for sofi" and previous prompts is "Who were the analysts?",then you have to make current prompt more clear by framing it as "Who were the analysts for sofi?".
+            Consider these informations as well Selected Companies: ${selectedCompanies}.\n\nSelected Quarter:${selectedQuarter}\n\nSelected Year${selectedYear}\n\n\n
+            From your generated response, infer the required company ticker(s), quarter(s), and year(s) for which transcripts are needed.If you infer that you need for all the quarters,then insert four values.Transcripts are only available for the year 2024.
+            For quarter,use Q1,Q2,Q3,Q4 and for year,use 2024.If you think that prompt is about a previous response in that chats history and no need to fetch transcripts again,then set
+            fetch_transcripts to false else set it to true.
+        Return your response in JSON format:
+        \`\`\`json
+       {
+        queryParamsArray: [
+            { "ticker": "<company_ticker>", "quarter": "<quarter>", "year": "<year>" }
+        ],
+        prompt: "<refined and clear prompt>",
+        fetch_transcripts: <either true or false>
+        } 
+
+          `
+                    }
+                ],
+                max_tokens: 1000,
+                temperature: 0,
+            })
+        });
+
+        const response = await bedrockClient.send(modelCommand);
+        const responseData = JSON.parse(Buffer.from(response.body).toString("utf-8"));
+        const responseText = responseData?.content?.map(item => item.text).join("\n") || "No response received";
+        const extractedJSON = extractJSON(responseText);
+        return JSON.parse(extractedJSON);
+    } catch (error) {
+        console.error("Unexpected error:", error);
+        throw error;
+    }
+}
 
 // **POST API Handler**
 export async function POST(req) {
@@ -199,12 +262,12 @@ export async function POST(req) {
         const body = await req.json();
         const { inputText, inputValue, chats, context, persona, foundationModel,
             fmTemperature,
-            fmMaxTokens, } = body;
+            fmMaxTokens, previousPrompts, selectedCompanies, selectedQuarter, selectedYear } = body;
 
 
         const stream = await generateResponse(inputText, inputValue, chats, context, persona, foundationModel,
             fmTemperature,
-            fmMaxTokens,);
+            fmMaxTokens, previousPrompts, selectedCompanies, selectedQuarter, selectedYear);
 
         return new Response(new ReadableStream({
             async start(controller) {

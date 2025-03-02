@@ -72,16 +72,6 @@ export default function Dashboard({
     }
   }, [chats]);
 
-  // useEffect(() => {
-  //   setInputText(
-  //     `${selectedQuestion} ${
-  //       selectedCompany.name ? "for " + selectedCompany.name : ""
-  //     } ${selectedQuarter ? "for the " + selectedQuarter + " quarter" : ""} ${
-  //       selectedYear ? "of " + selectedYear : ""
-  //     }`,
-  //   );
-  // }, [filters]);
-
   const getAgentResponse = async () => {
     try {
       setLoading(true);
@@ -92,29 +82,28 @@ export default function Dashboard({
         let temp = [
           ...prev,
           {
-            id: length + 1,
-            text: inputValue,
-            sender: "user",
+            role: "user",
+            content: inputValue,
           },
         ];
 
         return temp;
       });
+
       const res = await fetch(apiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           inputText: inputText,
-          chats: chats,
-          checked,
+          inputValue,
           selectedCompany,
-          selectedYear,
           selectedQuarter,
+          selectedYear,
+          context,
           persona,
           foundationModel,
           fmTemperature,
           fmMaxTokens,
-          context,
         }),
       });
 
@@ -134,7 +123,10 @@ export default function Dashboard({
         const sanitizedMarkdown = DOMPurify.sanitize(resultText);
         setChats((prev) => {
           let temp = [...prev];
-          temp[length + 1] = { ...temp[length + 1], text: sanitizedMarkdown };
+          temp[length + 1] = {
+            role: "assistant",
+            content: sanitizedMarkdown,
+          };
           return temp;
         });
       }
@@ -187,11 +179,6 @@ export default function Dashboard({
       (company) => company.ticker === selectedTicker,
     );
     setSelectedCompany(selectedCompanyObj); // Now setting the full object
-    // setFilters((prevFilters) => {
-    //   const updatedFilters = [...prevFilters];
-    //   updatedFilters[0] = selectedCompanyObj.name;
-    //   return [...updatedFilters];
-    // });
   };
 
   const handleCategoryChange = (event) => {
@@ -200,20 +187,10 @@ export default function Dashboard({
 
   const handleYearChange = (event) => {
     setSelectedYear(event.target.value);
-    // setFilters((prevFilters) => {
-    //   const updatedFilters = [...prevFilters];
-    //   updatedFilters[1] = event.target.value;
-    //   return [...updatedFilters];
-    // });
   };
 
   const handleQuarterChange = (event) => {
     setSelectedQuarter(event.target.value);
-    // setFilters((prevFilters) => {
-    //   const updatedFilters = [...prevFilters];
-    //   updatedFilters[2] = event.target.value;
-    //   return [...updatedFilters];
-    // });
   };
 
   const handleInputChangeWithCompany = (event) => {
@@ -376,17 +353,17 @@ export default function Dashboard({
                     className={`p-2 rounded-lg ${
                       index % 2 != 0 ? "mb-[30px]" : "mb-[15px]"
                     } ${
-                      m.sender === "user"
+                      m.role === "user"
                         ? "bg-blue-100 text-blue-900"
                         : "bg-gray-200 text-gray-900"
                     }`}
                   >
                     <span
                       className={`${
-                        m.sender === "user" ? "text-blue-600" : "text-green-600"
+                        m.role === "user" ? "text-blue-600" : "text-green-600"
                       } font-semibold`}
                     >
-                      {m.sender === "user" ? "User: " : "AI: "}
+                      {m.role === "user" ? "User: " : "AI: "}
                     </span>
 
                     <div className="prose ml-6 custom-markdown">
@@ -394,7 +371,7 @@ export default function Dashboard({
                         remarkPlugins={[remarkGfm]}
                         rehypePlugins={[rehypeRaw]}
                       >
-                        {m.text}
+                        {m.content}
                       </ReactMarkdown>
                     </div>
                   </div>
@@ -409,21 +386,6 @@ export default function Dashboard({
                 )}
                 <div ref={messagesEndRef} />
               </div>
-              {/* <div className="flex flex-wrap gap-2 mb-3">
-                {filters.map((filter, index) => (
-                  <span
-                    key={index}
-                    className="bg-blue-500 text-white px-3 py-1 rounded-full flex items-center"
-                  >
-                    {filter?.name ? filter.name : filter}
-
-                    <X
-                      className="ml-2 text-white hover:text-red-500"
-                      onClick={() => removeFilter(filter)}
-                    ></X>
-                  </span>
-                ))}
-              </div> */}
 
               <form
                 onSubmit={(e) => {
