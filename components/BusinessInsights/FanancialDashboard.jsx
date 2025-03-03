@@ -237,7 +237,9 @@ export default function Dashboard({
       {/* Header */}
       <header className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-5 px-6 shadow-lg">
         <div className="container mx-auto text-center">
-          <h1 className="text-3xl font-extrabold tracking-wide">Business Insights</h1>
+          <h1 className="text-3xl font-extrabold tracking-wide">
+            Business Insights
+          </h1>
         </div>
       </header>
 
@@ -247,52 +249,68 @@ export default function Dashboard({
           {/* Filters */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div>
-              <label className="block text-lg font-semibold text-gray-700">Company</label>
+              <label className="block text-lg font-semibold text-gray-700">
+                Company
+              </label>
               <select
                 className="w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-400"
                 value={selectedCompany.ticker}
                 onChange={handleCompanyChange}
               >
                 {companies.map((company, index) => (
-                  <option key={index} value={company.ticker}>{company.name}</option>
+                  <option key={index} value={company.ticker}>
+                    {company.name}
+                  </option>
                 ))}
               </select>
             </div>
             {!checked && (
               <div>
-                <label className="block text-lg font-semibold text-gray-700">Category</label>
+                <label className="block text-lg font-semibold text-gray-700">
+                  Category
+                </label>
                 <select
                   className="w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-400"
                   value={selectedCategory}
                   onChange={handleCategoryChange}
                 >
                   {Object.keys(suggestedQuestions).map((category, index) => (
-                    <option key={index} value={category}>{category}</option>
+                    <option key={index} value={category}>
+                      {category}
+                    </option>
                   ))}
                 </select>
               </div>
             )}
             <div>
-              <label className="block text-lg font-semibold text-gray-700">Year</label>
+              <label className="block text-lg font-semibold text-gray-700">
+                Year
+              </label>
               <select
                 className="w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-400"
                 value={selectedYear}
                 onChange={handleYearChange}
               >
                 {years.map((year, index) => (
-                  <option key={index} value={year}>{year}</option>
+                  <option key={index} value={year}>
+                    {year}
+                  </option>
                 ))}
               </select>
             </div>
             <div>
-              <label className="block text-lg font-semibold text-gray-700">Quarter</label>
+              <label className="block text-lg font-semibold text-gray-700">
+                Quarter
+              </label>
               <select
                 className="w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-400"
                 value={selectedQuarter}
                 onChange={handleQuarterChange}
               >
                 {quarters.map((quarter, index) => (
-                  <option key={index} value={quarter}>{quarter}</option>
+                  <option key={index} value={quarter}>
+                    {quarter}
+                  </option>
                 ))}
               </select>
             </div>
@@ -303,21 +321,28 @@ export default function Dashboard({
 
           {/* Sentiment Analysis or Questions */}
           {checked ? (
-            <SentimentAnalysisComponent isSentimentsLoading={isSentimentsLoading} content={content} />
+            <SentimentAnalysisComponent
+              isSentimentsLoading={isSentimentsLoading}
+              content={content}
+            />
           ) : (
             <>
               <div>
-                <h3 className="font-bold text-lg text-gray-700 mb-2">Suggested Questions:</h3>
+                <h3 className="font-bold text-lg text-gray-700 mb-2">
+                  Suggested Questions:
+                </h3>
                 <div className="flex flex-wrap gap-2">
-                  {suggestedQuestions[selectedCategory]["Common Questions"].map((question, index) => (
-                    <button
-                      key={index}
-                      className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition"
-                      onClick={() => handleButtonClick(question)}
-                    >
-                      {question}
-                    </button>
-                  ))}
+                  {suggestedQuestions[selectedCategory]["Common Questions"].map(
+                    (question, index) => (
+                      <button
+                        key={index}
+                        className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition"
+                        onClick={() => handleButtonClick(question)}
+                      >
+                        {question}
+                      </button>
+                    ),
+                  )}
                 </div>
               </div>
 
@@ -327,39 +352,72 @@ export default function Dashboard({
                   <div
                     key={index}
                     className={`p-2 rounded-lg ${
-                      m.role === "user" ? "bg-blue-100 text-blue-900" : "bg-gray-200 text-gray-900"
+                      m.role === "user"
+                        ? "bg-blue-100 text-blue-900"
+                        : "bg-gray-200 text-gray-900"
                     }`}
                   >
-                    <span className={`font-semibold ${m.role === "user" ? "text-blue-600" : "text-green-600"}`}>
+                    <span
+                      className={`font-semibold ${
+                        m.role === "user" ? "text-blue-600" : "text-green-600"
+                      }`}
+                    >
                       {m.role === "user" ? "User: " : "AI: "}
                     </span>
                     <div className="prose ml-6 custom-markdown">
-                      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        rehypePlugins={[rehypeRaw]}
+                      >
                         {m.content}
                       </ReactMarkdown>
                     </div>
                   </div>
                 ))}
                 <ScrollToTop scrollToTop={scrollToTop} />
-                {isLoading && <div className="spinner" />} 
+                {/* Loading Indicator */}
+                {isLoading && (
+                  <div className="loading-container">
+                    <div className="spinner"></div>
+                    <p className="loading-text">Generating response...</p>
+                  </div>
+                )}
                 <div ref={messagesEndRef} />
               </div>
 
               {/* Input Form */}
-              <form onSubmit={(e) => { e.preventDefault(); getAgentResponse(); }} className="flex">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  getAgentResponse();
+                }}
+                className="flex"
+              >
                 <input
                   className="flex-grow p-2 border border-gray-300 rounded-l"
                   value={inputValue}
                   placeholder="Ask your question..."
                   onChange={handleInputChangeWithCompany}
                 />
-                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600">Send</button>
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600"
+                >
+                  Send
+                </button>
               </form>
             </>
           )}
         </div>
 
-        {isChatOpen && <FetchUploadPopUp isOpen={isChatOpen} setIsOpen={setIsChatOpen} chats={fetchUploadChats} setChats={setFetchUploadChats} />}
+        {isChatOpen && (
+          <FetchUploadPopUp
+            isOpen={isChatOpen}
+            setIsOpen={setIsChatOpen}
+            chats={fetchUploadChats}
+            setChats={setFetchUploadChats}
+          />
+        )}
       </main>
     </div>
   );

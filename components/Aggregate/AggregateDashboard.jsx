@@ -188,94 +188,162 @@ export default function AggregateDashboard({
       </Head>
       <header className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-5 px-6 shadow-lg">
         <div className="container mx-auto text-center">
-          <h1 className="text-3xl font-extrabold tracking-wide">Aggregate Business Insights</h1>
+          <h1 className="text-3xl font-extrabold tracking-wide">
+            Aggregate Business Insights
+          </h1>
         </div>
       </header>
       <main className="container mx-auto flex-grow p-6">
         <div className="bg-white p-6 w-full h-full rounded-lg shadow-xl flex flex-col space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div>
-              <label className="block text-lg font-semibold text-gray-700">Company</label>
-              <MultiSelect selectedCompanies={selectedCompanies} setSelectedCompanies={setSelectedCompanies} />
+              <label className="block text-lg font-semibold text-gray-700">
+                Company
+              </label>
+              <MultiSelect
+                selectedCompanies={selectedCompanies}
+                setSelectedCompanies={setSelectedCompanies}
+              />
             </div>
             <div>
-              <label className="block text-lg font-semibold text-gray-700">Category</label>
+              <label className="block text-lg font-semibold text-gray-700">
+                Category
+              </label>
               <select
                 className="w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-400"
                 value={selectedCategory}
                 onChange={handleCategoryChange}
               >
                 {Object.keys(suggestedQuestions).map((category, index) => (
-                  <option key={index} value={category}>{category}</option>
+                  <option key={index} value={category}>
+                    {category}
+                  </option>
                 ))}
               </select>
             </div>
             {selectedCompanies.length > 0 && (
               <div>
-                <label className="block text-lg font-semibold text-gray-700">Selected Companies</label>
-                <div className="p-2 border border-gray-300 rounded-lg bg-gray-50">{selectedCompanies.join(", ")}</div>
+                <label className="block text-lg font-semibold text-gray-700">
+                  Selected Companies
+                </label>
+                <div className="p-2 border border-gray-300 rounded-lg bg-gray-50">
+                  {selectedCompanies.join(", ")}
+                </div>
               </div>
             )}
             <div>
-              <label className="block text-lg font-semibold text-gray-700">Year</label>
+              <label className="block text-lg font-semibold text-gray-700">
+                Year
+              </label>
               <select
                 className="w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-400"
                 value={selectedYear}
                 onChange={handleYearChange}
               >
                 {years.map((year, index) => (
-                  <option key={index} value={year}>{year}</option>
+                  <option key={index} value={year}>
+                    {year}
+                  </option>
                 ))}
               </select>
             </div>
             <div>
-              <label className="block text-lg font-semibold text-gray-700">Quarter</label>
+              <label className="block text-lg font-semibold text-gray-700">
+                Quarter
+              </label>
               <select
                 className="w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-400"
                 value={selectedQuarter}
                 onChange={handleQuarterChange}
               >
                 {quarters.map((quarter, index) => (
-                  <option key={index} value={quarter}>{quarter}</option>
+                  <option key={index} value={quarter}>
+                    {quarter}
+                  </option>
                 ))}
               </select>
             </div>
           </div>
           <div>
-            <h3 className="font-bold text-lg text-gray-700 mb-2">Suggested Questions:</h3>
+            <h3 className="font-bold text-lg text-gray-700 mb-2">
+              Suggested Questions:
+            </h3>
             <div className="flex flex-wrap gap-2">
-              {suggestedQuestions[selectedCategory]["Common Questions"].map((question, index) => (
-                <button
-                  key={index}
-                  className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition"
-                  onClick={() => handleButtonClick(question)}
-                >
-                  {question}
-                </button>
-              ))}
+              {suggestedQuestions[selectedCategory]["Common Questions"].map(
+                (question, index) => (
+                  <button
+                    key={index}
+                    className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition"
+                    onClick={() => handleButtonClick(question)}
+                  >
+                    {question}
+                  </button>
+                ),
+              )}
             </div>
           </div>
           <div className="flex-grow h-[300px] min-h-0 overflow-y-auto bg-gray-100 rounded-lg p-4 space-y-4">
             {chats.map((m, index) => (
-              <div key={index} className={`p-2 rounded-lg ${m.role === "user" ? "bg-blue-100 text-blue-900" : "bg-gray-200 text-gray-900"}`}>
-                <span className={`font-semibold ${m.role === "user" ? "text-blue-600" : "text-green-600"}`}>{m.role === "user" ? "User: " : "AI: "}</span>
+              <div
+                key={index}
+                className={`p-2 rounded-lg ${
+                  m.role === "user"
+                    ? "bg-blue-100 text-blue-900"
+                    : "bg-gray-200 text-gray-900"
+                }`}
+              >
+                <span
+                  className={`font-semibold ${
+                    m.role === "user" ? "text-blue-600" : "text-green-600"
+                  }`}
+                >
+                  {m.role === "user" ? "User: " : "AI: "}
+                </span>
                 <div className="prose ml-6 custom-markdown">
-                  <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>{m.content}</ReactMarkdown>
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    rehypePlugins={[rehypeRaw]}
+                  >
+                    {m.content}
+                  </ReactMarkdown>
                 </div>
               </div>
             ))}
             <ScrollToTop scrollToTop={scrollToTop} />
-            {isLoading && <div className="spinner" />} 
+            {/* Loading Indicator */}
+            {isLoading && (
+              <div className="loading-container">
+                <div className="spinner"></div>
+                <p className="loading-text">Generating response...</p>
+              </div>
+            )}
             <div ref={messagesEndRef} />
           </div>
-          <form onSubmit={(e) => { e.preventDefault(); getAgentResponse(); }} className="flex">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (!selectedCompanies.length) {
+                return alert("Please select atleast one company");
+              }
+              if (!inputValue.trim().length) {
+                return alert("Please provide some input");
+              }
+              getAgentResponse();
+            }}
+            className="flex"
+          >
             <input
               className="flex-grow p-2 border border-gray-300 rounded-l"
               value={inputValue}
               placeholder="Ask your question..."
               onChange={handleInputChangeWithCompany}
             />
-            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600">Send</button>
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600"
+            >
+              Send
+            </button>
           </form>
         </div>
         {isChatOpen && (
@@ -288,7 +356,6 @@ export default function AggregateDashboard({
         )}
       </main>
     </div>
-
   );
 }
 
