@@ -49,10 +49,10 @@ const Sidebar = ({ isChatOpen, setIsChatOpen }: any) => {
   };
 
   return (
-    <div className="w-1/5 h-screen bg-white p-6 rounded-2xl shadow-xl overflow-y-auto border border-gray-200">
+    <div className="w-1/5 h-screen bg-white px-4 pt-4 shadow-xl overflow-y-auto border border-gray-200">
       {/* Sidebar Tabs */}
-      <div className="mb-6">
-        <h2 className="text-xl font-bold mb-4 text-gray-700">Tabs</h2>
+      <div className="mb-2">
+        <h2 className="text-md font-bold mb-2 text-gray-700">Tabs</h2>
         <ul className="space-y-2">
           {["Business Insights", "Aggregate"].map((tab) => (
             <li
@@ -75,12 +75,12 @@ const Sidebar = ({ isChatOpen, setIsChatOpen }: any) => {
           Fetch & Upload
         </button>
 
-        <h2 className="text-xl font-bold my-4 mt-6 text-gray-700">Configuration</h2>
+        <h2 className="text-md font-bold my-2 mt-6 text-gray-700">Configuration</h2>
 
-        <div className="mb-4">
-          <label className="block mb-2 font-semibold text-gray-600">Persona</label>
+        <div className="mb-4 text-sm">
+          <label className="block mb-2 font-md text-gray-600">Persona</label>
           <select
-            className="w-full p-3 rounded-lg border border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className="w-full p-2 rounded-lg border border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
             value={persona}
             onChange={handlePersonaChange}
           >
@@ -90,10 +90,10 @@ const Sidebar = ({ isChatOpen, setIsChatOpen }: any) => {
           </select>
         </div>
 
-        <div className="mb-4">
-          <label className="block mb-2 font-semibold text-gray-600">Foundation Model</label>
+        <div className="mb-4 text-sm">
+          <label className="block mb-2 font-md text-gray-600">Foundation Model</label>
           <select
-            className="w-full p-3 rounded-lg border border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className="w-full p-2 rounded-lg border border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
             value={foundationModel}
             onChange={handleFoundationModelChange}
           >
@@ -103,7 +103,7 @@ const Sidebar = ({ isChatOpen, setIsChatOpen }: any) => {
           </select>
         </div>
 
-        <div className="mb-6">
+        <div className="mb-4 text-sm">
           <label className="block mb-2 font-semibold text-gray-700">FM Temperatures</label>
           <div className="relative">
             <input
@@ -122,7 +122,7 @@ const Sidebar = ({ isChatOpen, setIsChatOpen }: any) => {
             <span>1</span>
           </div>
         </div>
-        <div className="mb-4">
+        <div className="mb-4 text-sm">
           <label className="block mb-2 font-semibold text-gray-700">FM Max Tokens</label>
           <div className="relative">
             <input

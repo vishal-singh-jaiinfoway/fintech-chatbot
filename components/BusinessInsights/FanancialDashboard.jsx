@@ -247,9 +247,9 @@ export default function Dashboard({
       <main className="container mx-auto flex-grow p-6 overflow-y-auto">
         <div className="bg-white p-6 w-full rounded-lg shadow-xl flex flex-col space-y-4 h-full">
           {/* Filters */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
             <div>
-              <label className="block text-lg font-semibold text-gray-700">
+              <label className="block text-md font-bold text-gray-700">
                 Company
               </label>
               <select
@@ -266,7 +266,7 @@ export default function Dashboard({
             </div>
             {!checked && (
               <div>
-                <label className="block text-lg font-semibold text-gray-700">
+                <label className="block text-md font-bold text-gray-700">
                   Category
                 </label>
                 <select
@@ -283,7 +283,7 @@ export default function Dashboard({
               </div>
             )}
             <div>
-              <label className="block text-lg font-semibold text-gray-700">
+              <label className="block text-md font-bold text-gray-700">
                 Year
               </label>
               <select
@@ -299,7 +299,7 @@ export default function Dashboard({
               </select>
             </div>
             <div>
-              <label className="block text-lg font-semibold text-gray-700">
+              <label className="block text-md font-bold text-gray-700">
                 Quarter
               </label>
               <select
@@ -331,7 +331,7 @@ export default function Dashboard({
                 <h3 className="font-bold text-lg text-gray-700 mb-2">
                   Suggested Questions:
                 </h3>
-                <div className="flex flex-wrap gap-2">
+                <div className="text-sm flex flex-wrap gap-2 h-[100px] md:h-[150px] lg:h-[180px] xl:h-[200px] min-h-0 overflow-y-auto">
                   {suggestedQuestions[selectedCategory]["Common Questions"].map(
                     (question, index) => (
                       <button
