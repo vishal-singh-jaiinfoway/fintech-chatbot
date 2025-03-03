@@ -229,196 +229,137 @@ export default function Dashboard({
   };
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50 overflow-y-auto mr-2">
+    <div className="h-screen flex flex-col bg-gray-100">
       <Head>
         <title>Business Insights</title>
       </Head>
-      <header className="bg-blue-600 text-white py-4 px-6 shadow-md">
-        <div className="container mx-auto">
-          <h1 className="text-3xl font-bold">Business Insights</h1>
+
+      {/* Header */}
+      <header className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-5 px-6 shadow-lg">
+        <div className="container mx-auto text-center">
+          <h1 className="text-3xl font-extrabold tracking-wide">Business Insights</h1>
         </div>
       </header>
-      <main className="container mx-auto flex-grow">
-        <div className="bg-white p-6 w-full h-full rounded-lg shadow-lg flex flex-col">
-          <div className="flex flex-row items-center gap-4">
-            <div className="mb-4">
-              <label className="block text-lg font-medium mb-2 text-gray-700">
-                Company
-              </label>
+
+      {/* Main Content */}
+      <main className="container mx-auto flex-grow p-6 overflow-y-auto">
+        <div className="bg-white p-6 w-full rounded-lg shadow-xl flex flex-col space-y-4 h-full">
+          {/* Filters */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div>
+              <label className="block text-lg font-semibold text-gray-700">Company</label>
               <select
-                style={{ outlineWidth: 0 }}
-                value={selectedCompany.ticker} // Use ticker instead of object
+                className="w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-400"
+                value={selectedCompany.ticker}
                 onChange={handleCompanyChange}
-                className="p-2 border border-gray-300 rounded"
               >
                 {companies.map((company, index) => (
-                  <option key={index} value={company.ticker}>
-                    {company.name}
-                  </option>
+                  <option key={index} value={company.ticker}>{company.name}</option>
                 ))}
               </select>
             </div>
-            {checked ? null : (
-              <div className="mb-4">
-                <label className="block text-lg font-medium mb-2 text-gray-700">
-                  Category
-                </label>
+            {!checked && (
+              <div>
+                <label className="block text-lg font-semibold text-gray-700">Category</label>
                 <select
-                  style={{ outlineWidth: 0 }}
+                  className="w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-400"
                   value={selectedCategory}
                   onChange={handleCategoryChange}
-                  className="p-2 border border-gray-300 rounded"
                 >
                   {Object.keys(suggestedQuestions).map((category, index) => (
-                    <option key={index} value={category}>
-                      {category}
-                    </option>
+                    <option key={index} value={category}>{category}</option>
                   ))}
                 </select>
               </div>
             )}
-          </div>
-          <div className="flex flex-row items-center gap-4">
-            <div className="mb-4" ref={startRef}>
-              <label className="block text-lg font-medium mb-2 text-gray-700">
-                Year
-              </label>
+            <div>
+              <label className="block text-lg font-semibold text-gray-700">Year</label>
               <select
-                style={{ outlineWidth: 0 }}
+                className="w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-400"
                 value={selectedYear}
                 onChange={handleYearChange}
-                className="p-2 border border-gray-300 rounded"
               >
                 {years.map((year, index) => (
-                  <option key={index} value={year}>
-                    {year}
-                  </option>
+                  <option key={index} value={year}>{year}</option>
                 ))}
               </select>
             </div>
-            <div className="mb-4">
-              <label className="block text-lg font-medium mb-2 text-gray-700">
-                Quarter
-              </label>
+            <div>
+              <label className="block text-lg font-semibold text-gray-700">Quarter</label>
               <select
-                style={{ outlineWidth: 0 }}
+                className="w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-400"
                 value={selectedQuarter}
                 onChange={handleQuarterChange}
-                className="p-2 border border-gray-300 rounded"
               >
                 {quarters.map((quarter, index) => (
-                  <option key={index} value={quarter}>
-                    {quarter}
-                  </option>
+                  <option key={index} value={quarter}>{quarter}</option>
                 ))}
               </select>
             </div>
           </div>
-          <div className="mb-4">
-            <CustomCheckbox
-              checked={checked}
-              setChecked={setChecked}
-            ></CustomCheckbox>
-          </div>
 
+          {/* Checkbox */}
+          <CustomCheckbox checked={checked} setChecked={setChecked} />
+
+          {/* Sentiment Analysis or Questions */}
           {checked ? (
-            <SentimentAnalysisComponent
-              isSentimentsLoading={isSentimentsLoading}
-              content={content}
-            ></SentimentAnalysisComponent>
+            <SentimentAnalysisComponent isSentimentsLoading={isSentimentsLoading} content={content} />
           ) : (
             <>
-              <div className="mb-4">
-                <h3 className="font-bold mb-2 text-gray-700">
-                  Suggested Questions:
-                </h3>
-                <div className="flex flex-wrap">
-                  {suggestedQuestions[selectedCategory]["Common Questions"].map(
-                    (question, index) => (
-                      <button
-                        key={index}
-                        className="bg-blue-500 text-white px-3 py-1 rounded mr-2 mb-2 hover:bg-blue-600"
-                        onClick={() => handleButtonClick(question)}
-                      >
-                        {question}
-                      </button>
-                    ),
-                  )}
+              <div>
+                <h3 className="font-bold text-lg text-gray-700 mb-2">Suggested Questions:</h3>
+                <div className="flex flex-wrap gap-2">
+                  {suggestedQuestions[selectedCategory]["Common Questions"].map((question, index) => (
+                    <button
+                      key={index}
+                      className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition"
+                      onClick={() => handleButtonClick(question)}
+                    >
+                      {question}
+                    </button>
+                  ))}
                 </div>
               </div>
-              <div className="flex-grow overflow-y-auto mb-4 bg-gray-100 rounded-lg p-4">
+
+              {/* Chatbox */}
+              <div className="flex-grow h-[400px] min-h-0 overflow-y-auto bg-gray-100 rounded-lg p-4 space-y-4">
                 {chats.map((m, index) => (
                   <div
                     key={index}
                     className={`p-2 rounded-lg ${
-                      index % 2 != 0 ? "mb-[30px]" : "mb-[15px]"
-                    } ${
-                      m.role === "user"
-                        ? "bg-blue-100 text-blue-900"
-                        : "bg-gray-200 text-gray-900"
+                      m.role === "user" ? "bg-blue-100 text-blue-900" : "bg-gray-200 text-gray-900"
                     }`}
                   >
-                    <span
-                      className={`${
-                        m.role === "user" ? "text-blue-600" : "text-green-600"
-                      } font-semibold`}
-                    >
+                    <span className={`font-semibold ${m.role === "user" ? "text-blue-600" : "text-green-600"}`}>
                       {m.role === "user" ? "User: " : "AI: "}
                     </span>
-
                     <div className="prose ml-6 custom-markdown">
-                      <ReactMarkdown
-                        remarkPlugins={[remarkGfm]}
-                        rehypePlugins={[rehypeRaw]}
-                      >
+                      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
                         {m.content}
                       </ReactMarkdown>
                     </div>
                   </div>
                 ))}
-                <ScrollToTop scrollToTop={scrollToTop}></ScrollToTop>
-                {/* Loading Indicator */}
-                {isLoading && (
-                  <div className="loading-container">
-                    <div className="spinner"></div>
-                    <p className="loading-text">Generating response...</p>
-                  </div>
-                )}
+                <ScrollToTop scrollToTop={scrollToTop} />
+                {isLoading && <div className="spinner" />} 
                 <div ref={messagesEndRef} />
               </div>
 
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  getAgentResponse();
-                }}
-                className="flex"
-              >
+              {/* Input Form */}
+              <form onSubmit={(e) => { e.preventDefault(); getAgentResponse(); }} className="flex">
                 <input
                   className="flex-grow p-2 border border-gray-300 rounded-l"
                   value={inputValue}
                   placeholder="Ask your question..."
                   onChange={handleInputChangeWithCompany}
                 />
-                <button
-                  type="submit"
-                  className="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600"
-                >
-                  Send
-                </button>
+                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600">Send</button>
               </form>
             </>
           )}
         </div>
 
-        {isChatOpen && (
-          <FetchUploadPopUp
-            isOpen={isChatOpen}
-            setIsOpen={setIsChatOpen}
-            chats={fetchUploadChats}
-            setChats={setFetchUploadChats}
-          ></FetchUploadPopUp>
-        )}
+        {isChatOpen && <FetchUploadPopUp isOpen={isChatOpen} setIsOpen={setIsChatOpen} chats={fetchUploadChats} setChats={setFetchUploadChats} />}
       </main>
     </div>
   );
@@ -488,7 +429,7 @@ const ScrollToTop = ({ scrollToTop }) => {
   return (
     <button
       onClick={comeIntoView}
-      className={`fixed bottom-6 right-6 p-3 bg-blue-600 text-white rounded-full shadow-lg transition-opacity duration-300 ${
+      className={`fixed bottom-2 right-0 p-3 bg-blue-600 text-white rounded-full shadow-lg transition-opacity duration-300 ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
     >

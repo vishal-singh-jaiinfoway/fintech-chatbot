@@ -49,16 +49,15 @@ const Sidebar = ({ isChatOpen, setIsChatOpen }: any) => {
   };
 
   return (
-    <div className="flex-none w-1/5 h-screen bg-gray-100 p-6 rounded-lg shadow-lg overflow-y-auto mr-4">
+    <div className="w-1/5 h-screen bg-white p-6 rounded-2xl shadow-xl overflow-y-auto border border-gray-200">
+      {/* Sidebar Tabs */}
       <div className="mb-6">
-        {/* Sidebar Tabs */}
-        <h2 className="text-xl font-bold mb-4">Tabs</h2>
+        <h2 className="text-xl font-bold mb-4 text-gray-700">Tabs</h2>
         <ul className="space-y-2">
-
           {["Business Insights", "Aggregate"].map((tab) => (
             <li
               key={tab}
-              className={`cursor-pointer rounded-md px-3 py-2 ${selectedTab === tab ? "bg-blue-500 text-white" : "bg-gray-200 hover:bg-gray-300"}`}
+              className={`cursor-pointer px-3 py-2 rounded-lg transition-all duration-300 ease-in-out text-gray-700 font-bold text-center shadow-md ${selectedTab === tab ? "bg-gradient-to-r from-blue-500 to-indigo-500 text-white" : "bg-gray-100 hover:bg-blue-200"}`}
               onClick={() => handleTabClick(tab)}
             >
               {tab}
@@ -66,36 +65,35 @@ const Sidebar = ({ isChatOpen, setIsChatOpen }: any) => {
           ))}
         </ul>
       </div>
+
+      {/* Configuration */}
       <div>
-        {/* Configuration */}
-        <div className="mb-4 flex justify-start">
-          <button
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            onClick={toggleChat}
-          >
-            Fetch & Upload
-          </button>
-        </div>
-        <h2 className="text-xl font-bold mb-4">Configuration</h2>
+        <button
+          className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 rounded-lg shadow-lg hover:scale-105 transform transition-all duration-300 font-bold"
+          onClick={toggleChat}
+        >
+          Fetch & Upload
+        </button>
+
+        <h2 className="text-xl font-bold my-4 mt-6 text-gray-700">Configuration</h2>
+
         <div className="mb-4">
-          <label className="block mb-1 font-semibold">Persona</label>
+          <label className="block mb-2 font-semibold text-gray-600">Persona</label>
           <select
-            className="form-select w-full rounded-md shadow-sm border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+            className="w-full p-3 rounded-lg border border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
             value={persona}
             onChange={handlePersonaChange}
           >
-            {
-              personas.map((persona: any, index: number) => (
-                <option key={index} value={persona}>{persona}</option>
-              ))
-            }
-
+            {personas.map((persona, index) => (
+              <option key={index} value={persona}>{persona}</option>
+            ))}
           </select>
         </div>
+
         <div className="mb-4">
-          <label className="block mb-1 font-semibold">Foundation Model</label>
+          <label className="block mb-2 font-semibold text-gray-600">Foundation Model</label>
           <select
-            className="form-select w-full rounded-md shadow-sm border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+            className="w-full p-3 rounded-lg border border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
             value={foundationModel}
             onChange={handleFoundationModelChange}
           >
@@ -104,53 +102,54 @@ const Sidebar = ({ isChatOpen, setIsChatOpen }: any) => {
             <option value="anthropic.claude-3-haiku-20240307-v1:0">Claude 3.5 Haiku</option>
           </select>
         </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-semibold">FM Temperatures</label>
+
+        <div className="mb-6">
+          <label className="block mb-2 font-semibold text-gray-700">FM Temperatures</label>
           <div className="relative">
             <input
               type="range"
               min="0"
               max="1"
               step="0.01"
-              className="form-range w-full rounded-md shadow-sm border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+              className="form-range w-full rounded-lg appearance-none bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={fmTemperature}
               onChange={handleFmTemperatureChange}
             />
-            <div className="tooltip">{fmTemperature}</div>
           </div>
-          <div className="flex justify-between text-sm text-gray-500">
+          <div className="flex justify-between text-sm text-gray-600 mt-1">
             <span>0</span>
+            <div className="text-center text-md font-bold text-blue-600">{fmTemperature}</div>
             <span>1</span>
           </div>
         </div>
         <div className="mb-4">
-          <label className="block mb-1 font-semibold">FM Max Tokens</label>
+          <label className="block mb-2 font-semibold text-gray-700">FM Max Tokens</label>
           <div className="relative">
             <input
               type="range"
               min="300"
               max="4000"
               step="1"
-              className="form-range w-full rounded-md shadow-sm border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+              className="form-range w-full rounded-lg appearance-none bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={fmMaxTokens}
               onChange={handleFmMaxTokensChange}
             />
-            <div className="tooltip">{fmMaxTokens}</div>
           </div>
-          <div className="flex justify-between text-sm text-gray-500">
-            <span>0</span>
+          <div className="flex justify-between text-sm text-gray-600 mt-1">
+            <span>300</span>
+            <div className="text-center text-md font-bold text-blue-600">{fmMaxTokens}</div>
             <span>4000</span>
           </div>
+        </div>
 
-          <div className="mb-4">
-            <label className="block mb-1 font-semibold">Context</label>
-            <textarea 
-              className="form-textarea w-full rounded-md shadow-sm border-gray-300 focus:border-blue-500 focus:ring-blue-500" 
-              rows={6} 
-              value={context}
-              onChange={handleContextChange}
-              />
-          </div>
+        <div className="mb-4">
+          <label className="block mb-2 font-semibold text-gray-600">Context</label>
+          <textarea
+            className="w-full p-3 rounded-lg border border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+            rows={3}
+            value={context}
+            onChange={handleContextChange}
+          />
         </div>
       </div>
     </div>
