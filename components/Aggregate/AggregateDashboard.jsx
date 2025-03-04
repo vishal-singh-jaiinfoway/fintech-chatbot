@@ -590,7 +590,7 @@ function MultiSelect({ selectedCompanies, setSelectedCompanies }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
   return (
-    <div className="relative inline-block w-[250px]" ref={dropdownRef}>
+    <div className="relative inline-block w-[-webkit-fill-available]" ref={dropdownRef}>
       <button
         onClick={toggleDropdown}
         className="border px-4 py-2 bg-white w-full text-left rounded border border-gray-300"

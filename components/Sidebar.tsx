@@ -159,7 +159,7 @@ const Sidebar = ({ isChatOpen, setIsChatOpen }: any) => {
       {/* Hamburger Menu - Only Visible on Medium Screens and Smaller */}
       {!isOpen && (
         <button
-          className="md:hidden fixed top-4 left-4 z-50 bg-gray-900 text-white p-2 rounded-full shadow-lg"
+          className="md:hidden fixed top-4 left-4 z-50 bg-gradient-to-r from-blue-500 to-indigo-500 text-white p-2 rounded-full shadow-lg"
           onClick={() => setIsOpen(true)}
         >
           <BiMenu size={24} />
@@ -181,7 +181,7 @@ const Sidebar = ({ isChatOpen, setIsChatOpen }: any) => {
         {/* Close Button (Only visible on md and smaller when open) */}
         {isOpen && (
           <button
-            className="md:hidden absolute top-4 right-4 bg-gray-900 text-white p-2 rounded-full"
+            className="md:hidden absolute top-4 right-4 bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-2 px-4 rounded-full"
             onClick={() => setIsOpen(false)}
           >
             ✕
