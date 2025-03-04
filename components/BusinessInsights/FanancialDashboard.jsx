@@ -568,97 +568,97 @@ function FetchUploadPopUp({ isOpen, setIsOpen, chats, setChats }) {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 flex flex-col items-end">
+    <div className="border-white border-[2px] fixed bottom-6 right-6 flex flex-col items-end">
       <div
-        style={{
-          boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.5)",
-          border: 2,
-          borderColor: "blue",
-        }}
-        className="bg-white shadow-2xl rounded-2xl p-4 m-4 mb-8 h-[500px] w-[800px] flex flex-col"
+        className="bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl p-6 shadow-2xl w-[800px] h-[500px] flex flex-col border-4 border-white shadow-[0px_4px_10px_rgba(255,255,255,0.3)]"
       >
-        <div className="flex justify-center items-center border-b pb-2">
-          <Button
+        {/* Header with Close Button */}
+        <div className="flex justify-between items-center pb-4 border-b border-white">
+          <h3 className="text-lg font-bold text-white">
+            Upload Earnings Calls Transcripts
+          </h3>
+          <button
             onClick={() => {
               setIsOpen(false);
               setLoading(false);
               setInput("");
             }}
+            className="bg-indigo-700 text-white rounded-full p-2 hover:bg-indigo-800"
           >
             <X className="w-5 h-5" />
-          </Button>
+          </button>
         </div>
-        <div className="p-4 bg-white rounded-lg shadow-md">
-          <h3 className="text-lg font-medium text-gray-700">
+
+        {/* Chat Instructions */}
+        <div className="bg-white p-4 rounded-lg shadow-md mb-4">
+          <h3 className="text-lg font-medium text-indigo-700 mb-2">
             Upload Earnings Calls Transcripts To Get Insights
           </h3>
-          <section className="mt-3 p-4 text-gray-600 border border-gray-300 rounded-lg bg-gray-50">
-            <p className="text-sm">
+          <section className="p-4 bg-gray-100 rounded-lg border border-blue-300">
+            <p className="text-sm text-gray-700">
               <span className="font-semibold">Prompt type 1:&nbsp;</span>
-              Ticker=<span className="text-blue-600">SOFI</span>, Year=
-              <span className="text-blue-600">2024</span>, Quarters=
-              <span className="text-blue-600">4</span>
+              Ticker=<span className="text-indigo-600">SOFI</span>, Year=
+              <span className="text-indigo-600">2024</span>, Quarters=
+              <span className="text-indigo-600">4</span>
             </p>
-            <p className="text-sm mt-2">
+            <p className="text-sm mt-2 text-gray-700">
               <span className="font-semibold">Prompt type 2:&nbsp;</span>
-              Ticker=<span className="text-blue-600">[SOFI, JPM, MS]</span>,
-              Year=<span className="text-blue-600">2024</span>, Quarters=
-              <span className="text-blue-600">4</span>
+              Ticker=<span className="text-indigo-600">[SOFI, JPM, MS]</span>,
+              Year=<span className="text-indigo-600">2024</span>, Quarters=
+              <span className="text-indigo-600">4</span>
             </p>
           </section>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-2">
-          <div className="flex-1 overflow-y-auto">
-            {chats.map((msg, index) => (
-              <section
-                style={{ marginBottom: msg.id % 2 === 0 ? "60px" : "30px" }}
-                key={index}
-                className={`flex-1 overflow-y-auto p-[20px] rounded text-sm-200 ${
-                  msg.sender === "user"
-                    ? "bg-blue-100 text-white self-end"
-                    : "bg-gray-200 text-black self-start"
-                }`}
+        {/* Chat Messages */}
+        <div className="flex-1 overflow-y-auto p-2 bg-gray-50 rounded-lg mb-4 shadow-inner">
+          {chats.map((msg, index) => (
+            <section
+              key={index}
+              className={`p-4 rounded-lg mb-4 shadow-md ${
+                msg.sender === "user"
+                  ? "bg-indigo-100 text-indigo-800 self-end"
+                  : "bg-gray-200 text-gray-800 self-start"
+              }`}
+            >
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeRaw]}
               >
-                <div className="prose ml-6 custom-markdown">
-                  <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    rehypePlugins={[rehypeRaw]}
-                  >
-                    {msg.text}
-                  </ReactMarkdown>
-                </div>
-              </section>
-            ))}
-          </div>
+                {msg.text}
+              </ReactMarkdown>
+            </section>
+          ))}
 
           {isLoading && (
-            <div className="loading-container">
-              <div className="spinner"></div>
-              <p className="loading-text">Uploading transcripts...</p>
+            <div className="flex items-center justify-center mt-4">
+              <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-indigo-600"></div>
+              <p className="ml-3 text-indigo-600">Uploading transcripts...</p>
             </div>
           )}
 
           <div ref={scrollViewRef}></div>
         </div>
+
+        {/* Input Field with Send Button */}
         <div className="border-t pt-2 flex items-center">
           <input
             type="text"
             placeholder="Type a message..."
-            className="flex-1 border-none outline-none px-3 py-2 rounded-lg bg-gray-200"
+            className="flex-1 bg-indigo-100 text-indigo-700 p-3 rounded-lg outline-none border-none shadow-inner focus:ring-2 focus:ring-indigo-500"
             onChange={(e) => setInput(e.target.value)}
             value={inputText}
             onKeyDown={handleKeyDown}
           />
-          <SendHorizonalIcon
+          <button
             onClick={getAgentResponse}
-            className="w-5 h-5 ml-2"
-            color="blue"
-          />
+            className="bg-indigo-600 text-white p-3 ml-2 rounded-lg hover:bg-indigo-700"
+          >
+            <SendHorizonalIcon className="w-5 h-5" />
+          </button>
         </div>
       </div>
     </div>
   );
 }
-
 
